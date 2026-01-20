@@ -156,11 +156,11 @@ const Settori = () => {
                 Non sei sicuro di quale settore rientra il tuo impianto?
               </h2>
               <p className="text-muted-foreground mb-8">
-                Valutiamo il tuo caso e ti indirizziamo alla soluzione corretta.
+                Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
               </p>
               <Button variant="cta" size="lg" asChild>
                 <Link to="/contatti">
-                  Richiedi un sopralluogo gratuito
+                  Richiedi una valutazione tecnica
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>

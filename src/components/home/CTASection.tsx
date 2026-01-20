@@ -20,7 +20,7 @@ const CTASection = () => {
   };
 
   const benefits = [
-    { icon: Clock, text: "Sopralluogo entro 48h" },
+    { icon: Clock, text: "Valutazione entro 48h" },
     { icon: Shield, text: "Preventivo senza impegno" },
     { icon: Truck, text: "Installazione rapida" },
   ];
@@ -35,12 +35,14 @@ const CTASection = () => {
               Inizia ora
             </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              Richiedi un{" "}
-              <span className="text-accent">sopralluogo gratuito</span>
+              Richiedi una{" "}
+              <span className="text-accent">valutazione tecnica</span>
             </h2>
-            <p className="text-lg text-primary-foreground/80 mb-8">
-              Un nostro tecnico specializzato valuterà la tua situazione e ti proporrà 
-              la soluzione migliore. Senza impegno, senza costi nascosti.
+            <p className="text-lg text-primary-foreground/80 mb-4">
+              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
+            </p>
+            <p className="text-primary-foreground/70 mb-8">
+              Un nostro tecnico specializzato ti proporrà la soluzione migliore. Senza impegno, senza costi nascosti.
             </p>
 
             {/* Benefits */}
@@ -157,7 +159,7 @@ const CTASection = () => {
               </div>
 
               <Button type="submit" variant="accent" size="xl" className="w-full">
-                Richiedi sopralluogo gratuito
+                Richiedi una valutazione tecnica
                 <ArrowRight className="w-5 h-5" />
               </Button>
 

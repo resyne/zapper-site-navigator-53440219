@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChefHat, Home, Factory, ArrowRight, ArrowLeft, Flame, Wind, Loader2, CheckCircle } from "lucide-react";
 
@@ -232,12 +233,14 @@ const SelfDiscoverySection = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <Button variant="accent" size="xl" className="w-full">
-                    Richiedi sopralluogo gratuito
-                    <ArrowRight className="w-5 h-5" />
+                  <Button variant="accent" size="xl" className="w-full" asChild>
+                    <Link to="/contatti">
+                      Richiedi una valutazione tecnica
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
                   </Button>
                   <p className="text-center text-sm text-muted-foreground">
-                    Un nostro tecnico verificherà le tue esigenze senza impegno.
+                    Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
                   </p>
                 </div>
               </div>
