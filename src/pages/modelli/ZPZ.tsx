@@ -20,6 +20,20 @@ const data: ModelloData = {
     { label: "Tipologia forno", value: "Legna" },
     { label: "Ambito", value: "Professionale" },
   ],
+  inAzione: {
+    videoPlaceholder: true,
+    contestoBreve: "Installazione ZPZ su forno a legna in pizzeria – problema di fumi persistenti risolto con abbattimento oltre il 90%.",
+    interventoLink: "/interventi",
+  },
+  quandoNon: {
+    casi: [
+      "Canne fumarie con diametro superiore a 250 mm",
+      "Impianti ad altissima portata fumi",
+      "Contesti industriali con cicli continui",
+    ],
+    alternativa: "un modello ZPZ MAX o ZAPPER industriale",
+    alternativaLink: "/modelli/zpz-max",
+  },
 };
 
 export default function ZPZ() {
