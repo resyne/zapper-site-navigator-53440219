@@ -7,16 +7,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MessageCircle, CheckCircle2, Camera, ArrowRight, ArrowLeft, ChevronDown } from "lucide-react";
+import { Phone, Mail, MessageCircle, ArrowRight, ArrowLeft, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-type FormStep = "prefiltro" | "contatto" | "impianto" | "foto" | "note";
+type FormStep = "prefiltro" | "form";
 
 const Contatti = () => {
   const [currentStep, setCurrentStep] = useState<FormStep>("prefiltro");
-  const [impiantoFiles, setImpiantoFiles] = useState<FileList | null>(null);
-  const [cannaFiles, setCannaFiles] = useState<FileList | null>(null);
   
   // Pre-filtro data
   const [prefiltroData, setPrefiltroData] = useState({
@@ -28,27 +26,16 @@ const Contatti = () => {
   // Accordion states for mobile
   const [openSections, setOpenSections] = useState({
     contatto: true,
-    impianto: false,
-    foto: false,
     note: false
   });
 
-  const steps: { id: FormStep; label: string; number: number }[] = [
-    { id: "prefiltro", label: "Verifica", number: 0 },
-    { id: "contatto", label: "Contatto", number: 1 },
-    { id: "impianto", label: "Impianto", number: 2 },
-    { id: "foto", label: "Foto", number: 3 },
-    { id: "note", label: "Invio", number: 4 }
-  ];
-
-  const currentStepIndex = steps.findIndex(s => s.id === currentStep);
   const isPreFiltro = currentStep === "prefiltro";
 
   const canProceedFromPrefiltro = prefiltroData.settore && prefiltroData.tipoImpianto && prefiltroData.diametroRange;
 
   const handlePrefiltroSubmit = () => {
     if (canProceedFromPrefiltro) {
-      setCurrentStep("contatto");
+      setCurrentStep("form");
     }
   };
 
@@ -102,31 +89,21 @@ const Contatti = () => {
               <div className="max-w-2xl mx-auto">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm text-muted-foreground">
-                    Passaggio {currentStepIndex} di 4
+                    Passaggio 1 di 2
                   </span>
                   <span className="text-sm font-medium text-primary">
-                    {Math.round((currentStepIndex / 4) * 100)}% completato
+                    50% completato
                   </span>
                 </div>
                 <div className="h-2 bg-muted rounded-full overflow-hidden">
                   <div 
                     className="h-full bg-primary transition-all duration-300 rounded-full"
-                    style={{ width: `${(currentStepIndex / 4) * 100}%` }}
+                    style={{ width: '50%' }}
                   />
                 </div>
                 <div className="flex justify-between mt-3">
-                  {steps.slice(1).map((step, index) => (
-                    <div 
-                      key={step.id}
-                      className={cn(
-                        "text-xs transition-colors",
-                        index + 1 <= currentStepIndex ? "text-primary font-medium" : "text-muted-foreground"
-                      )}
-                    >
-                      <span className="hidden sm:inline">{step.label}</span>
-                      <span className="sm:hidden">{step.number}</span>
-                    </div>
-                  ))}
+                  <div className="text-xs text-primary font-medium">Contatto</div>
+                  <div className="text-xs text-muted-foreground">Invio</div>
                 </div>
               </div>
             </div>
@@ -296,54 +273,14 @@ const Contatti = () => {
                               <Label htmlFor="azienda">Azienda (se presente)</Label>
                               <Input id="azienda" placeholder="Nome azienda" className="h-11" />
                             </div>
-                          </div>
-                          <Button 
-                            type="button" 
-                            onClick={() => goToNextSection("contatto", "impianto")}
-                            className="w-full md:w-auto"
-                          >
-                            Continua
-                            <ArrowRight className="w-4 h-4 ml-2" />
-                          </Button>
-                        </div>
-                      </CollapsibleContent>
-                    </div>
-                  </Collapsible>
-
-                  {/* Section 2: Dettagli impianto */}
-                  <Collapsible open={openSections.impianto} onOpenChange={() => toggleSection("impianto")}>
-                    <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
-                      <CollapsibleTrigger className="w-full p-5 flex items-center justify-between hover:bg-muted/30 transition-colors">
-                        <div className="flex items-center gap-3">
-                          <span className={cn(
-                            "w-7 h-7 rounded-full flex items-center justify-center text-sm font-medium",
-                            openSections.impianto ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-                          )}>
-                            2
-                          </span>
-                          <span className="font-semibold text-foreground">Dettagli impianto</span>
-                        </div>
-                        <ChevronDown className={cn(
-                          "w-5 h-5 text-muted-foreground transition-transform",
-                          openSections.impianto && "rotate-180"
-                        )} />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <div className="px-5 pb-5 pt-2 space-y-4">
-                          <div className="grid md:grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <Label htmlFor="diametro">Diametro esatto (mm)</Label>
-                              <Input id="diametro" type="number" placeholder="es. 150" className="h-11" />
-                              <p className="text-xs text-muted-foreground">Opzionale se non lo conosci</p>
-                            </div>
-                            <div className="space-y-2">
+                            <div className="space-y-2 md:col-span-2">
                               <Label htmlFor="citta">Città / Paese *</Label>
                               <Input id="citta" placeholder="Milano, Italia" required className="h-11" />
                             </div>
                           </div>
                           <Button 
                             type="button" 
-                            onClick={() => goToNextSection("impianto", "foto")}
+                            onClick={() => goToNextSection("contatto", "note")}
                             className="w-full md:w-auto"
                           >
                             Continua
@@ -354,90 +291,7 @@ const Contatti = () => {
                     </div>
                   </Collapsible>
 
-                  {/* Section 3: Foto */}
-                  <Collapsible open={openSections.foto} onOpenChange={() => toggleSection("foto")}>
-                    <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
-                      <CollapsibleTrigger className="w-full p-5 flex items-center justify-between hover:bg-muted/30 transition-colors">
-                        <div className="flex items-center gap-3">
-                          <span className={cn(
-                            "w-7 h-7 rounded-full flex items-center justify-center text-sm font-medium",
-                            openSections.foto ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-                          )}>
-                            3
-                          </span>
-                          <span className="font-semibold text-foreground">Foto dell'impianto</span>
-                          {(impiantoFiles || cannaFiles) && (
-                            <CheckCircle2 className="w-4 h-4 text-green-500" />
-                          )}
-                        </div>
-                        <ChevronDown className={cn(
-                          "w-5 h-5 text-muted-foreground transition-transform",
-                          openSections.foto && "rotate-180"
-                        )} />
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <div className="px-5 pb-5 pt-2 space-y-4">
-                          <div className="grid md:grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                              <Label htmlFor="foto-impianto" className="flex items-center gap-2">
-                                <Camera className="w-4 h-4" />
-                                Foto impianto *
-                              </Label>
-                              <Input 
-                                id="foto-impianto" 
-                                type="file" 
-                                accept="image/*" 
-                                multiple
-                                required
-                                onChange={(e) => setImpiantoFiles(e.target.files)}
-                                className="cursor-pointer h-11"
-                              />
-                              {impiantoFiles && impiantoFiles.length > 0 && (
-                                <p className="text-xs text-primary flex items-center gap-1">
-                                  <CheckCircle2 className="w-3 h-3" />
-                                  {impiantoFiles.length} file selezionati
-                                </p>
-                              )}
-                            </div>
-                            <div className="space-y-2">
-                              <Label htmlFor="foto-canna" className="flex items-center gap-2">
-                                <Camera className="w-4 h-4" />
-                                Foto canna fumaria *
-                              </Label>
-                              <Input 
-                                id="foto-canna" 
-                                type="file" 
-                                accept="image/*" 
-                                multiple
-                                required
-                                onChange={(e) => setCannaFiles(e.target.files)}
-                                className="cursor-pointer h-11"
-                              />
-                              {cannaFiles && cannaFiles.length > 0 && (
-                                <p className="text-xs text-primary flex items-center gap-1">
-                                  <CheckCircle2 className="w-3 h-3" />
-                                  {cannaFiles.length} file selezionati
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                          <p className="text-xs text-muted-foreground">
-                            Formati accettati: JPG, PNG. Puoi caricare più foto per campo.
-                          </p>
-                          <Button 
-                            type="button" 
-                            onClick={() => goToNextSection("foto", "note")}
-                            className="w-full md:w-auto"
-                          >
-                            Continua
-                            <ArrowRight className="w-4 h-4 ml-2" />
-                          </Button>
-                        </div>
-                      </CollapsibleContent>
-                    </div>
-                  </Collapsible>
-
-                  {/* Section 4: Note e invio */}
+                  {/* Section 2: Note e invio */}
                   <Collapsible open={openSections.note} onOpenChange={() => toggleSection("note")}>
                     <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
                       <CollapsibleTrigger className="w-full p-5 flex items-center justify-between hover:bg-muted/30 transition-colors">
@@ -446,7 +300,7 @@ const Contatti = () => {
                             "w-7 h-7 rounded-full flex items-center justify-center text-sm font-medium",
                             openSections.note ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
                           )}>
-                            4
+                            2
                           </span>
                           <span className="font-semibold text-foreground">Note e invio</span>
                         </div>
