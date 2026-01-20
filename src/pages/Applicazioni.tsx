@@ -113,32 +113,16 @@ const Applicazioni = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
+      <main className="pt-20">
         {/* Hero Section */}
-        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-br from-primary via-primary/95 to-primary/90">
+        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container">
             <div className="max-w-3xl">
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 Applicazioni ZAPPER
               </h1>
-              <p className="text-lg md:text-xl text-primary-foreground/80 mb-4">
+              <p className="text-lg md:text-xl text-muted-foreground">
                 ZAPPER interviene su diverse tipologie di impianti a combustione, adattando ogni soluzione al tipo di fumi, alla portata e al contesto di utilizzo.
-              </p>
-              <p className="text-sm text-primary-foreground/60 flex items-center gap-2">
-                <Wind className="w-4 h-4" />
-                Ogni applicazione richiede una valutazione tecnica dedicata.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Spiegazione orientamento */}
-        <section className="py-8 md:py-12 bg-muted/30 border-b border-border">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="text-muted-foreground text-lg">
-                Le applicazioni identificano il <strong className="text-foreground">tipo di impianto</strong> su cui interveniamo.
-                Da qui puoi approfondire i problemi tipici, vedere interventi reali e scoprire quali modelli ZAPPER sono compatibili.
               </p>
             </div>
           </div>

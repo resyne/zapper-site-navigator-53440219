@@ -210,19 +210,16 @@ const Modelli = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main>
+      <main className="pt-20">
         {/* Hero */}
-        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-primary">
+        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container">
             <div className="max-w-3xl">
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 I modelli ZAPPER
               </h1>
-              <p className="text-lg md:text-xl text-primary-foreground/80 mb-4">
+              <p className="text-lg md:text-xl text-muted-foreground">
                 Ogni impianto a combustione ha esigenze diverse. I modelli ZAPPER sono progettati per adattarsi a differenti portate, diametri e contesti di utilizzo.
-              </p>
-              <p className="text-base text-primary-foreground/60 italic">
-                Il modello corretto viene sempre confermato tramite sopralluogo tecnico.
               </p>
             </div>
           </div>
