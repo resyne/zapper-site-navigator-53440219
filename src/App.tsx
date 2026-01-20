@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Interventi from "./pages/Interventi";
 import Settori from "./pages/Settori";
+import Applicazioni from "./pages/Applicazioni";
 import Modelli from "./pages/Modelli";
 import Professionale from "./pages/settori/Professionale";
 import Domestico from "./pages/settori/Domestico";
@@ -67,6 +68,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/interventi" element={<Interventi />} />
           <Route path="/settori" element={<Settori />} />
+          <Route path="/applicazioni" element={<Applicazioni />} />
+          <Route path="/modelli" element={<Modelli />} />
           <Route path="/modelli" element={<Modelli />} />
           <Route path="/settori/professionale" element={<Professionale />} />
           <Route path="/settori/domestico" element={<Domestico />} />
