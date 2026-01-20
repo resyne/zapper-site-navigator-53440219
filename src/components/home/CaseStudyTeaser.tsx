@@ -57,8 +57,8 @@ const CaseStudyTeaser = () => {
             </div>
 
             <Button variant="outline" asChild>
-              <Link to="/clienti">
-                Vedi tutti i case study
+              <Link to="/interventi">
+                Vedi tutti gli interventi
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
