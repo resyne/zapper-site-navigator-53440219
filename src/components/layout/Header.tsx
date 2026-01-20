@@ -46,8 +46,8 @@ const Header = () => {
               <Phone className="w-4 h-4" />
               <span className="font-medium">Chiama ora</span>
             </a>
-            <Button variant="accent" size="lg">
-              Sopralluogo gratuito
+            <Button variant="accent" size="lg" asChild>
+              <Link to="/contatti">Valutazione tecnica gratuita</Link>
             </Button>
           </div>
 
@@ -78,8 +78,8 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-4 mt-2 border-t border-border">
-                <Button variant="accent" className="w-full" size="lg">
-                  Sopralluogo gratuito
+                <Button variant="accent" className="w-full" size="lg" asChild>
+                  <Link to="/contatti">Valutazione tecnica gratuita</Link>
                 </Button>
               </div>
             </nav>

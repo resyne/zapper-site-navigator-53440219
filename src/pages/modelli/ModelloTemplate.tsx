@@ -66,7 +66,8 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
-              <p className="text-sm text-primary-foreground/60 mt-3">Sopralluogo tecnico gratuito</p>
+              <p className="text-sm text-primary-foreground/60 mt-3">Valutazione tecnica gratuita e senza impegno</p>
+              
             </div>
           </div>
         </section>
@@ -224,14 +225,46 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
           </section>
         )}
 
+        {/* Come funziona la valutazione */}
+        <section className="py-12 md:py-16">
+          <div className="container">
+            <div className="max-w-2xl mx-auto">
+              <h2 className="font-display text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+                🔧 Come funziona la valutazione tecnica
+              </h2>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm flex-shrink-0">1</span>
+                  <p className="text-muted-foreground pt-1">Ci invii alcune foto dell'impianto</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm flex-shrink-0">2</span>
+                  <p className="text-muted-foreground pt-1">Analizziamo configurazione e diametri</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm flex-shrink-0">3</span>
+                  <p className="text-muted-foreground pt-1">Ti proponiamo il modello ZAPPER più adatto</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm flex-shrink-0">4</span>
+                  <p className="text-muted-foreground pt-1">Ricevi indicazioni di installazione e offerta</p>
+                </div>
+              </div>
+              <p className="text-sm text-muted-foreground mt-6 italic">
+                La valutazione è da remoto e senza impegno.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Finale */}
         <section className="py-16 md:py-24 bg-accent">
           <div className="container text-center">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-accent-foreground mb-4">
-              Conferma la soluzione con un sopralluogo
+              Conferma la soluzione con una valutazione
             </h2>
             <p className="text-accent-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
-              Il modello non si sceglie, si conferma. Richiedi un sopralluogo gratuito per verificare
+              Il modello non si sceglie, si conferma. Richiedi una valutazione tecnica gratuita per verificare
               che {data.name} sia la soluzione giusta per il tuo impianto.
             </p>
             <Button
@@ -241,7 +274,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
               asChild
             >
               <Link to="/contatti">
-                Richiedi sopralluogo gratuito
+                Richiedi una valutazione tecnica
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
             </Button>
