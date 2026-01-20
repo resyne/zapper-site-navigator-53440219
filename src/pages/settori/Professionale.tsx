@@ -1,0 +1,332 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { 
+  ArrowRight, 
+  CheckCircle, 
+  AlertTriangle, 
+  ChefHat, 
+  Pizza, 
+  Croissant, 
+  Flame, 
+  UtensilsCrossed,
+  Play,
+  MapPin
+} from "lucide-react";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+
+const Professionale = () => {
+  const problemiTipici = [
+    "Fumi neri che escono dalla canna fumaria",
+    "Odori persistenti che disturbano i vicini",
+    "Segnalazioni e multe dall'ASL o dal Comune",
+    "Cappa fumaria che non tira correttamente",
+    "Polveri e residui che sporcano l'ambiente",
+  ];
+
+  const ambiti = [
+    {
+      id: "pizzerie",
+      title: "Pizzerie",
+      description: "Forni a legna e forni elettrici ad alta temperatura con problemi di fumi e odori.",
+      icon: Pizza,
+      href: "/professionale/pizzerie",
+      interventi: 45,
+    },
+    {
+      id: "panifici",
+      title: "Panifici",
+      description: "Forni professionali per la panificazione con emissioni da gestire.",
+      icon: Croissant,
+      href: "/professionale/panifici",
+      interventi: 28,
+    },
+    {
+      id: "bracerie",
+      title: "Bracerie",
+      description: "Griglie a carbone e braci con fumi densi e odore intenso.",
+      icon: Flame,
+      href: "/professionale/bracerie",
+      interventi: 32,
+    },
+    {
+      id: "cucine-professionali",
+      title: "Cucine Professionali",
+      description: "Ristoranti e hotel con cucine che generano fumi e vapori.",
+      icon: UtensilsCrossed,
+      href: "/professionale/cucine-professionali",
+      interventi: 56,
+    },
+  ];
+
+  const applicazioniRilevanti = [
+    { name: "Forni a legna", href: "/applicazioni/forni-a-legna" },
+    { name: "Braci e carbonella", href: "/applicazioni/braci-carbone" },
+    { name: "Cappe professionali", href: "/applicazioni/cappe" },
+  ];
+
+  const modelliConsigliati = [
+    { 
+      name: "ZAPPER S", 
+      descrizione: "Ideale per pizzerie e piccoli panifici",
+      href: "/modelli/zapper-s" 
+    },
+    { 
+      name: "ZAPPER M", 
+      descrizione: "Perfetto per bracerie e ristoranti",
+      href: "/modelli/zapper-m" 
+    },
+  ];
+
+  const miniInterventi = [
+    {
+      titolo: "Pizzeria Centro Storico",
+      citta: "Napoli",
+      problema: "Fumi neri e segnalazioni ASL",
+      risultato: "Zero segnalazioni in 8 mesi",
+      modello: "ZAPPER M",
+    },
+    {
+      titolo: "Braceria Gourmet",
+      citta: "Roma",
+      problema: "Odore carbone nel vicinato",
+      risultato: "Clienti e vicini soddisfatti",
+      modello: "ZAPPER M",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      <main>
+        {/* Hero Section */}
+        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-primary">
+          <div className="container">
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-14 h-14 bg-primary-foreground/20 rounded-xl flex items-center justify-center">
+                  <ChefHat className="w-7 h-7 text-primary-foreground" />
+                </div>
+                <span className="px-3 py-1 bg-accent text-accent-foreground text-sm font-semibold rounded-full">
+                  Più richiesto
+                </span>
+              </div>
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
+                Soluzioni ZAPPER per il Settore Professionale
+              </h1>
+              <p className="text-lg md:text-xl text-primary-foreground/80">
+                Ristoranti, pizzerie, panifici e bracerie: risolviamo problemi di fumi, odori e segnalazioni 
+                con soluzioni certificate e interventi rapidi.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Problemi Tipici */}
+        <section className="py-12 md:py-16 bg-muted/30">
+          <div className="container">
+            <div className="max-w-4xl">
+              <div className="flex items-center gap-3 mb-6">
+                <AlertTriangle className="w-6 h-6 text-accent" />
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
+                  Problemi tipici del settore
+                </h2>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {problemiTipici.map((problema, index) => (
+                  <div 
+                    key={index}
+                    className="flex items-start gap-3 p-4 bg-card rounded-xl shadow-sm"
+                  >
+                    <span className="w-6 h-6 bg-destructive/10 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                      <span className="text-destructive text-sm">✕</span>
+                    </span>
+                    <span className="text-foreground">{problema}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Ambiti - Card Grandi */}
+        <section className="py-12 md:py-20">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
+                Scegli il tuo ambito
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+                Ogni attività ha esigenze specifiche. Seleziona il tuo settore per scoprire le soluzioni dedicate.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {ambiti.map((ambito, index) => (
+                <Link
+                  key={ambito.id}
+                  to={ambito.href}
+                  className="group block animate-fade-in-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="h-full bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-border hover:border-accent/30">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                        <ambito.icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="font-display text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                          {ambito.title}
+                        </h3>
+                        <span className="text-sm text-muted-foreground">{ambito.interventi}+ interventi</span>
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground mb-4">
+                      {ambito.description}
+                    </p>
+                    <div className="flex items-center text-primary font-medium group-hover:text-accent transition-colors">
+                      <span>Scopri le soluzioni</span>
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Applicazioni Rilevanti */}
+        <section className="py-12 md:py-16 bg-muted/30">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
+                Applicazioni tecniche
+              </h2>
+              <div className="flex flex-wrap justify-center gap-4">
+                {applicazioniRilevanti.map((app) => (
+                  <Link
+                    key={app.name}
+                    to={app.href}
+                    className="px-6 py-3 bg-card rounded-full shadow-sm hover:shadow-md transition-all border border-border hover:border-primary/30 text-foreground font-medium hover:text-primary"
+                  >
+                    {app.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Modelli Consigliati */}
+        <section className="py-12 md:py-16">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
+                Modelli consigliati per questo settore
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-6">
+                {modelliConsigliati.map((modello) => (
+                  <Link
+                    key={modello.name}
+                    to={modello.href}
+                    className="group block"
+                  >
+                    <div className="p-6 bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all border border-border hover:border-accent/30">
+                      <h3 className="font-display text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                        {modello.name}
+                      </h3>
+                      <p className="text-muted-foreground mb-4">{modello.descrizione}</p>
+                      <div className="flex items-center text-accent font-medium">
+                        <span>Scopri il modello</span>
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Mini Interventi */}
+        <section className="py-12 md:py-16 bg-muted/30">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
+                  Interventi nel settore
+                </h2>
+                <Link 
+                  to="/interventi" 
+                  className="text-primary hover:text-accent font-medium flex items-center gap-1 transition-colors"
+                >
+                  Vedi tutti
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-6">
+                {miniInterventi.map((intervento, index) => (
+                  <div 
+                    key={index}
+                    className="bg-card rounded-2xl p-6 shadow-lg"
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <MapPin className="w-4 h-4 text-accent" />
+                      <span className="text-sm text-muted-foreground">{intervento.citta}</span>
+                    </div>
+                    <h3 className="font-display text-lg font-bold text-foreground mb-3">
+                      {intervento.titolo}
+                    </h3>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-start gap-2">
+                        <span className="text-destructive">⚠</span>
+                        <span className="text-muted-foreground">{intervento.problema}</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
+                        <span className="text-foreground font-medium">{intervento.risultato}</span>
+                      </div>
+                    </div>
+                    <div className="mt-4 px-3 py-1.5 bg-accent/10 rounded-full inline-block">
+                      <span className="text-sm font-semibold text-accent">{intervento.modello}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Dedicata */}
+        <section className="py-16 md:py-24 bg-primary">
+          <div className="container text-center">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-4">
+              Hai un'attività professionale con problemi di fumi?
+            </h2>
+            <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
+              Richiedi un sopralluogo gratuito. Analizziamo il tuo impianto e ti proponiamo la soluzione più adatta.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button variant="accent" size="lg" asChild>
+                <Link to="/contatti">
+                  Richiedi sopralluogo gratuito
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
+                <Link to="/interventi">
+                  Vedi gli interventi
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Professionale;
