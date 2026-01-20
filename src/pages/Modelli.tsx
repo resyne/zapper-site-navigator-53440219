@@ -225,20 +225,6 @@ const Modelli = () => {
           </div>
         </section>
 
-        {/* Intro educativa */}
-        <section className="py-10 md:py-14 bg-muted/30 border-b border-border">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="text-lg text-foreground font-medium mb-4">
-                Non esiste uno ZAPPER universale.
-              </p>
-              <p className="text-muted-foreground">
-                La scelta del modello dipende da: <strong>tipo di impianto</strong>, <strong>ambito di utilizzo</strong>, <strong>diametro della canna fumaria</strong> e <strong>portata dei fumi</strong>. Per questo motivo, il nostro team verifica sempre ogni installazione prima della conferma finale.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* Modelli per settore */}
         {sectors.map((sector, sectorIndex) => (
           <section 
