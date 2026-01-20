@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight, Zap, Play, AlertTriangle } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -14,6 +14,17 @@ export interface ModelloData {
   applicazioniCompatibili: { name: string; href: string }[];
   settoriUtilizzo: { name: string; href: string }[];
   specifiche: { label: string; value: string }[];
+  // New fields
+  inAzione?: {
+    videoPlaceholder?: boolean;
+    contestoBreve: string;
+    interventoLink?: string;
+  };
+  quandoNon?: {
+    casi: string[];
+    alternativa: string;
+    alternativaLink?: string;
+  };
 }
 
 interface ModelloTemplateProps {
@@ -42,7 +53,20 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
               </h1>
               <p className="text-xl text-accent font-semibold mb-2">{data.tagline}</p>
               <p className="text-lg text-primary-foreground/70 mb-4">{data.diameter}</p>
-              <p className="text-lg text-primary-foreground/80">{data.description}</p>
+              <p className="text-lg text-primary-foreground/80 mb-8">{data.description}</p>
+              
+              {/* CTA Primaria in Hero */}
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90"
+                asChild
+              >
+                <Link to="/contatti">
+                  Verifica se {data.name} è adatto al tuo impianto
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
+              <p className="text-sm text-primary-foreground/60 mt-3">Sopralluogo tecnico gratuito</p>
             </div>
           </div>
         </section>
@@ -119,7 +143,88 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* In Azione */}
+        {data.inAzione && (
+          <section className="py-12 md:py-16">
+            <div className="container">
+              <h2 className="font-display text-2xl font-bold text-foreground mb-8 text-center">
+                🔥 {data.name} in azione
+              </h2>
+              <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                {/* Video placeholder */}
+                <div className="aspect-video bg-muted rounded-2xl flex items-center justify-center relative overflow-hidden group cursor-pointer">
+                  <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors" />
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center z-10">
+                    <Play className="w-8 h-8 text-primary-foreground ml-1" />
+                  </div>
+                  <span className="absolute bottom-4 left-4 text-sm text-muted-foreground">Video intervento</span>
+                </div>
+                
+                {/* Foto placeholder */}
+                <div className="aspect-video bg-muted rounded-2xl flex items-center justify-center">
+                  <div className="text-center p-6">
+                    <Zap className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                    <span className="text-sm text-muted-foreground">Foto installazione</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Contesto */}
+              <div className="max-w-2xl mx-auto mt-8 text-center">
+                <p className="text-lg text-muted-foreground mb-6">
+                  {data.inAzione.contestoBreve}
+                </p>
+                <Link 
+                  to={data.inAzione.interventoLink || "/interventi"}
+                  className="inline-flex items-center text-primary hover:text-accent font-medium transition-colors"
+                >
+                  Vedi altri interventi simili
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Quando NON è questo modello */}
+        {data.quandoNon && (
+          <section className="py-12 md:py-16 bg-muted/30">
+            <div className="container">
+              <div className="max-w-2xl mx-auto">
+                <div className="flex items-center gap-3 mb-6">
+                  <AlertTriangle className="w-6 h-6 text-amber-500" />
+                  <h2 className="font-display text-xl font-bold text-foreground">
+                    Quando {data.name} non è la soluzione ideale
+                  </h2>
+                </div>
+                <ul className="space-y-3 mb-6">
+                  {data.quandoNon.casi.map((caso, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2 flex-shrink-0" />
+                      <span className="text-muted-foreground">{caso}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-foreground">
+                  👉 In questi casi viene valutato{" "}
+                  {data.quandoNon.alternativaLink ? (
+                    <Link 
+                      to={data.quandoNon.alternativaLink}
+                      className="text-primary hover:text-accent font-semibold transition-colors"
+                    >
+                      {data.quandoNon.alternativa}
+                    </Link>
+                  ) : (
+                    <span className="font-semibold">{data.quandoNon.alternativa}</span>
+                  )}
+                  .
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* CTA Finale */}
         <section className="py-16 md:py-24 bg-accent">
           <div className="container text-center">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-accent-foreground mb-4">
