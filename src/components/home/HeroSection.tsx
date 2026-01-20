@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Shield, CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-industrial.jpg";
@@ -51,15 +52,20 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up animation-delay-300">
-              <Button variant="hero" size="xl">
-                Richiedi sopralluogo gratuito
-                <ArrowRight className="w-5 h-5" />
+              <Button variant="hero" size="xl" asChild>
+                <Link to="/contatti">
+                  Richiedi una valutazione tecnica
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
               </Button>
               <Button variant="hero-outline" size="xl">
                 <Play className="w-5 h-5" />
                 Guarda come funziona
               </Button>
             </div>
+            <p className="text-sm text-primary-foreground/60 mt-3 animate-fade-in-up animation-delay-300">
+              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
+            </p>
 
             {/* Trust Badge */}
             <div className="mt-10 pt-8 border-t border-primary-foreground/10 animate-fade-in animation-delay-400">

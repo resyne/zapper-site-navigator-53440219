@@ -214,13 +214,16 @@ const AmbitoTemplate = ({ data }: AmbitoTemplateProps) => {
             <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-4">
               Hai un problema simile?
             </h2>
-            <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
-              Richiedi un sopralluogo gratuito. Analizziamo il tuo impianto e ti proponiamo la soluzione più adatta.
+            <p className="text-primary-foreground/80 text-lg mb-2 max-w-2xl mx-auto">
+              Richiedi una valutazione tecnica gratuita.
+            </p>
+            <p className="text-primary-foreground/60 text-sm mb-8 max-w-2xl mx-auto">
+              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="accent" size="lg" asChild>
                 <Link to="/contatti">
-                  Richiedi sopralluogo gratuito
+                  Richiedi una valutazione tecnica
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
