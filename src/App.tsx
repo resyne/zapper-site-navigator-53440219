@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Interventi from "./pages/Interventi";
 import Settori from "./pages/Settori";
+import Modelli from "./pages/Modelli";
 import Professionale from "./pages/settori/Professionale";
 import Domestico from "./pages/settori/Domestico";
 import Industriale from "./pages/settori/Industriale";
@@ -25,9 +26,33 @@ import BraciCarbone from "./pages/applicazioni/BraciCarbone";
 import CaldaieBiomassaApp from "./pages/applicazioni/CaldaieBiomassa";
 import CaminiApp from "./pages/applicazioni/Camini";
 import Cappe from "./pages/applicazioni/Cappe";
-import ZapperS from "./pages/modelli/ZapperS";
-import ZapperM from "./pages/modelli/ZapperM";
-import ZapperL from "./pages/modelli/ZapperL";
+// Modelli imports
+import ZPZ from "./pages/modelli/ZPZ";
+import ZPZMax from "./pages/modelli/ZPZMax";
+import ZPZNuvolaL from "./pages/modelli/ZPZNuvolaL";
+import ZPZNuvola from "./pages/modelli/ZPZNuvola";
+import ZPF from "./pages/modelli/ZPF";
+import ZPFMax from "./pages/modelli/ZPFMax";
+import ZBRS from "./pages/modelli/ZBRS";
+import ZBRMax from "./pages/modelli/ZBRMax";
+import ZGR from "./pages/modelli/ZGR";
+import ZGRMax from "./pages/modelli/ZGRMax";
+import Destink from "./pages/modelli/Destink";
+import DestinkMax from "./pages/modelli/DestinkMax";
+import DestinkUltra from "./pages/modelli/DestinkUltra";
+import DestinkUltraMax from "./pages/modelli/DestinkUltraMax";
+import ZCL from "./pages/modelli/ZCL";
+import ZCLMax from "./pages/modelli/ZCLMax";
+import ZCM from "./pages/modelli/ZCM";
+import ZMax from "./pages/modelli/ZMax";
+import ZTRF from "./pages/modelli/ZTRF";
+import ZTRFMax from "./pages/modelli/ZTRFMax";
+import ZTRFMaxDesk from "./pages/modelli/ZTRFMaxDesk";
+import ZAF from "./pages/modelli/ZAF";
+import ZAFMax from "./pages/modelli/ZAFMax";
+import ZTGL from "./pages/modelli/ZTGL";
+import ZTGLMax from "./pages/modelli/ZTGLMax";
+import ZTGLMaxUltra from "./pages/modelli/ZTGLMaxUltra";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +67,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/interventi" element={<Interventi />} />
           <Route path="/settori" element={<Settori />} />
+          <Route path="/modelli" element={<Modelli />} />
           <Route path="/settori/professionale" element={<Professionale />} />
           <Route path="/settori/domestico" element={<Domestico />} />
           <Route path="/settori/industriale" element={<Industriale />} />
@@ -61,9 +87,37 @@ const App = () => (
           <Route path="/applicazioni/caldaie-biomassa" element={<CaldaieBiomassaApp />} />
           <Route path="/applicazioni/camini" element={<CaminiApp />} />
           <Route path="/applicazioni/cappe" element={<Cappe />} />
-          <Route path="/modelli/zapper-s" element={<ZapperS />} />
-          <Route path="/modelli/zapper-m" element={<ZapperM />} />
-          <Route path="/modelli/zapper-l" element={<ZapperL />} />
+          {/* Modelli routes */}
+          <Route path="/modelli/zpz" element={<ZPZ />} />
+          <Route path="/modelli/zpz-max" element={<ZPZMax />} />
+          <Route path="/modelli/zpz-nuvola-l" element={<ZPZNuvolaL />} />
+          <Route path="/modelli/zpz-nuvola" element={<ZPZNuvola />} />
+          <Route path="/modelli/zpz-nuvola-l-elettrico" element={<ZPZNuvolaL />} />
+          <Route path="/modelli/zpf" element={<ZPF />} />
+          <Route path="/modelli/zpf-max" element={<ZPFMax />} />
+          <Route path="/modelli/zbr-s" element={<ZBRS />} />
+          <Route path="/modelli/zbr-max" element={<ZBRMax />} />
+          <Route path="/modelli/zgr" element={<ZGR />} />
+          <Route path="/modelli/zgr-max" element={<ZGRMax />} />
+          <Route path="/modelli/destink" element={<Destink />} />
+          <Route path="/modelli/destink-max" element={<DestinkMax />} />
+          <Route path="/modelli/destink-ultra" element={<DestinkUltra />} />
+          <Route path="/modelli/destink-ultra-max" element={<DestinkUltraMax />} />
+          <Route path="/modelli/zcl" element={<ZCL />} />
+          <Route path="/modelli/zcl-max" element={<ZCLMax />} />
+          <Route path="/modelli/zcl-max-res" element={<ZCLMax />} />
+          <Route path="/modelli/zcl-ind" element={<ZCL />} />
+          <Route path="/modelli/zcl-max-ind" element={<ZCLMax />} />
+          <Route path="/modelli/zcm" element={<ZCM />} />
+          <Route path="/modelli/z-max" element={<ZMax />} />
+          <Route path="/modelli/ztrf" element={<ZTRF />} />
+          <Route path="/modelli/ztrf-max" element={<ZTRFMax />} />
+          <Route path="/modelli/ztrf-max-desk" element={<ZTRFMaxDesk />} />
+          <Route path="/modelli/zaf" element={<ZAF />} />
+          <Route path="/modelli/zaf-max" element={<ZAFMax />} />
+          <Route path="/modelli/ztgl" element={<ZTGL />} />
+          <Route path="/modelli/ztgl-max" element={<ZTGLMax />} />
+          <Route path="/modelli/ztgl-max-ultra" element={<ZTGLMaxUltra />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
