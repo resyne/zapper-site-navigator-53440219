@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChefHat, Home, Factory, ArrowRight } from "lucide-react";
+import sectorProfessionale from "@/assets/sector-professionale.jpg";
+import sectorDomestico from "@/assets/sector-domestico.jpg";
+import sectorIndustriale from "@/assets/sector-industriale.jpg";
 
 const SectorsSection = () => {
   const sectors = [
@@ -12,7 +15,7 @@ const SectorsSection = () => {
       icon: ChefHat,
       href: "/settori/professionale",
       features: ["Pizzerie", "Panifici", "Bracerie", "Cucine professionali"],
-      color: "bg-zapper-black",
+      image: sectorProfessionale,
     },
     {
       id: "domestico",
@@ -22,7 +25,7 @@ const SectorsSection = () => {
       icon: Home,
       href: "/settori/domestico",
       features: ["Camini", "Stufe a pellet", "Barbecue", "Forni da giardino"],
-      color: "bg-zapper-gray",
+      image: sectorDomestico,
     },
     {
       id: "industriale",
@@ -32,7 +35,7 @@ const SectorsSection = () => {
       icon: Factory,
       href: "/settori/industriale",
       features: ["Torrefazioni", "Caseifici", "Affumicatori", "Forni industriali"],
-      color: "bg-zapper-gray",
+      image: sectorIndustriale,
     },
   ];
 
@@ -60,20 +63,32 @@ const SectorsSection = () => {
               key={sector.id}
               className={`group relative bg-card rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
             >
-              {/* Card Header */}
-              <div className={`${sector.color} p-5 sm:p-6 md:p-8`}>
-                <div className="flex items-center justify-between mb-3 sm:mb-4">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 rounded-lg sm:rounded-xl flex items-center justify-center">
-                    <sector.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+              {/* Card Header with Background Image */}
+              <div 
+                className="relative p-5 sm:p-6 md:p-8"
+                style={{
+                  backgroundImage: `url(${sector.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                {/* Dark overlay for readability */}
+                <div className="absolute inset-0 bg-foreground/60" />
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 backdrop-blur-sm rounded-lg sm:rounded-xl flex items-center justify-center">
+                      <sector.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+                    </div>
+                    <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
                   </div>
-                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-1">
+                    {sector.title}
+                  </h3>
+                  <p className="text-white/70 text-xs sm:text-sm">
+                    {sector.subtitle}
+                  </p>
                 </div>
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-1">
-                  {sector.title}
-                </h3>
-                <p className="text-white/70 text-xs sm:text-sm">
-                  {sector.subtitle}
-                </p>
               </div>
 
               {/* Card Content */}
