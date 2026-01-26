@@ -19,10 +19,10 @@ const HeroSection = () => {
         }} />
       </div>
 
-      <div className="container relative z-10 pt-24 pb-12 md:pt-32 md:pb-24">
+      <div className="container relative z-10 pt-24 pb-12 md:pt-32 md:pb-24 px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Content */}
-          <div className="text-center lg:text-left px-4 sm:px-0">
+          <div className="text-center lg:text-left max-w-xl mx-auto lg:max-w-none lg:mx-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-full mb-4 sm:mb-6 animate-fade-in">
               <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
               <span className="text-white/90 text-xs sm:text-sm font-medium">
