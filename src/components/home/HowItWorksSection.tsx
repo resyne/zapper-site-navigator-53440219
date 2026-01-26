@@ -52,11 +52,11 @@ const HowItWorksSection = () => {
                 className={`relative animate-fade-in-up animation-delay-${(index + 1) * 100}`}
               >
                 {/* Card */}
-                <div className="bg-card rounded-2xl p-8 shadow-lg border border-border hover:shadow-xl hover:border-accent/20 transition-all duration-300 text-center">
+                <div className="bg-card rounded-2xl p-8 shadow-lg border border-border hover:shadow-xl hover:border-primary/20 transition-all duration-300 text-center">
                   {/* Step Number */}
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary mb-6 relative">
-                    <step.icon className="w-8 h-8 text-primary-foreground" />
-                    <span className="absolute -top-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-xs font-bold text-accent-foreground">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-zapper-black mb-6 relative">
+                    <step.icon className="w-8 h-8 text-white" />
+                    <span className="absolute -top-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-xs font-bold text-white">
                       {step.number}
                     </span>
                   </div>
@@ -74,7 +74,7 @@ const HowItWorksSection = () => {
         </div>
 
         {/* Benefits Bar */}
-        <div className="mt-12 md:mt-16 p-6 md:p-8 bg-primary rounded-2xl">
+        <div className="mt-12 md:mt-16 p-6 md:p-8 bg-zapper-black rounded-2xl">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               "Installazione in 1 giorno",
@@ -83,10 +83,10 @@ const HowItWorksSection = () => {
               "Assistenza 24/7",
             ].map((benefit) => (
               <div key={benefit} className="flex items-center gap-3">
-                <div className="w-6 h-6 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                  <Check className="w-4 h-4 text-accent-foreground" />
+                <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                  <Check className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-primary-foreground font-medium">{benefit}</span>
+                <span className="text-white font-medium">{benefit}</span>
               </div>
             ))}
           </div>
