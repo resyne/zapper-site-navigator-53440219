@@ -19,7 +19,7 @@ const HeroSection = () => {
         }} />
       </div>
 
-      <div className="container relative z-10 pt-24 pb-12 md:pt-32 md:pb-24 px-4 sm:px-6">
+      <div className="container relative z-10 pt-20 pb-20 sm:pt-24 sm:pb-12 md:pt-32 md:pb-24 px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Content */}
           <div className="text-center lg:text-left max-w-xl mx-auto lg:max-w-none lg:mx-0">

@@ -28,7 +28,7 @@ const Footer = () => {
   return (
     <footer className="bg-zapper-black text-white">
       {/* Main Footer */}
-      <div className="container py-10 sm:py-12 md:py-16">
+      <div className="container px-4 sm:px-6 py-10 sm:py-12 md:py-16">
         <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-5 lg:gap-12">
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2 mb-4 sm:mb-0">
@@ -127,7 +127,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
-        <div className="container py-4 sm:py-6">
+        <div className="container px-4 sm:px-6 py-4 sm:py-6">
           <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between text-xs sm:text-sm text-white/50">
             <p>© {currentYear} ZAPPER®. Tutti i diritti riservati.</p>
             <div className="flex flex-wrap gap-4 sm:gap-6">

@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-      <div className="container">
+      <div className="container px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center">
@@ -67,7 +67,7 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-background border-b border-border animate-fade-in-down">
-          <div className="container py-4">
+          <div className="container px-4 sm:px-6 py-4">
             <nav className="flex flex-col gap-2">
               {navigation.map((item) => (
                 <Link
