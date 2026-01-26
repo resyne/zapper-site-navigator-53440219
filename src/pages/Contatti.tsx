@@ -60,7 +60,7 @@ const Contatti = () => {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-primary/5 to-background py-12 md:py-20">
+        <section className="bg-gradient-to-b from-primary/5 to-background pt-24 pb-12 md:pt-32 md:pb-20">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
