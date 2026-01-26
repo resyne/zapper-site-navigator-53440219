@@ -15,12 +15,12 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent/10 hover:text-accent",
         link: "text-primary underline-offset-4 hover:underline",
-        // ZAPPER Custom Variants
-        accent: "bg-accent text-accent-foreground hover:bg-zapper-orange-hover shadow-md hover:shadow-glow",
-        hero: "bg-accent text-accent-foreground hover:bg-zapper-orange-hover shadow-glow hover:shadow-glow-lg text-base md:text-lg px-8 py-6",
-        "hero-outline": "border-2 border-accent-foreground/30 bg-transparent text-accent-foreground hover:bg-accent-foreground/10 text-base md:text-lg px-8 py-6",
-        "sector-card": "bg-primary text-primary-foreground hover:bg-zapper-blue-light w-full justify-center",
-        cta: "bg-accent text-accent-foreground hover:bg-zapper-orange-hover shadow-md hover:shadow-glow font-bold tracking-wide uppercase",
+        // ZAPPER Custom Variants - Green CTA
+        accent: "bg-primary text-primary-foreground hover:bg-zapper-green-hover shadow-md hover:shadow-glow",
+        hero: "bg-primary text-primary-foreground hover:bg-zapper-green-hover shadow-glow hover:shadow-glow-lg text-base md:text-lg px-8 py-6",
+        "hero-outline": "border-2 border-primary bg-transparent text-primary hover:bg-primary/10 text-base md:text-lg px-8 py-6",
+        "sector-card": "bg-zapper-black text-white hover:bg-zapper-black/90 w-full justify-center",
+        cta: "bg-primary text-primary-foreground hover:bg-zapper-green-hover shadow-md hover:shadow-glow font-bold tracking-wide uppercase",
       },
       size: {
         default: "h-10 px-4 py-2",
