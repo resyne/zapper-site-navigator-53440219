@@ -30,7 +30,7 @@ const TrustpilotSection = () => {
 
   return (
     <section className="py-12 md:py-24 bg-muted/30">
-      <div className="container">
+      <div className="container px-4 sm:px-6">
         {/* Header with Trustpilot badge */}
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 bg-card px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-sm border border-border mb-4 sm:mb-6">

@@ -21,10 +21,10 @@ const CaseStudyTeaser = () => {
 
   return (
     <section className="py-12 md:py-24 bg-background">
-      <div className="container">
+      <div className="container px-4 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Content */}
-          <div>
+          <div className="text-center lg:text-left">
             <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
               Case study
             </span>
