@@ -13,7 +13,6 @@ const Settori = () => {
       icon: ChefHat,
       href: "/settori/professionale",
       ambiti: ["Pizzerie", "Panifici", "Bracerie", "Cucine professionali"],
-      color: "bg-primary",
       priority: true,
     },
     {
@@ -23,7 +22,6 @@ const Settori = () => {
       icon: Home,
       href: "/settori/domestico",
       ambiti: ["Caldaie a biomassa", "Camini a legna", "Stufe"],
-      color: "bg-zapper-blue-light",
       priority: false,
     },
     {
@@ -33,7 +31,6 @@ const Settori = () => {
       icon: Factory,
       href: "/settori/industriale",
       ambiti: ["Torrefazioni", "Caseifici", "Affumicatori", "Forni industriali"],
-      color: "bg-zapper-gray",
       priority: false,
     },
   ];
@@ -75,20 +72,20 @@ const Settori = () => {
                   className={`group block animate-fade-in-up`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className={`relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${sector.priority ? 'ring-2 ring-accent/50' : ''}`}>
-                    {/* Card Header */}
-                    <div className={`${sector.color} p-6 md:p-8`}>
+                  <div className={`relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${sector.priority ? 'ring-2 ring-primary/50' : ''}`}>
+                    {/* Card Header - Nero strutturale per massima leggibilità */}
+                    <div className="bg-zapper-black p-6 md:p-8">
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-14 h-14 bg-primary-foreground/20 rounded-xl flex items-center justify-center">
-                          <sector.icon className="w-7 h-7 text-primary-foreground" />
+                        <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center">
+                          <sector.icon className="w-7 h-7 text-primary" />
                         </div>
                         {sector.priority && (
-                          <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-semibold rounded-full">
+                          <span className="px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full">
                             Più richiesto
                           </span>
                         )}
                       </div>
-                      <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground">
+                      <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
                         {sector.title}
                       </h2>
                     </div>
