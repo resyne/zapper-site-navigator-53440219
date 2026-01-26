@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
+import logoBianco from "@/assets/logo-zapper-bianco.svg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -31,11 +32,12 @@ const Footer = () => {
         <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-5 lg:gap-12">
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2 mb-4 sm:mb-0">
-            <Link to="/" className="flex items-center gap-2 mb-4 sm:mb-6">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-display font-bold text-xl sm:text-2xl">Z</span>
-              </div>
-              <span className="font-display font-bold text-xl sm:text-2xl text-white">ZAPPER</span>
+            <Link to="/" className="inline-block mb-4 sm:mb-6">
+              <img 
+                src={logoBianco} 
+                alt="ZAPPER" 
+                className="h-8 sm:h-10 w-auto"
+              />
             </Link>
             <p className="text-white/70 text-sm sm:text-base mb-4 sm:mb-6 max-w-sm">
               Sistemi di abbattimento fumi e polveri per il settore professionale, domestico e industriale. 
