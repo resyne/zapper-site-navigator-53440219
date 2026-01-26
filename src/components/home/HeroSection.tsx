@@ -19,10 +19,10 @@ const HeroSection = () => {
         }} />
       </div>
 
-      <div className="container relative z-10 pt-24 pb-12 md:pt-32 md:pb-24 px-4 sm:px-6">
+      <div className="container relative z-10 pt-24 pb-12 md:pt-32 md:pb-24">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Content */}
-          <div className="text-center lg:text-left">
+          <div className="text-center lg:text-left px-4 sm:px-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-full mb-4 sm:mb-6 animate-fade-in">
               <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
               <span className="text-white/90 text-xs sm:text-sm font-medium">
@@ -35,7 +35,7 @@ const HeroSection = () => {
               <span className="text-primary block sm:inline">Problema risolto.</span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-100 px-2 sm:px-0">
+            <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-100">
               ZAPPER è il sistema di abbattimento fumi che elimina il problema alla fonte. 
               Niente più segnalazioni, niente più multe. Solo aria pulita.
             </p>
@@ -51,7 +51,7 @@ const HeroSection = () => {
             </ul>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col gap-3 sm:gap-4 animate-fade-in-up animation-delay-300 px-2 sm:px-0">
+            <div className="flex flex-col gap-3 sm:gap-4 animate-fade-in-up animation-delay-300">
               <Button variant="hero" size="lg" className="w-full sm:w-auto" asChild>
                 <Link to="/contatti">
                   Richiedi una valutazione tecnica
@@ -63,7 +63,7 @@ const HeroSection = () => {
                 Guarda come funziona
               </Button>
             </div>
-            <p className="text-xs sm:text-sm text-white/60 mt-3 animate-fade-in-up animation-delay-300 px-2 sm:px-0">
+            <p className="text-xs sm:text-sm text-white/60 mt-3 animate-fade-in-up animation-delay-300">
               Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
             </p>
 

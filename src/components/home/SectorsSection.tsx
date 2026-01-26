@@ -38,7 +38,7 @@ const SectorsSection = () => {
 
   return (
     <section className="py-12 md:py-24 bg-background">
-      <div className="container px-4 sm:px-6">
+      <div className="container">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
           <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">

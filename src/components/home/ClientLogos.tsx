@@ -11,7 +11,7 @@ const ClientLogos = () => {
 
   return (
     <section className="py-8 sm:py-12 md:py-16 bg-muted/50 border-y border-border">
-      <div className="container px-4 sm:px-6">
+      <div className="container">
         <p className="text-center text-muted-foreground text-xs sm:text-sm uppercase tracking-wider mb-6 sm:mb-8">
           Scelto da oltre 500 aziende in Italia
         </p>
