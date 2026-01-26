@@ -35,7 +35,7 @@ const ProblemSection = () => {
   ];
 
   return (
-    <section className="py-12 md:py-24 bg-zapper-beige overflow-hidden">
+    <section className="py-12 md:py-24 bg-zapper-blue-light overflow-hidden">
       <div className="container px-4 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Content */}
@@ -75,7 +75,7 @@ const ProblemSection = () => {
             {problems.map((problem, index) => (
               <div
                 key={problem.title}
-                className={`group p-4 sm:p-5 bg-white rounded-lg sm:rounded-xl border border-zapper-beige hover:border-primary/30 transition-all duration-300 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
+                className={`group p-4 sm:p-5 bg-white rounded-lg sm:rounded-xl border border-zapper-blue-light hover:border-primary/30 transition-all duration-300 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
               >
                 <div className="w-9 h-9 sm:w-10 sm:h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-colors">
                   <problem.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />

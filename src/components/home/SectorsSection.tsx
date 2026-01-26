@@ -22,7 +22,7 @@ const SectorsSection = () => {
       icon: Home,
       href: "/settori/domestico",
       features: ["Camini", "Stufe a pellet", "Barbecue", "Forni da giardino"],
-      color: "bg-zapper-beige",
+      color: "bg-zapper-blue-light",
     },
     {
       id: "industriale",
