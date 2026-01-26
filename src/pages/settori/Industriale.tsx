@@ -100,18 +100,18 @@ const Industriale = () => {
       
       <main>
         {/* Hero Section */}
-        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-zapper-gray">
+        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-zapper-black">
           <div className="container">
             <div className="max-w-3xl">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-14 h-14 bg-primary-foreground/20 rounded-xl flex items-center justify-center">
-                  <Factory className="w-7 h-7 text-primary-foreground" />
+                <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center">
+                  <Factory className="w-7 h-7 text-white" />
                 </div>
               </div>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
                 Soluzioni ZAPPER® per il Settore Industriale
               </h1>
-              <p className="text-lg md:text-xl text-primary-foreground/80">
+              <p className="text-lg md:text-xl text-white/80">
                 Impianti industriali con alte portate e emissioni complesse: interveniamo in modo mirato 
                 per garantire conformità e continuità operativa.
               </p>
@@ -280,7 +280,7 @@ const Industriale = () => {
                         <span className="text-muted-foreground">{intervento.problema}</span>
                       </div>
                       <div className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500 shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-primary shrink-0" />
                         <span className="text-foreground font-medium">{intervento.risultato}</span>
                       </div>
                     </div>
@@ -295,15 +295,15 @@ const Industriale = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 bg-zapper-gray">
+        <section className="py-16 md:py-24 bg-zapper-black">
           <div className="container text-center">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-4">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">
               Hai un impianto industriale con problemi di emissioni?
             </h2>
-            <p className="text-primary-foreground/80 text-lg mb-2 max-w-2xl mx-auto">
+            <p className="text-white/80 text-lg mb-2 max-w-2xl mx-auto">
               Richiedi una valutazione tecnica gratuita.
             </p>
-            <p className="text-primary-foreground/60 text-sm mb-8 max-w-2xl mx-auto">
+            <p className="text-white/60 text-sm mb-8 max-w-2xl mx-auto">
               Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -313,7 +313,7 @@ const Industriale = () => {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
+              <Button variant="outline" size="lg" className="bg-transparent border-white/30 text-white hover:bg-white/10" asChild>
                 <Link to="/interventi">
                   Vedi gli interventi
                 </Link>
