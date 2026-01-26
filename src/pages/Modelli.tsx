@@ -216,10 +216,10 @@ const Modelli = () => {
           <div className="container">
             <div className="max-w-3xl">
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                I modelli ZAPPER
+                I modelli ZAPPER®
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
-                Ogni impianto a combustione ha esigenze diverse. I modelli ZAPPER sono progettati per adattarsi a differenti portate, diametri e contesti di utilizzo.
+                Ogni impianto a combustione ha esigenze diverse. I modelli ZAPPER® sono progettati per adattarsi a differenti portate, diametri e contesti di utilizzo.
               </p>
             </div>
           </div>
@@ -292,7 +292,7 @@ const Modelli = () => {
               Non sei sicuro di quale modello è adatto al tuo impianto?
             </h2>
             <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-              Il nostro team tecnico analizza il tuo impianto e conferma la soluzione ZAPPER più adatta.
+              Il nostro team tecnico analizza il tuo impianto e conferma la soluzione ZAPPER® più adatta.
             </p>
             <Button 
               variant="accent" 

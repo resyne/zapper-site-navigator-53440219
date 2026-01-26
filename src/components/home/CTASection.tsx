@@ -39,7 +39,7 @@ const CTASection = () => {
               <span className="text-primary">valutazione tecnica</span>
             </h2>
             <p className="text-base sm:text-lg text-white/80 mb-3 sm:mb-4">
-              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
+              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
             </p>
             <p className="text-sm sm:text-base text-white/70 mb-6 sm:mb-8">
               Un nostro tecnico specializzato ti proporrà la soluzione migliore. Senza impegno, senza costi nascosti.

@@ -119,10 +119,10 @@ const Applicazioni = () => {
           <div className="container">
             <div className="max-w-3xl">
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                Applicazioni ZAPPER
+                Applicazioni ZAPPER®
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
-                ZAPPER interviene su diverse tipologie di impianti a combustione, adattando ogni soluzione al tipo di fumi, alla portata e al contesto di utilizzo.
+                ZAPPER® interviene su diverse tipologie di impianti a combustione, adattando ogni soluzione al tipo di fumi, alla portata e al contesto di utilizzo.
               </p>
             </div>
           </div>

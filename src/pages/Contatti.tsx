@@ -64,12 +64,12 @@ const Contatti = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-                {isPreFiltro ? "Verifica il tuo impianto" : "Valutazione tecnica ZAPPER"}
+                {isPreFiltro ? "Verifica il tuo impianto" : "Valutazione tecnica ZAPPER®"}
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-3">
                 {isPreFiltro 
-                  ? "Scopri in pochi secondi se ZAPPER è la soluzione adatta al tuo impianto."
-                  : "Analizziamo il tuo impianto da remoto e ti proponiamo la soluzione ZAPPER più adatta."
+                  ? "Scopri in pochi secondi se ZAPPER® è la soluzione adatta al tuo impianto."
+                  : "Analizziamo il tuo impianto da remoto e ti proponiamo la soluzione ZAPPER® più adatta."
                 }
               </p>
               <p className="text-sm text-primary font-medium">

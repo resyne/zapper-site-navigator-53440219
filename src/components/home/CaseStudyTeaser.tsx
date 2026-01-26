@@ -9,7 +9,7 @@ const CaseStudyTeaser = () => {
     sector: "Professionale",
     application: "Forno a legna",
     model: "ZAPPER M",
-    quote: "Dopo l'installazione di ZAPPER, le lamentele dei vicini sono scomparse completamente. Ora possiamo lavorare in tranquillità e concentrarci sulla qualità delle nostre pizze.",
+    quote: "Dopo l'installazione di ZAPPER®, le lamentele dei vicini sono scomparse completamente. Ora possiamo lavorare in tranquillità e concentrarci sulla qualità delle nostre pizze.",
     author: "Mario Rossi",
     role: "Titolare",
     results: [

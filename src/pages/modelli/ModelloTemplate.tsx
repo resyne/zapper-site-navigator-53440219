@@ -243,7 +243,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                 </div>
                 <div className="flex items-start gap-4">
                   <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm flex-shrink-0">3</span>
-                  <p className="text-muted-foreground pt-1">Ti proponiamo il modello ZAPPER più adatto</p>
+                  <p className="text-muted-foreground pt-1">Ti proponiamo il modello ZAPPER® più adatto</p>
                 </div>
                 <div className="flex items-start gap-4">
                   <span className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm flex-shrink-0">4</span>

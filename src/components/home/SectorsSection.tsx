@@ -49,7 +49,7 @@ const SectorsSection = () => {
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground px-4 sm:px-0">
             Che tu gestisca una pizzeria, abbia un camino in casa o lavori nell'industria alimentare, 
-            ZAPPER ha la soluzione giusta per te.
+            ZAPPER® ha la soluzione giusta per te.
           </p>
         </div>
 

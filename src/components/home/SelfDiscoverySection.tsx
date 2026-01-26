@@ -95,7 +95,7 @@ const SelfDiscoverySection = () => {
           {/* Section Header */}
           <div className="text-center mb-8 sm:mb-10">
             <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
-              Trova il tuo ZAPPER
+              Trova il tuo ZAPPER®
             </span>
             <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 px-2">
               Qual è la soluzione giusta per te?
@@ -240,7 +240,7 @@ const SelfDiscoverySection = () => {
                     </Link>
                   </Button>
                   <p className="text-center text-xs sm:text-sm text-muted-foreground">
-                    Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
+                    Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
                   </p>
                 </div>
               </div>

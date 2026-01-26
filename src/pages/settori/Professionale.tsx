@@ -113,7 +113,7 @@ const Professionale = () => {
                 </span>
               </div>
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
-                Soluzioni ZAPPER per il Settore Professionale
+                Soluzioni ZAPPER® per il Settore Professionale
               </h1>
               <p className="text-lg md:text-xl text-primary-foreground/80">
                 Ristoranti, pizzerie, panifici e bracerie: risolviamo problemi di fumi, odori e segnalazioni 
@@ -308,7 +308,7 @@ const Professionale = () => {
               Richiedi una valutazione tecnica gratuita.
             </p>
             <p className="text-primary-foreground/60 text-sm mb-8 max-w-2xl mx-auto">
-              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
+              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="accent" size="lg" asChild>

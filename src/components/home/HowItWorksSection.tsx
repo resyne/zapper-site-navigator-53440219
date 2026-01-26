@@ -35,7 +35,7 @@ const HowItWorksSection = () => {
             <span className="text-primary">risultati straordinari</span>
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground px-4 sm:px-0">
-            ZAPPER utilizza un processo in tre fasi per garantire aria pulita 
+            ZAPPER® utilizza un processo in tre fasi per garantire aria pulita 
             e conformità normativa senza compromessi.
           </p>
         </div>
