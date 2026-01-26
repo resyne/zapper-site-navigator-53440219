@@ -8,111 +8,109 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors - Industrial Palette */
-    --background: 210 20% 98%;
-    --foreground: 220 25% 10%;
+    /* ZAPPER Design System - New Palette */
+    
+    /* Structure: Black #1c1e1c */
+    --background: 0 0% 100%;
+    --foreground: 120 5% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card-foreground: 120 5% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover-foreground: 120 5% 11%;
 
-    /* Primary: Deep Petrol Blue - Trust & Technology */
-    --primary: 200 80% 20%;
+    /* Primary: Green #59d153 - Action & Conversion */
+    --primary: 117 58% 57%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Lighter industrial blue */
-    --secondary: 200 30% 94%;
-    --secondary-foreground: 200 80% 20%;
+    /* Secondary: Beige #d1c7b7 - Context & Storytelling */
+    --secondary: 36 24% 77%;
+    --secondary-foreground: 120 5% 11%;
 
-    /* Muted: Industrial gray */
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 47%;
+    /* Muted: Gray #8c8c8c - Support */
+    --muted: 36 15% 92%;
+    --muted-foreground: 0 0% 55%;
 
-    /* Accent: Vibrant Orange - Energy & Action */
-    --accent: 24 95% 53%;
+    /* Accent: Same as Primary (Green) for consistency */
+    --accent: 117 58% 57%;
     --accent-foreground: 0 0% 100%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 200 80% 20%;
+    --border: 36 15% 85%;
+    --input: 36 15% 85%;
+    --ring: 117 58% 57%;
 
     --radius: 0.75rem;
 
     /* Custom ZAPPER tokens */
-    --zapper-dark: 220 25% 10%;
-    --zapper-blue: 200 80% 20%;
-    --zapper-blue-light: 200 60% 35%;
-    --zapper-orange: 24 95% 53%;
-    --zapper-orange-hover: 24 95% 45%;
-    --zapper-gray: 210 15% 40%;
-    --zapper-gray-light: 210 20% 96%;
-    
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(200 80% 20%) 0%, hsl(200 60% 30%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(24 95% 53%) 0%, hsl(30 95% 50%) 100%);
-    --gradient-dark: linear-gradient(180deg, hsl(220 25% 8%) 0%, hsl(220 25% 15%) 100%);
+    --zapper-black: 120 5% 11%;
+    --zapper-green: 117 58% 57%;
+    --zapper-green-hover: 117 58% 47%;
+    --zapper-beige: 36 24% 77%;
+    --zapper-beige-light: 36 20% 92%;
+    --zapper-gray: 0 0% 55%;
+    --zapper-gray-light: 0 0% 75%;
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --shadow-glow: 0 0 40px -10px hsl(24 95% 53% / 0.4);
+    --shadow-glow: 0 0 40px -10px hsl(117 58% 57% / 0.4);
     
     /* Sidebar */
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-foreground: 120 5% 11%;
+    --sidebar-primary: 117 58% 57%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 36 20% 92%;
+    --sidebar-accent-foreground: 120 5% 11%;
+    --sidebar-border: 36 15% 85%;
+    --sidebar-ring: 117 58% 57%;
   }
 
   .dark {
-    --background: 220 25% 8%;
-    --foreground: 210 40% 98%;
+    /* Dark mode uses black #1c1e1c as background */
+    --background: 120 5% 11%;
+    --foreground: 0 0% 100%;
 
-    --card: 220 25% 12%;
-    --card-foreground: 210 40% 98%;
+    --card: 120 5% 15%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 220 25% 12%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 120 5% 15%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 24 95% 53%;
+    --primary: 117 58% 57%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 25% 18%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 36 24% 77%;
+    --secondary-foreground: 120 5% 11%;
 
-    --muted: 220 25% 18%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 120 5% 20%;
+    --muted-foreground: 0 0% 75%;
 
-    --accent: 200 80% 50%;
+    --accent: 117 58% 57%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 25% 20%;
-    --input: 220 25% 20%;
-    --ring: 24 95% 53%;
+    --border: 120 5% 25%;
+    --input: 120 5% 25%;
+    --ring: 117 58% 57%;
     
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-background: 120 5% 11%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 117 58% 57%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 120 5% 20%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 120 5% 25%;
+    --sidebar-ring: 117 58% 57%;
   }
 }
 
@@ -132,17 +130,17 @@
 }
 
 @layer components {
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-accent);
+  /* ZAPPER Background Classes */
+  .bg-zapper-black {
+    background-color: hsl(var(--zapper-black));
   }
   
-  .bg-hero-gradient {
-    background: var(--gradient-hero);
+  .bg-zapper-beige {
+    background-color: hsl(var(--zapper-beige));
   }
   
-  .bg-dark-gradient {
-    background: var(--gradient-dark);
+  .bg-zapper-beige-light {
+    background-color: hsl(var(--zapper-beige-light));
   }
   
   .shadow-glow {
