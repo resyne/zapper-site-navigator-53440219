@@ -1,87 +1,53 @@
-import { AlertTriangle, CloudOff, Users, FileWarning, TrendingDown, Ban } from "lucide-react";
+import { CloudOff, Users, FileWarning } from "lucide-react";
 
 const ProblemSection = () => {
   const problems = [
     {
       icon: CloudOff,
       title: "Fumi visibili",
-      description: "Il fumo che esce dalla canna fumaria attira segnalazioni e lamentele dei vicini.",
+      description: "Segnalazioni e lamentele dei vicini",
     },
     {
       icon: Users,
-      title: "Proteste dei vicini",
-      description: "Odori sgradevoli che invadono le abitazioni circostanti creano tensioni nel quartiere.",
+      title: "Proteste",
+      description: "Tensioni nel quartiere per gli odori",
     },
     {
       icon: FileWarning,
       title: "Controlli ASL",
-      description: "Ispezioni sempre più frequenti con rischio di multe e chiusure temporanee.",
-    },
-    {
-      icon: TrendingDown,
-      title: "Danni alla reputazione",
-      description: "Recensioni negative online che parlano di 'puzza' e 'fumo' danneggiano il business.",
-    },
-    {
-      icon: Ban,
-      title: "Sanzioni e multe",
-      description: "Multe fino a €5.000 per mancato rispetto delle normative sulle emissioni.",
-    },
-    {
-      icon: AlertTriangle,
-      title: "Rischio chiusura",
-      description: "In casi gravi, le autorità possono ordinare la cessazione dell'attività.",
+      description: "Rischio multe fino a €5.000",
     },
   ];
 
   return (
-    <section className="py-12 md:py-24 bg-zapper-gray-light overflow-hidden">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container px-4 sm:px-6">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
-          {/* Content */}
-          <div className="text-center lg:text-left">
-            <span className="inline-block text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
-              Il problema
-            </span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
-              Fumi, odori e polveri:{" "}
-              <span className="text-primary">un problema serio</span>
-            </h2>
-            <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8">
-              Ogni giorno, centinaia di attività in Italia ricevono segnalazioni, multe e richiami 
-              per problemi legati alle emissioni. Questo significa stress, costi imprevisti e, 
-              nei casi peggiori, la chiusura dell'attività.
-            </p>
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Fumi, odori e polveri?{" "}
+            <span className="text-primary">Problema risolto.</span>
+          </h2>
+          <p className="text-muted-foreground mb-10 max-w-xl mx-auto">
+            Ogni giorno centinaia di attività ricevono segnalazioni per emissioni. 
+            Con ZAPPER® elimini il problema alla fonte.
+          </p>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-6 p-4 sm:p-6 bg-foreground/5 rounded-lg sm:rounded-xl">
-              <div className="text-center">
-                <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary">70%</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">Attività con problemi di fumi</p>
-              </div>
-              <div className="text-center">
-                <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary">€5k</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">Multa media per violazione</p>
-              </div>
-              <div className="text-center">
-                <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary">30%</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">Rischiano la chiusura</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Problems Grid */}
-          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2">
-            {problems.map((problem, index) => (
+          {/* Problems - Horizontal */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {problems.map((problem) => (
               <div
                 key={problem.title}
-                className={`group p-4 sm:p-5 bg-white rounded-lg sm:rounded-xl border border-white/20 hover:border-primary/30 transition-all duration-300 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
+                className="flex flex-col items-center text-center"
               >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-colors">
-                  <problem.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center mb-3">
+                  <problem.icon className="w-5 h-5 text-muted-foreground" />
                 </div>
-                <h3 className="font-display font-semibold text-base sm:text-lg mb-1 sm:mb-2 text-zapper-black">{problem.title}</h3>
-                <p className="text-xs sm:text-sm text-zapper-gray">{problem.description}</p>
+                <h3 className="font-display font-semibold text-foreground mb-1">
+                  {problem.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {problem.description}
+                </p>
               </div>
             ))}
           </div>
