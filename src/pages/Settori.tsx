@@ -45,12 +45,12 @@ const Settori = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main>
+      <main className="pt-20">
         {/* Hero Section */}
-        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-gradient-to-b from-muted/50 to-background">
+        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <div className="max-w-3xl">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
                 Soluzioni ZAPPER® per ogni settore
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
@@ -146,22 +146,20 @@ const Settori = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="py-16 md:py-24 bg-muted/30">
-          <div className="container">
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Non sei sicuro di quale settore rientra il tuo impianto?
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
-              </p>
-              <Button variant="cta" size="lg" asChild>
-                <Link to="/contatti">
-                  Richiedi una valutazione tecnica
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </Button>
-            </div>
+        <section className="py-16 md:py-24 bg-zapper-black">
+          <div className="container text-center">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">
+              Non sei sicuro di quale settore rientra il tuo impianto?
+            </h2>
+            <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
+            </p>
+            <Button variant="accent" size="lg" asChild>
+              <Link to="/contatti">
+                Richiedi una valutazione tecnica
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
+            </Button>
           </div>
         </section>
       </main>
