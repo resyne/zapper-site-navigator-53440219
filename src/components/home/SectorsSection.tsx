@@ -22,7 +22,7 @@ const SectorsSection = () => {
       icon: Home,
       href: "/settori/domestico",
       features: ["Camini", "Stufe a pellet", "Barbecue", "Forni da giardino"],
-      color: "bg-zapper-blue-light",
+      color: "bg-zapper-gray",
     },
     {
       id: "industriale",
@@ -63,15 +63,15 @@ const SectorsSection = () => {
               {/* Card Header */}
               <div className={`${sector.color} p-5 sm:p-6 md:p-8`}>
                 <div className="flex items-center justify-between mb-3 sm:mb-4">
-                  <div className={`w-12 h-12 sm:w-14 sm:h-14 ${sector.id === 'domestico' ? 'bg-foreground/10' : 'bg-white/20'} rounded-lg sm:rounded-xl flex items-center justify-center`}>
-                    <sector.icon className={`w-6 h-6 sm:w-7 sm:h-7 ${sector.id === 'domestico' ? 'text-foreground' : 'text-white'}`} />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white/20 rounded-lg sm:rounded-xl flex items-center justify-center">
+                    <sector.icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
                   </div>
-                  <ArrowRight className={`w-5 h-5 sm:w-6 sm:h-6 ${sector.id === 'domestico' ? 'text-foreground/50 group-hover:text-foreground' : 'text-white/50 group-hover:text-white'} group-hover:translate-x-1 transition-all duration-300`} />
+                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
                 </div>
-                <h3 className={`font-display text-xl sm:text-2xl font-bold ${sector.id === 'domestico' ? 'text-foreground' : 'text-white'} mb-1`}>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-1">
                   {sector.title}
                 </h3>
-                <p className={`${sector.id === 'domestico' ? 'text-muted-foreground' : 'text-white/70'} text-xs sm:text-sm`}>
+                <p className="text-white/70 text-xs sm:text-sm">
                   {sector.subtitle}
                 </p>
               </div>

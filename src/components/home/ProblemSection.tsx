@@ -35,7 +35,7 @@ const ProblemSection = () => {
   ];
 
   return (
-    <section className="py-12 md:py-24 bg-zapper-blue-light overflow-hidden">
+    <section className="py-12 md:py-24 bg-zapper-gray-light overflow-hidden">
       <div className="container px-4 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Content */}
