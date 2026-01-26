@@ -51,10 +51,10 @@ const Settori = () => {
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-                Soluzioni ZAPPER per ogni settore
+                Soluzioni ZAPPER® per ogni settore
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
-                ZAPPER interviene su impianti a combustione in ambito professionale, domestico e industriale, 
+                ZAPPER® interviene su impianti a combustione in ambito professionale, domestico e industriale, 
                 adattando ogni soluzione al contesto reale di utilizzo.
               </p>
             </div>
@@ -153,7 +153,7 @@ const Settori = () => {
                 Non sei sicuro di quale settore rientra il tuo impianto?
               </h2>
               <p className="text-muted-foreground mb-8">
-                Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
+                Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
               </p>
               <Button variant="cta" size="lg" asChild>
                 <Link to="/contatti">

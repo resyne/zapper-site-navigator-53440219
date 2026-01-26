@@ -36,7 +36,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-100">
-              ZAPPER è il sistema di abbattimento fumi che elimina il problema alla fonte. 
+              ZAPPER® è il sistema di abbattimento fumi che elimina il problema alla fonte. 
               Niente più segnalazioni, niente più multe. Solo aria pulita.
             </p>
 
@@ -64,7 +64,7 @@ const HeroSection = () => {
               </Button>
             </div>
             <p className="text-xs sm:text-sm text-white/60 mt-3 animate-fade-in-up animation-delay-300">
-              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
+              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
             </p>
 
             {/* Trust Badge */}
@@ -100,9 +100,9 @@ const HeroSection = () => {
           <div className="relative animate-fade-in-up animation-delay-200 hidden lg:block">
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-2xl"></div>
-              <img
-                src={heroImage}
-                alt="Sistema ZAPPER per abbattimento fumi"
+                <img
+                  src={heroImage}
+                  alt="Sistema ZAPPER® per abbattimento fumi"
                 className="relative rounded-2xl shadow-2xl w-full object-cover aspect-[4/3]"
               />
               {/* Floating Badge */}

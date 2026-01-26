@@ -35,7 +35,7 @@ const Footer = () => {
             <Link to="/" className="inline-block mb-4 sm:mb-6">
               <img 
                 src={logoBianco} 
-                alt="ZAPPER" 
+                alt="ZAPPER®" 
                 className="h-8 sm:h-10 w-auto"
               />
             </Link>
@@ -129,7 +129,7 @@ const Footer = () => {
       <div className="border-t border-white/10">
         <div className="container py-4 sm:py-6">
           <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between text-xs sm:text-sm text-white/50">
-            <p>© {currentYear} ZAPPER. Tutti i diritti riservati.</p>
+            <p>© {currentYear} ZAPPER®. Tutti i diritti riservati.</p>
             <div className="flex flex-wrap gap-4 sm:gap-6">
               <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
               <Link to="/cookie" className="hover:text-primary transition-colors">Cookie Policy</Link>

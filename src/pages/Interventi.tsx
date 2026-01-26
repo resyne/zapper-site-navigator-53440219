@@ -272,7 +272,7 @@ const Interventi = () => {
               Richiedi una valutazione tecnica gratuita.
             </p>
             <p className="text-primary-foreground/60 text-sm mb-8 max-w-2xl mx-auto">
-              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
+              Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
             </p>
             <Button variant="accent" size="lg" asChild>
               <Link to="/contatti">

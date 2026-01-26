@@ -24,7 +24,7 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <img 
               src={logoVerde} 
-              alt="ZAPPER" 
+              alt="ZAPPER®" 
               className="h-8 md:h-10 w-auto"
             />
           </Link>
