@@ -65,26 +65,26 @@ const CaseStudyTeaser = () => {
           </div>
 
           {/* Results Card */}
-          <div className="bg-primary rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10">
-            <h3 className="font-display text-xl sm:text-2xl font-bold text-primary-foreground mb-6 sm:mb-8">
+          <div className="bg-zapper-black rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10">
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8">
               I risultati
             </h3>
             <div className="space-y-4 sm:space-y-6">
               {caseStudy.results.map((result) => (
-                <div key={result.label} className="flex items-center justify-between border-b border-primary-foreground/10 pb-3 sm:pb-4">
-                  <span className="text-primary-foreground/70 text-sm sm:text-base">{result.label}</span>
-                  <span className="font-display text-2xl sm:text-3xl font-bold text-accent">{result.value}</span>
+                <div key={result.label} className="flex items-center justify-between border-b border-white/10 pb-3 sm:pb-4">
+                  <span className="text-white/70 text-sm sm:text-base">{result.label}</span>
+                  <span className="font-display text-2xl sm:text-3xl font-bold text-primary">{result.value}</span>
                 </div>
               ))}
             </div>
 
             {/* Before/After placeholder */}
             <div className="mt-6 sm:mt-8 grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="aspect-video bg-primary-foreground/10 rounded-lg flex items-center justify-center">
-                <span className="text-xs sm:text-sm text-primary-foreground/50">Prima</span>
+              <div className="aspect-video bg-white/10 rounded-lg flex items-center justify-center">
+                <span className="text-xs sm:text-sm text-white/50">Prima</span>
               </div>
-              <div className="aspect-video bg-primary-foreground/10 rounded-lg flex items-center justify-center">
-                <span className="text-xs sm:text-sm text-primary-foreground/50">Dopo</span>
+              <div className="aspect-video bg-white/10 rounded-lg flex items-center justify-center">
+                <span className="text-xs sm:text-sm text-white/50">Dopo</span>
               </div>
             </div>
           </div>
