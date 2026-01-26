@@ -69,8 +69,6 @@ export default {
           black: "hsl(var(--zapper-black))",
           green: "hsl(var(--zapper-green))",
           "green-hover": "hsl(var(--zapper-green-hover))",
-          blue: "hsl(var(--zapper-blue))",
-          "blue-light": "hsl(var(--zapper-blue-light))",
           gray: "hsl(var(--zapper-gray))",
           "gray-light": "hsl(var(--zapper-gray-light))",
         },
