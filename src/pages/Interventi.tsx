@@ -215,14 +215,14 @@ const Interventi = () => {
                         </div>
                       </div>
                       <div className="flex items-start gap-2">
-                        <span className="w-4 h-4 text-red-500 mt-0.5 shrink-0 text-center">⚠</span>
+                        <span className="w-4 h-4 text-destructive mt-0.5 shrink-0 text-center">⚠</span>
                         <div>
                           <span className="text-muted-foreground">Problema: </span>
                           <span className="text-foreground">{intervento.problema}</span>
                         </div>
                       </div>
                       <div className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
+                        <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                         <div>
                           <span className="text-muted-foreground">Risultato: </span>
                           <span className="text-foreground font-medium">{intervento.risultato}</span>
@@ -263,15 +263,15 @@ const Interventi = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 md:py-24 bg-primary">
+        <section className="py-16 md:py-24 bg-zapper-black">
           <div className="container text-center">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-4">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">
               Hai un problema simile?
             </h2>
-            <p className="text-primary-foreground/80 text-lg mb-2 max-w-2xl mx-auto">
+            <p className="text-white/80 text-lg mb-2 max-w-2xl mx-auto">
               Richiedi una valutazione tecnica gratuita.
             </p>
-            <p className="text-primary-foreground/60 text-sm mb-8 max-w-2xl mx-auto">
+            <p className="text-white/60 text-sm mb-8 max-w-2xl mx-auto">
               Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER® più adatta.
             </p>
             <Button variant="accent" size="lg" asChild>

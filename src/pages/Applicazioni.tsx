@@ -199,15 +199,15 @@ const Applicazioni = () => {
         </section>
 
         {/* CTA Finale */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-accent via-accent/95 to-accent/90">
+        <section className="py-16 md:py-24 bg-zapper-black">
           <div className="container text-center">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-accent-foreground mb-4">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">
               Non trovi la tua applicazione?
             </h2>
-            <p className="text-accent-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
               Analizziamo il tuo impianto e individuiamo la soluzione più adatta.
             </p>
-            <Button variant="secondary" size="lg" asChild>
+            <Button variant="accent" size="lg" asChild>
               <Link to="/contatti">
                 Richiedi una valutazione tecnica gratuita
                 <ArrowRight className="w-5 h-5 ml-2" />
