@@ -20,71 +20,71 @@ const CaseStudyTeaser = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="container">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="py-12 md:py-24 bg-background">
+      <div className="container px-4 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Content */}
           <div>
-            <span className="inline-block text-accent font-semibold text-sm uppercase tracking-wider mb-4">
+            <span className="inline-block text-accent font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
               Case study
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 sm:mb-6">
               {caseStudy.name}
             </h2>
             
-            <div className="flex flex-wrap gap-2 mb-6">
-              <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
+            <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
+              <span className="px-2.5 py-1 sm:px-3 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium">
                 {caseStudy.sector}
               </span>
-              <span className="px-3 py-1 bg-muted text-muted-foreground rounded-full text-sm">
+              <span className="px-2.5 py-1 sm:px-3 bg-muted text-muted-foreground rounded-full text-xs sm:text-sm">
                 {caseStudy.application}
               </span>
-              <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium">
+              <span className="px-2.5 py-1 sm:px-3 bg-accent/10 text-accent rounded-full text-xs sm:text-sm font-medium">
                 {caseStudy.model}
               </span>
             </div>
 
             {/* Quote */}
-            <div className="relative bg-muted/50 rounded-xl p-6 mb-8">
-              <Quote className="absolute top-4 left-4 w-8 h-8 text-accent/30" />
-              <p className="text-lg text-foreground italic pl-8">
+            <div className="relative bg-muted/50 rounded-lg sm:rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+              <Quote className="absolute top-3 left-3 sm:top-4 sm:left-4 w-6 h-6 sm:w-8 sm:h-8 text-accent/30" />
+              <p className="text-base sm:text-lg text-foreground italic pl-6 sm:pl-8">
                 "{caseStudy.quote}"
               </p>
-              <div className="mt-4 pl-8">
-                <p className="font-semibold text-foreground">{caseStudy.author}</p>
-                <p className="text-sm text-muted-foreground">{caseStudy.role}</p>
+              <div className="mt-3 sm:mt-4 pl-6 sm:pl-8">
+                <p className="font-semibold text-foreground text-sm sm:text-base">{caseStudy.author}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">{caseStudy.role}</p>
               </div>
             </div>
 
-            <Button variant="outline" asChild>
+            <Button variant="outline" className="w-full sm:w-auto" asChild>
               <Link to="/interventi">
                 Vedi tutti gli interventi
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
             </Button>
           </div>
 
           {/* Results Card */}
-          <div className="bg-primary rounded-2xl p-8 md:p-10">
-            <h3 className="font-display text-2xl font-bold text-primary-foreground mb-8">
+          <div className="bg-primary rounded-xl sm:rounded-2xl p-6 sm:p-8 md:p-10">
+            <h3 className="font-display text-xl sm:text-2xl font-bold text-primary-foreground mb-6 sm:mb-8">
               I risultati
             </h3>
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {caseStudy.results.map((result) => (
-                <div key={result.label} className="flex items-center justify-between border-b border-primary-foreground/10 pb-4">
-                  <span className="text-primary-foreground/70">{result.label}</span>
-                  <span className="font-display text-3xl font-bold text-accent">{result.value}</span>
+                <div key={result.label} className="flex items-center justify-between border-b border-primary-foreground/10 pb-3 sm:pb-4">
+                  <span className="text-primary-foreground/70 text-sm sm:text-base">{result.label}</span>
+                  <span className="font-display text-2xl sm:text-3xl font-bold text-accent">{result.value}</span>
                 </div>
               ))}
             </div>
 
             {/* Before/After placeholder */}
-            <div className="mt-8 grid grid-cols-2 gap-4">
+            <div className="mt-6 sm:mt-8 grid grid-cols-2 gap-3 sm:gap-4">
               <div className="aspect-video bg-primary-foreground/10 rounded-lg flex items-center justify-center">
-                <span className="text-sm text-primary-foreground/50">Prima</span>
+                <span className="text-xs sm:text-sm text-primary-foreground/50">Prima</span>
               </div>
               <div className="aspect-video bg-primary-foreground/10 rounded-lg flex items-center justify-center">
-                <span className="text-sm text-primary-foreground/50">Dopo</span>
+                <span className="text-xs sm:text-sm text-primary-foreground/50">Dopo</span>
               </div>
             </div>
           </div>

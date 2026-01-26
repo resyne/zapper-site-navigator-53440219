@@ -10,18 +10,18 @@ const ClientLogos = () => {
   ];
 
   return (
-    <section className="py-12 md:py-16 bg-muted/50 border-y border-border">
-      <div className="container">
-        <p className="text-center text-muted-foreground text-sm uppercase tracking-wider mb-8">
+    <section className="py-8 sm:py-12 md:py-16 bg-muted/50 border-y border-border">
+      <div className="container px-4 sm:px-6">
+        <p className="text-center text-muted-foreground text-xs sm:text-sm uppercase tracking-wider mb-6 sm:mb-8">
           Scelto da oltre 500 aziende in Italia
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-12">
           {clients.map((client, index) => (
             <div
               key={client.name}
-              className={`flex items-center justify-center w-24 h-12 md:w-32 md:h-16 rounded-lg bg-background border border-border opacity-60 hover:opacity-100 transition-opacity duration-300 animate-fade-in animation-delay-${(index + 1) * 100}`}
+              className={`flex items-center justify-center w-20 h-10 sm:w-24 sm:h-12 md:w-32 md:h-16 rounded-lg bg-background border border-border opacity-60 hover:opacity-100 transition-opacity duration-300 animate-fade-in animation-delay-${(index + 1) * 100}`}
             >
-              <span className="font-display font-bold text-lg md:text-xl text-muted-foreground">
+              <span className="font-display font-bold text-base sm:text-lg md:text-xl text-muted-foreground">
                 {client.initials}
               </span>
             </div>
