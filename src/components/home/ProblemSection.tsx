@@ -43,29 +43,29 @@ const ProblemSection = () => {
             <span className="inline-block text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
               Il problema
             </span>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-zapper-black mb-4 sm:mb-6 leading-tight">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
               Fumi, odori e polveri:{" "}
               <span className="text-primary">un problema serio</span>
             </h2>
-            <p className="text-base sm:text-lg text-zapper-black/80 mb-6 sm:mb-8">
+            <p className="text-base sm:text-lg text-white/80 mb-6 sm:mb-8">
               Ogni giorno, centinaia di attività in Italia ricevono segnalazioni, multe e richiami 
               per problemi legati alle emissioni. Questo significa stress, costi imprevisti e, 
               nei casi peggiori, la chiusura dell'attività.
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-6 p-4 sm:p-6 bg-white/50 rounded-lg sm:rounded-xl">
+            <div className="grid grid-cols-3 gap-3 sm:gap-6 p-4 sm:p-6 bg-white/10 rounded-lg sm:rounded-xl">
               <div className="text-center">
                 <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary">70%</p>
-                <p className="text-xs sm:text-sm text-zapper-gray">Attività con problemi di fumi</p>
+                <p className="text-xs sm:text-sm text-white/70">Attività con problemi di fumi</p>
               </div>
               <div className="text-center">
                 <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary">€5k</p>
-                <p className="text-xs sm:text-sm text-zapper-gray">Multa media per violazione</p>
+                <p className="text-xs sm:text-sm text-white/70">Multa media per violazione</p>
               </div>
               <div className="text-center">
                 <p className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary">30%</p>
-                <p className="text-xs sm:text-sm text-zapper-gray">Rischiano la chiusura</p>
+                <p className="text-xs sm:text-sm text-white/70">Rischiano la chiusura</p>
               </div>
             </div>
           </div>
@@ -75,7 +75,7 @@ const ProblemSection = () => {
             {problems.map((problem, index) => (
               <div
                 key={problem.title}
-                className={`group p-4 sm:p-5 bg-white rounded-lg sm:rounded-xl border border-zapper-blue-light hover:border-primary/30 transition-all duration-300 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
+                className={`group p-4 sm:p-5 bg-white rounded-lg sm:rounded-xl border border-white/20 hover:border-primary/30 transition-all duration-300 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
               >
                 <div className="w-9 h-9 sm:w-10 sm:h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-colors">
                   <problem.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
