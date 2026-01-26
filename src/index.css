@@ -24,8 +24,8 @@
     --primary: 117 58% 57%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Beige #d1c7b7 - Context & Storytelling */
-    --secondary: 36 24% 77%;
+    /* Secondary: Beige #f2e9dc - Context & Storytelling */
+    --secondary: 36 46% 91%;
     --secondary-foreground: 120 5% 11%;
 
     /* Muted: Gray #8c8c8c - Support */
@@ -50,8 +50,8 @@
     --zapper-black: 120 5% 11%;
     --zapper-green: 117 58% 57%;
     --zapper-green-hover: 117 58% 47%;
-    --zapper-beige: 36 24% 77%;
-    --zapper-beige-light: 36 20% 92%;
+    --zapper-beige: 36 46% 91%;
+    --zapper-beige-light: 36 40% 96%;
     --zapper-gray: 0 0% 55%;
     --zapper-gray-light: 0 0% 75%;
     
