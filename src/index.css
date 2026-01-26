@@ -24,12 +24,12 @@
     --primary: 117 58% 57%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Beige #f2e9dc - Context & Storytelling */
-    --secondary: 36 46% 91%;
+    /* Secondary: Blue #154e9d - Context & Storytelling */
+    --secondary: 215 60% 92%;
     --secondary-foreground: 120 5% 11%;
 
-    /* Muted: Gray #8c8c8c - Support */
-    --muted: 36 15% 92%;
+    /* Muted: Blue tint - Support */
+    --muted: 215 20% 94%;
     --muted-foreground: 0 0% 55%;
 
     /* Accent: Same as Primary (Green) for consistency */
@@ -40,8 +40,8 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 36 15% 85%;
-    --input: 36 15% 85%;
+    --border: 215 20% 88%;
+    --input: 215 20% 88%;
     --ring: 117 58% 57%;
 
     --radius: 0.75rem;
@@ -50,8 +50,8 @@
     --zapper-black: 120 5% 11%;
     --zapper-green: 117 58% 57%;
     --zapper-green-hover: 117 58% 47%;
-    --zapper-beige: 36 46% 91%;
-    --zapper-beige-light: 36 40% 96%;
+    --zapper-blue: 215 77% 35%;
+    --zapper-blue-light: 215 60% 92%;
     --zapper-gray: 0 0% 55%;
     --zapper-gray-light: 0 0% 75%;
     
@@ -139,12 +139,12 @@
     background-color: hsl(var(--zapper-black));
   }
   
-  .bg-zapper-beige {
-    background-color: hsl(var(--zapper-beige));
+  .bg-zapper-blue {
+    background-color: hsl(var(--zapper-blue));
   }
   
-  .bg-zapper-beige-light {
-    background-color: hsl(var(--zapper-beige-light));
+  .bg-zapper-blue-light {
+    background-color: hsl(var(--zapper-blue-light));
   }
   
   .shadow-glow {
