@@ -37,28 +37,28 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
       <Header />
       <main>
         {/* Hero */}
-        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-primary">
+        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-zapper-black">
           <div className="container">
-            <nav className="flex items-center gap-2 text-sm text-primary-foreground/60 mb-6">
-              <Link to="/modelli" className="hover:text-primary-foreground">Modelli</Link>
+            <nav className="flex items-center gap-2 text-sm text-white/60 mb-6">
+              <Link to="/modelli" className="hover:text-white">Modelli</Link>
               <span>/</span>
-              <span className="text-primary-foreground">{data.name}</span>
+              <span className="text-white">{data.name}</span>
             </nav>
             <div className="max-w-3xl">
-              <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center mb-6">
-                <Zap className="w-8 h-8 text-accent-foreground" />
+              <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6">
+                <Zap className="w-8 h-8 text-white" />
               </div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
                 {data.name}
               </h1>
-              <p className="text-xl text-accent font-semibold mb-2">{data.tagline}</p>
-              <p className="text-lg text-primary-foreground/70 mb-4">{data.diameter}</p>
-              <p className="text-lg text-primary-foreground/80 mb-8">{data.description}</p>
+              <p className="text-xl text-primary font-semibold mb-2">{data.tagline}</p>
+              <p className="text-lg text-white/70 mb-4">{data.diameter}</p>
+              <p className="text-lg text-white/80 mb-8">{data.description}</p>
               
               {/* CTA Primaria in Hero */}
               <Button
                 size="lg"
-                className="bg-accent text-accent-foreground hover:bg-accent/90"
+                className="bg-primary text-white hover:bg-primary/90"
                 asChild
               >
                 <Link to="/contatti">
@@ -66,7 +66,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>
-              <p className="text-sm text-primary-foreground/60 mt-3">Valutazione tecnica gratuita e senza impegno</p>
+              <p className="text-sm text-white/60 mt-3">Valutazione tecnica gratuita e senza impegno</p>
               
             </div>
           </div>
