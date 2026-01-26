@@ -35,37 +35,37 @@ const ProblemSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-zapper-dark text-primary-foreground overflow-hidden">
+    <section className="py-16 md:py-24 bg-zapper-beige overflow-hidden">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
           <div>
-            <span className="inline-block text-accent font-semibold text-sm uppercase tracking-wider mb-4">
+            <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
               Il problema
             </span>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-zapper-black mb-6">
               Fumi, odori e polveri:{" "}
-              <span className="text-accent">un problema serio</span>
+              <span className="text-primary">un problema serio</span>
             </h2>
-            <p className="text-lg text-primary-foreground/80 mb-8">
+            <p className="text-lg text-zapper-black/80 mb-8">
               Ogni giorno, centinaia di attività in Italia ricevono segnalazioni, multe e richiami 
               per problemi legati alle emissioni. Questo significa stress, costi imprevisti e, 
               nei casi peggiori, la chiusura dell'attività.
             </p>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 p-6 bg-primary-foreground/5 rounded-xl">
+            <div className="grid grid-cols-3 gap-6 p-6 bg-white/50 rounded-xl">
               <div className="text-center">
-                <p className="font-display text-3xl md:text-4xl font-bold text-accent">70%</p>
-                <p className="text-sm text-primary-foreground/60">Attività con problemi di fumi</p>
+                <p className="font-display text-3xl md:text-4xl font-bold text-primary">70%</p>
+                <p className="text-sm text-zapper-gray">Attività con problemi di fumi</p>
               </div>
               <div className="text-center">
-                <p className="font-display text-3xl md:text-4xl font-bold text-accent">€5k</p>
-                <p className="text-sm text-primary-foreground/60">Multa media per violazione</p>
+                <p className="font-display text-3xl md:text-4xl font-bold text-primary">€5k</p>
+                <p className="text-sm text-zapper-gray">Multa media per violazione</p>
               </div>
               <div className="text-center">
-                <p className="font-display text-3xl md:text-4xl font-bold text-accent">30%</p>
-                <p className="text-sm text-primary-foreground/60">Rischiano la chiusura</p>
+                <p className="font-display text-3xl md:text-4xl font-bold text-primary">30%</p>
+                <p className="text-sm text-zapper-gray">Rischiano la chiusura</p>
               </div>
             </div>
           </div>
@@ -75,13 +75,13 @@ const ProblemSection = () => {
             {problems.map((problem, index) => (
               <div
                 key={problem.title}
-                className={`group p-5 bg-primary-foreground/5 rounded-xl border border-primary-foreground/10 hover:bg-primary-foreground/10 hover:border-accent/30 transition-all duration-300 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
+                className={`group p-5 bg-white rounded-xl border border-zapper-beige hover:border-primary/30 transition-all duration-300 animate-fade-in-up animation-delay-${(index + 1) * 100}`}
               >
-                <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                  <problem.icon className="w-5 h-5 text-accent" />
+                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                  <problem.icon className="w-5 h-5 text-primary" />
                 </div>
-                <h3 className="font-display font-semibold text-lg mb-2">{problem.title}</h3>
-                <p className="text-sm text-primary-foreground/60">{problem.description}</p>
+                <h3 className="font-display font-semibold text-lg mb-2 text-zapper-black">{problem.title}</h3>
+                <p className="text-sm text-zapper-gray">{problem.description}</p>
               </div>
             ))}
           </div>

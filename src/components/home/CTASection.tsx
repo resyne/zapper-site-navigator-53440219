@@ -26,22 +26,22 @@ const CTASection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-hero-gradient text-primary-foreground">
+    <section className="py-16 md:py-24 bg-zapper-black">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
           <div>
-            <span className="inline-block text-accent font-semibold text-sm uppercase tracking-wider mb-4">
+            <span className="inline-block text-primary font-semibold text-sm uppercase tracking-wider mb-4">
               Inizia ora
             </span>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
               Richiedi una{" "}
-              <span className="text-accent">valutazione tecnica</span>
+              <span className="text-primary">valutazione tecnica</span>
             </h2>
-            <p className="text-lg text-primary-foreground/80 mb-4">
+            <p className="text-lg text-white/80 mb-4">
               Analizziamo il tuo impianto da remoto e definiamo la soluzione ZAPPER più adatta.
             </p>
-            <p className="text-primary-foreground/70 mb-8">
+            <p className="text-white/70 mb-8">
               Un nostro tecnico specializzato ti proporrà la soluzione migliore. Senza impegno, senza costi nascosti.
             </p>
 
@@ -49,25 +49,25 @@ const CTASection = () => {
             <div className="space-y-4 mb-8">
               {benefits.map((benefit) => (
                 <div key={benefit.text} className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center">
-                    <benefit.icon className="w-5 h-5 text-accent" />
+                  <div className="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+                    <benefit.icon className="w-5 h-5 text-primary" />
                   </div>
-                  <span className="font-medium">{benefit.text}</span>
+                  <span className="text-white font-medium">{benefit.text}</span>
                 </div>
               ))}
             </div>
 
             {/* Direct Contact */}
-            <div className="p-6 bg-primary-foreground/10 rounded-xl">
-              <p className="text-sm text-primary-foreground/70 mb-4">
+            <div className="p-6 bg-white/10 rounded-xl">
+              <p className="text-sm text-white/70 mb-4">
                 Preferisci parlare direttamente con noi?
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="tel:+390000000000" className="flex items-center gap-2 text-accent hover:underline">
+                <a href="tel:+390000000000" className="flex items-center gap-2 text-primary hover:underline">
                   <Phone className="w-5 h-5" />
                   <span className="font-semibold">+39 000 000 0000</span>
                 </a>
-                <a href="mailto:info@zapper.it" className="flex items-center gap-2 text-accent hover:underline">
+                <a href="mailto:info@zapper.it" className="flex items-center gap-2 text-primary hover:underline">
                   <Mail className="w-5 h-5" />
                   <span className="font-semibold">info@zapper.it</span>
                 </a>

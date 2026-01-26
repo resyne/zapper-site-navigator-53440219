@@ -286,18 +286,17 @@ const Modelli = () => {
         ))}
 
         {/* CTA Finale */}
-        <section className="py-16 md:py-24 bg-accent">
+        <section className="py-16 md:py-24 bg-zapper-black">
           <div className="container text-center">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-accent-foreground mb-4">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4">
               Non sei sicuro di quale modello è adatto al tuo impianto?
             </h2>
-            <p className="text-accent-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
               Il nostro team tecnico analizza il tuo impianto e conferma la soluzione ZAPPER più adatta.
             </p>
             <Button 
-              variant="default" 
+              variant="accent" 
               size="lg" 
-              className="bg-primary-foreground text-primary hover:bg-primary-foreground/90"
               asChild
             >
               <Link to="/contatti">

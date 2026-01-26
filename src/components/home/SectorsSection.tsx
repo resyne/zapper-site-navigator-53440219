@@ -12,7 +12,7 @@ const SectorsSection = () => {
       icon: ChefHat,
       href: "/settori/professionale",
       features: ["Pizzerie", "Panifici", "Bracerie", "Cucine professionali"],
-      color: "bg-primary",
+      color: "bg-zapper-black",
     },
     {
       id: "domestico",
@@ -22,7 +22,7 @@ const SectorsSection = () => {
       icon: Home,
       href: "/settori/domestico",
       features: ["Camini", "Stufe a pellet", "Barbecue", "Forni da giardino"],
-      color: "bg-zapper-blue-light",
+      color: "bg-zapper-beige",
     },
     {
       id: "industriale",
@@ -63,15 +63,15 @@ const SectorsSection = () => {
               {/* Card Header */}
               <div className={`${sector.color} p-6 md:p-8`}>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-14 h-14 bg-primary-foreground/20 rounded-xl flex items-center justify-center">
-                    <sector.icon className="w-7 h-7 text-primary-foreground" />
+                  <div className={`w-14 h-14 ${sector.id === 'domestico' ? 'bg-zapper-black/20' : 'bg-white/20'} rounded-xl flex items-center justify-center`}>
+                    <sector.icon className={`w-7 h-7 ${sector.id === 'domestico' ? 'text-zapper-black' : 'text-white'}`} />
                   </div>
-                  <ArrowRight className="w-6 h-6 text-primary-foreground/50 group-hover:text-primary-foreground group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight className={`w-6 h-6 ${sector.id === 'domestico' ? 'text-zapper-black/50 group-hover:text-zapper-black' : 'text-white/50 group-hover:text-white'} group-hover:translate-x-1 transition-all duration-300`} />
                 </div>
-                <h3 className="font-display text-2xl font-bold text-primary-foreground mb-1">
+                <h3 className={`font-display text-2xl font-bold ${sector.id === 'domestico' ? 'text-zapper-black' : 'text-white'} mb-1`}>
                   {sector.title}
                 </h3>
-                <p className="text-primary-foreground/70 text-sm">
+                <p className={`${sector.id === 'domestico' ? 'text-zapper-black/70' : 'text-white/70'} text-sm`}>
                   {sector.subtitle}
                 </p>
               </div>
