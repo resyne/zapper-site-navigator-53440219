@@ -36,10 +36,10 @@ const ProblemSection = () => {
 
   return (
     <section className="py-12 md:py-24 bg-zapper-beige overflow-hidden">
-      <div className="container">
+      <div className="container px-4 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Content */}
-          <div>
+          <div className="text-center lg:text-left">
             <span className="inline-block text-primary font-semibold text-xs sm:text-sm uppercase tracking-wider mb-3 sm:mb-4">
               Il problema
             </span>
