@@ -27,7 +27,7 @@ const CTASection = () => {
 
   return (
     <section className="py-12 md:py-24 bg-zapper-black">
-      <div className="container px-4 sm:px-6">
+      <div className="container">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Content */}
           <div>

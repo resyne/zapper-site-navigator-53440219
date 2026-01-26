@@ -21,7 +21,7 @@ const CaseStudyTeaser = () => {
 
   return (
     <section className="py-12 md:py-24 bg-background">
-      <div className="container px-4 sm:px-6">
+      <div className="container">
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
           {/* Content */}
           <div>

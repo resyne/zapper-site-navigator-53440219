@@ -90,7 +90,7 @@ const SelfDiscoverySection = () => {
 
   return (
     <section className="py-12 md:py-24 bg-muted/50">
-      <div className="container px-4 sm:px-6">
+      <div className="container">
         <div className="max-w-3xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-8 sm:mb-10">
