@@ -6,6 +6,7 @@ import ClientLogos from "@/components/home/ClientLogos";
 import ProblemSection from "@/components/home/ProblemSection";
 import HowItWorksSection from "@/components/home/HowItWorksSection";
 import SelfDiscoverySection from "@/components/home/SelfDiscoverySection";
+import IncentivesCarousel from "@/components/home/IncentivesCarousel";
 import CaseStudyTeaser from "@/components/home/CaseStudyTeaser";
 import TrustpilotSection from "@/components/home/TrustpilotSection";
 import CTASection from "@/components/home/CTASection";
@@ -21,6 +22,7 @@ const Index = () => {
         <ProblemSection />
         <HowItWorksSection />
         <SelfDiscoverySection />
+        <IncentivesCarousel />
         <CaseStudyTeaser />
         <TrustpilotSection />
         <CTASection />
