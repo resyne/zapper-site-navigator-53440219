@@ -10,6 +10,9 @@ import Interventi from "./pages/Interventi";
 import Settori from "./pages/Settori";
 import Applicazioni from "./pages/Applicazioni";
 import Modelli from "./pages/Modelli";
+import Agevolazioni from "./pages/Agevolazioni";
+import Industria40 from "./pages/agevolazioni/Industria40";
+import BandoInailIsi from "./pages/agevolazioni/BandoInailIsi";
 import Professionale from "./pages/settori/Professionale";
 import Domestico from "./pages/settori/Domestico";
 import Industriale from "./pages/settori/Industriale";
@@ -74,7 +77,9 @@ const App = () => (
           <Route path="/settori" element={<Settori />} />
           <Route path="/applicazioni" element={<Applicazioni />} />
           <Route path="/modelli" element={<Modelli />} />
-          <Route path="/modelli" element={<Modelli />} />
+          <Route path="/agevolazioni" element={<Agevolazioni />} />
+          <Route path="/agevolazioni/industria-40" element={<Industria40 />} />
+          <Route path="/agevolazioni/bando-inail-isi" element={<BandoInailIsi />} />
           <Route path="/settori/professionale" element={<Professionale />} />
           <Route path="/settori/domestico" element={<Domestico />} />
           <Route path="/settori/industriale" element={<Industriale />} />

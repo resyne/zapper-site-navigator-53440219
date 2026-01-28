@@ -20,6 +20,7 @@ const IncentivesCarousel = () => {
       subtitle: "Iperammortamento",
       description:
         "I sistemi ZAPPER® rientrano tra i beni strumentali 4.0. Puoi beneficiare dell'iperammortamento al 180% sull'investimento.",
+      link: "/agevolazioni/industria-40",
     },
     {
       id: "inail-isi",
@@ -30,6 +31,7 @@ const IncentivesCarousel = () => {
       subtitle: "Fondo perduto",
       description:
         "Il Bando INAIL ISI finanzia interventi per la sicurezza sul lavoro. I sistemi ZAPPER® sono ammissibili al contributo a fondo perduto.",
+      link: "/agevolazioni/bando-inail-isi",
     },
   ];
 
@@ -94,8 +96,8 @@ const IncentivesCarousel = () => {
 
                       {/* CTA */}
                       <Button variant="outline" className="w-full group" asChild>
-                        <Link to="/contatti">
-                          Richiedi info
+                        <Link to={incentive.link}>
+                          Scopri di più
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Link>
                       </Button>
