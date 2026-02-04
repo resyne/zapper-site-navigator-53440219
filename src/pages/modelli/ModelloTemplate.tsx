@@ -188,6 +188,20 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                   </div>
                 ))}
               </div>
+              
+              {/* Download datasheet CTA */}
+              {hasDatasheet && (
+                <div className="mt-6 pt-6 border-t border-border">
+                  <Button
+                    onClick={() => setIsDatasheetModalOpen(true)}
+                    className="w-full"
+                    size="lg"
+                  >
+                    <FileDown className="w-5 h-5 mr-2" />
+                    Scarica scheda tecnica
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </section>
