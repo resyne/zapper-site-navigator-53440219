@@ -14,6 +14,7 @@ export interface ModelloData {
   applicazioniCompatibili: { name: string; href: string }[];
   settoriUtilizzo: { name: string; href: string }[];
   specifiche: { label: string; value: string }[];
+  photos?: string[]; // URLs of product images
   // New fields
   inAzione?: {
     videoPlaceholder?: boolean;
@@ -44,30 +45,54 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
               <span>/</span>
               <span className="text-white">{data.name}</span>
             </nav>
-            <div className="max-w-3xl">
-              <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6">
-                <Zap className="w-8 h-8 text-white" />
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Text content */}
+              <div className="max-w-xl">
+                <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6">
+                  <Zap className="w-8 h-8 text-white" />
+                </div>
+                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                  {data.name}
+                </h1>
+                <p className="text-xl text-primary font-semibold mb-2">{data.tagline}</p>
+                <p className="text-lg text-white/70 mb-4">{data.diameter}</p>
+                <p className="text-lg text-white/80 mb-8">{data.description}</p>
+                
+                {/* CTA Primaria in Hero */}
+                <Button
+                  size="lg"
+                  className="bg-primary text-white hover:bg-primary/90"
+                  asChild
+                >
+                  <Link to="/contatti">
+                    Verifica se {data.name} è adatto al tuo impianto
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
+                </Button>
+                <p className="text-sm text-white/60 mt-3">Valutazione tecnica gratuita e senza impegno</p>
               </div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-                {data.name}
-              </h1>
-              <p className="text-xl text-primary font-semibold mb-2">{data.tagline}</p>
-              <p className="text-lg text-white/70 mb-4">{data.diameter}</p>
-              <p className="text-lg text-white/80 mb-8">{data.description}</p>
-              
-              {/* CTA Primaria in Hero */}
-              <Button
-                size="lg"
-                className="bg-primary text-white hover:bg-primary/90"
-                asChild
-              >
-                <Link to="/contatti">
-                  Verifica se {data.name} è adatto al tuo impianto
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Link>
-              </Button>
-              <p className="text-sm text-white/60 mt-3">Valutazione tecnica gratuita e senza impegno</p>
-              
+
+              {/* Product image */}
+              <div className="flex justify-center lg:justify-end">
+                {data.photos && data.photos.length > 0 ? (
+                  <div className="relative">
+                    <img 
+                      src={data.photos[0]} 
+                      alt={`${data.name} - Abbattitore di fumi ZAPPER`}
+                      className="max-w-full h-auto max-h-[400px] object-contain rounded-2xl shadow-2xl"
+                    />
+                    {/* Optional glow effect */}
+                    <div className="absolute inset-0 bg-primary/10 rounded-2xl blur-3xl -z-10 scale-110" />
+                  </div>
+                ) : (
+                  <div className="w-full max-w-md aspect-square bg-white/5 rounded-2xl flex items-center justify-center">
+                    <div className="text-center p-8">
+                      <Zap className="w-16 h-16 text-white/20 mx-auto mb-4" />
+                      <span className="text-white/40 text-sm">Foto prodotto</span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </section>
