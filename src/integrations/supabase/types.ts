@@ -118,7 +118,7 @@ export type Database = {
           applicazioni_compatibili: Json | null
           created_at: string
           created_by: string | null
-          datasheet_url: string | null
+          datasheet_url: Json | null
           description: string | null
           diameter: string | null
           id: string
@@ -137,7 +137,7 @@ export type Database = {
           applicazioni_compatibili?: Json | null
           created_at?: string
           created_by?: string | null
-          datasheet_url?: string | null
+          datasheet_url?: Json | null
           description?: string | null
           diameter?: string | null
           id?: string
@@ -156,7 +156,7 @@ export type Database = {
           applicazioni_compatibili?: Json | null
           created_at?: string
           created_by?: string | null
-          datasheet_url?: string | null
+          datasheet_url?: Json | null
           description?: string | null
           diameter?: string | null
           id?: string

@@ -17,6 +17,16 @@ export interface Specification {
   value: string;
 }
 
+export type DatasheetLanguage = 'it' | 'en' | 'fr' | 'es' | 'de';
+
+export interface DatasheetUrls {
+  it?: string;
+  en?: string;
+  fr?: string;
+  es?: string;
+  de?: string;
+}
+
 export interface LinkItem {
   name: string;
   href: string;
@@ -35,7 +45,7 @@ export interface Model {
   ambiti_ideali: LinkItem[];
   applicazioni_compatibili: LinkItem[];
   settori_utilizzo: LinkItem[];
-  datasheet_url: string | null;
+  datasheet_url: DatasheetUrls;
   created_by: string | null;
   updated_by: string | null;
   created_at: string;
@@ -69,7 +79,7 @@ export interface ModelInsert {
   ambiti_ideali?: LinkItem[];
   applicazioni_compatibili?: LinkItem[];
   settori_utilizzo?: LinkItem[];
-  datasheet_url?: string | null;
+  datasheet_url?: DatasheetUrls;
 }
 
 export interface ModelUpdate extends Partial<ModelInsert> {
