@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Zap, Play, AlertTriangle } from "lucide-react";
+import { ArrowRight, Zap, Play, AlertTriangle, FileDown } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import DatasheetRequestModal from "@/components/modelli/DatasheetRequestModal";
 
 export interface ModelloData {
   id: string;
@@ -14,7 +16,8 @@ export interface ModelloData {
   applicazioniCompatibili: { name: string; href: string }[];
   settoriUtilizzo: { name: string; href: string }[];
   specifiche: { label: string; value: string }[];
-  photos?: string[]; // URLs of product images
+  photos?: string[];
+  datasheetUrl?: string | null;
   // New fields
   inAzione?: {
     videoPlaceholder?: boolean;
@@ -33,6 +36,8 @@ interface ModelloTemplateProps {
 }
 
 const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
+  const [isDatasheetModalOpen, setIsDatasheetModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -58,17 +63,31 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                 <p className="text-lg text-white/70 mb-4">{data.diameter}</p>
                 <p className="text-lg text-white/80 mb-8">{data.description}</p>
                 
-                {/* CTA Primaria in Hero */}
-                <Button
-                  size="lg"
-                  className="bg-primary text-white hover:bg-primary/90"
-                  asChild
-                >
-                  <Link to="/contatti">
-                    Verifica se {data.name} è adatto al tuo impianto
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
+                {/* CTAs */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button
+                    size="lg"
+                    className="bg-primary text-white hover:bg-primary/90"
+                    asChild
+                  >
+                    <Link to="/contatti">
+                      Verifica se {data.name} è adatto al tuo impianto
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Link>
+                  </Button>
+                  
+                  {data.datasheetUrl && (
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-white/30 text-white hover:bg-white/10"
+                      onClick={() => setIsDatasheetModalOpen(true)}
+                    >
+                      <FileDown className="w-5 h-5 mr-2" />
+                      Scarica scheda tecnica
+                    </Button>
+                  )}
+                </div>
                 <p className="text-sm text-white/60 mt-3">Valutazione tecnica gratuita e senza impegno</p>
               </div>
 
@@ -305,6 +324,17 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
             </Button>
           </div>
         </section>
+
+        {/* Datasheet Request Modal */}
+        {data.datasheetUrl && (
+          <DatasheetRequestModal
+            isOpen={isDatasheetModalOpen}
+            onClose={() => setIsDatasheetModalOpen(false)}
+            modelId={data.id}
+            modelName={data.name}
+            datasheetUrl={data.datasheetUrl}
+          />
+        )}
       </main>
       <Footer />
     </div>

@@ -14,6 +14,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      datasheet_requests: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          model_id: string | null
+          phone: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          model_id?: string | null
+          phone: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          model_id?: string | null
+          phone?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "datasheet_requests_model_id_fkey"
+            columns: ["model_id"]
+            isOneToOne: false
+            referencedRelation: "models"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       interventions: {
         Row: {
           client_name: string | null
@@ -80,6 +118,7 @@ export type Database = {
           applicazioni_compatibili: Json | null
           created_at: string
           created_by: string | null
+          datasheet_url: string | null
           description: string | null
           diameter: string | null
           id: string
@@ -98,6 +137,7 @@ export type Database = {
           applicazioni_compatibili?: Json | null
           created_at?: string
           created_by?: string | null
+          datasheet_url?: string | null
           description?: string | null
           diameter?: string | null
           id?: string
@@ -116,6 +156,7 @@ export type Database = {
           applicazioni_compatibili?: Json | null
           created_at?: string
           created_by?: string | null
+          datasheet_url?: string | null
           description?: string | null
           diameter?: string | null
           id?: string
