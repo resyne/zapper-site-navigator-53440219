@@ -31,6 +31,9 @@
     /* Muted: Blue tint - Support */
     --muted: 215 20% 94%;
     --muted-foreground: 0 0% 55%;
+    
+    /* Muted Warm: Beige #d1c7b7 - Alternative backgrounds */
+    --muted-warm: 33 22% 77%;
 
     /* Accent: Same as Primary (Green) for consistency */
     --accent: 117 58% 57%;
