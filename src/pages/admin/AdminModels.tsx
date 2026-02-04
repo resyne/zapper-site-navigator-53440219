@@ -25,9 +25,9 @@ import { Plus, Pencil, Trash2, Search, Image, Video, FileText } from 'lucide-rea
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { Model, ModelInsert, Specification, LinkItem } from '@/types/admin';
+import { Model, ModelInsert, Specification, LinkItem, DatasheetUrls } from '@/types/admin';
 import ImageUpload from '@/components/admin/ImageUpload';
-import FileUpload from '@/components/admin/FileUpload';
+import MultilingualFileUpload from '@/components/admin/MultilingualFileUpload';
 
 export default function AdminModels() {
   const [models, setModels] = useState<Model[]>([]);
@@ -49,7 +49,7 @@ export default function AdminModels() {
     specifications: [],
     photos: [],
     videos: [],
-    datasheet_url: null,
+    datasheet_url: {},
   });
 
   const fetchModels = async () => {
@@ -75,7 +75,7 @@ export default function AdminModels() {
         ambiti_ideali: (model.ambiti_ideali as unknown as LinkItem[]) || [],
         applicazioni_compatibili: (model.applicazioni_compatibili as unknown as LinkItem[]) || [],
         settori_utilizzo: (model.settori_utilizzo as unknown as LinkItem[]) || [],
-        datasheet_url: model.datasheet_url,
+        datasheet_url: (model.datasheet_url as unknown as DatasheetUrls) || {},
         created_by: model.created_by,
         updated_by: model.updated_by,
         created_at: model.created_at,
@@ -111,7 +111,7 @@ export default function AdminModels() {
         specifications: model.specifications || [],
         photos: model.photos || [],
         videos: model.videos || [],
-        datasheet_url: model.datasheet_url || null,
+        datasheet_url: model.datasheet_url || {},
       });
     } else {
       setEditingModel(null);
@@ -124,7 +124,7 @@ export default function AdminModels() {
         specifications: [],
         photos: [],
         videos: [],
-        datasheet_url: null,
+        datasheet_url: {},
       });
     }
     setIsDialogOpen(true);
@@ -154,7 +154,7 @@ export default function AdminModels() {
           specifications: formData.specifications || [],
           photos: formData.photos || [],
           videos: formData.videos || [],
-          datasheet_url: formData.datasheet_url || null,
+          datasheet_url: formData.datasheet_url || {},
           updated_by: profile?.id,
         };
 
@@ -180,7 +180,7 @@ export default function AdminModels() {
           specifications: formData.specifications || [],
           photos: formData.photos || [],
           videos: formData.videos || [],
-          datasheet_url: formData.datasheet_url || null,
+          datasheet_url: formData.datasheet_url || {},
           created_by: profile?.id,
           updated_by: profile?.id,
         };
@@ -363,15 +363,12 @@ export default function AdminModels() {
                   folder={`models/${formData.model_id || 'new'}`}
                 />
 
-                {/* PDF Upload */}
-                <FileUpload
-                  label="Scheda tecnica (PDF)"
-                  value={formData.datasheet_url || null}
-                  onChange={(url) => setFormData({ ...formData, datasheet_url: url })}
-                  accept="application/pdf"
-                  maxSizeMB={10}
+                {/* Multilingual PDF Upload */}
+                <MultilingualFileUpload
+                  label="Schede tecniche (PDF)"
+                  value={formData.datasheet_url || {}}
+                  onChange={(urls) => setFormData({ ...formData, datasheet_url: urls })}
                   folder={`datasheets/${formData.model_id || 'new'}`}
-                  hint="PDF, max 10MB"
                 />
 
                 <div className="flex gap-2 pt-4">
@@ -445,8 +442,13 @@ export default function AdminModels() {
                         </div>
                       </TableCell>
                       <TableCell className="text-center">
-                        {model.datasheet_url ? (
-                          <FileText className="h-4 w-4 text-primary mx-auto" />
+                        {model.datasheet_url && Object.keys(model.datasheet_url).length > 0 ? (
+                          <div className="flex items-center justify-center gap-1">
+                            <FileText className="h-4 w-4 text-primary" />
+                            <span className="text-xs text-muted-foreground">
+                              {Object.keys(model.datasheet_url).length}
+                            </span>
+                          </div>
                         ) : (
                           <span className="text-muted-foreground">-</span>
                         )}

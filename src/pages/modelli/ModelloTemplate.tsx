@@ -6,6 +6,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import DatasheetRequestModal from "@/components/modelli/DatasheetRequestModal";
 
+import { DatasheetUrls } from "@/types/admin";
+
 export interface ModelloData {
   id: string;
   name: string;
@@ -17,7 +19,7 @@ export interface ModelloData {
   settoriUtilizzo: { name: string; href: string }[];
   specifiche: { label: string; value: string }[];
   photos?: string[];
-  datasheetUrl?: string | null;
+  datasheetUrl?: DatasheetUrls;
   // New fields
   inAzione?: {
     videoPlaceholder?: boolean;
@@ -37,6 +39,8 @@ interface ModelloTemplateProps {
 
 const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
   const [isDatasheetModalOpen, setIsDatasheetModalOpen] = useState(false);
+
+  const hasDatasheet = data.datasheetUrl && Object.keys(data.datasheetUrl).length > 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -76,7 +80,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                     </Link>
                   </Button>
                   
-                  {data.datasheetUrl && (
+                  {hasDatasheet && (
                     <Button
                       size="lg"
                       variant="outline"
@@ -326,13 +330,13 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
         </section>
 
         {/* Datasheet Request Modal */}
-        {data.datasheetUrl && (
+        {hasDatasheet && data.datasheetUrl && (
           <DatasheetRequestModal
             isOpen={isDatasheetModalOpen}
             onClose={() => setIsDatasheetModalOpen(false)}
             modelId={data.id}
             modelName={data.name}
-            datasheetUrl={data.datasheetUrl}
+            datasheetUrls={data.datasheetUrl}
           />
         )}
       </main>

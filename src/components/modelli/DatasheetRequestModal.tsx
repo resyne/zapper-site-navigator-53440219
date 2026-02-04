@@ -12,13 +12,22 @@ import { Label } from '@/components/ui/label';
 import { Loader2, FileDown, CheckCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { DatasheetUrls, DatasheetLanguage } from '@/types/admin';
+
+const LANGUAGES: { code: DatasheetLanguage; label: string; flag: string }[] = [
+  { code: 'it', label: 'Italiano', flag: '🇮🇹' },
+  { code: 'en', label: 'English', flag: '🇬🇧' },
+  { code: 'fr', label: 'Français', flag: '🇫🇷' },
+  { code: 'es', label: 'Español', flag: '🇪🇸' },
+  { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
+];
 
 interface DatasheetRequestModalProps {
   isOpen: boolean;
   onClose: () => void;
   modelId: string;
   modelName: string;
-  datasheetUrl: string;
+  datasheetUrls: DatasheetUrls;
 }
 
 export default function DatasheetRequestModal({
@@ -26,10 +35,11 @@ export default function DatasheetRequestModal({
   onClose,
   modelId,
   modelName,
-  datasheetUrl,
+  datasheetUrls,
 }: DatasheetRequestModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<DatasheetLanguage | null>(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -37,6 +47,14 @@ export default function DatasheetRequestModal({
     phone: '',
   });
   const { toast } = useToast();
+
+  // Get available languages
+  const availableLanguages = LANGUAGES.filter(lang => datasheetUrls[lang.code]);
+
+  // Auto-select if only one language
+  const effectiveLanguage = availableLanguages.length === 1 
+    ? availableLanguages[0].code 
+    : selectedLanguage;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +64,15 @@ export default function DatasheetRequestModal({
       toast({
         title: 'Campi obbligatori',
         description: 'Compila tutti i campi per procedere.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!effectiveLanguage) {
+      toast({
+        title: 'Seleziona una lingua',
+        description: 'Scegli la lingua della scheda tecnica.',
         variant: 'destructive',
       });
       return;
@@ -79,13 +106,16 @@ export default function DatasheetRequestModal({
       setIsSuccess(true);
 
       // Trigger download
-      const link = document.createElement('a');
-      link.href = datasheetUrl;
-      link.download = `Scheda-Tecnica-${modelName}.pdf`;
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const datasheetUrl = datasheetUrls[effectiveLanguage];
+      if (datasheetUrl) {
+        const link = document.createElement('a');
+        link.href = datasheetUrl;
+        link.download = `Scheda-Tecnica-${modelName}-${effectiveLanguage.toUpperCase()}.pdf`;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
 
     } catch (error) {
       console.error('Error submitting request:', error);
@@ -101,9 +131,14 @@ export default function DatasheetRequestModal({
 
   const handleClose = () => {
     setIsSuccess(false);
+    setSelectedLanguage(null);
     setFormData({ firstName: '', lastName: '', email: '', phone: '' });
     onClose();
   };
+
+  const selectedLangData = effectiveLanguage 
+    ? LANGUAGES.find(l => l.code === effectiveLanguage)
+    : null;
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -128,7 +163,7 @@ export default function DatasheetRequestModal({
             <p className="text-muted-foreground text-sm mb-6">
               Se il download non parte automaticamente,{' '}
               <a 
-                href={datasheetUrl} 
+                href={effectiveLanguage ? datasheetUrls[effectiveLanguage] : '#'} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"
@@ -142,6 +177,36 @@ export default function DatasheetRequestModal({
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 py-4">
+            {/* Language selection - only show if multiple languages */}
+            {availableLanguages.length > 1 && (
+              <div className="space-y-2">
+                <Label>Lingua scheda tecnica *</Label>
+                <div className="flex flex-wrap gap-2">
+                  {availableLanguages.map((lang) => (
+                    <Button
+                      key={lang.code}
+                      type="button"
+                      variant={selectedLanguage === lang.code ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setSelectedLanguage(lang.code)}
+                      className="gap-2"
+                    >
+                      <span>{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Show selected language badge for single-language case */}
+            {availableLanguages.length === 1 && (
+              <div className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                <span className="text-lg">{availableLanguages[0].flag}</span>
+                <span className="text-sm">Scheda tecnica in {availableLanguages[0].label}</span>
+              </div>
+            )}
+
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName">Nome *</Label>
@@ -204,7 +269,7 @@ export default function DatasheetRequestModal({
               </Button>
               <Button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || (availableLanguages.length > 1 && !selectedLanguage)}
                 className="flex-1"
               >
                 {isSubmitting ? (
