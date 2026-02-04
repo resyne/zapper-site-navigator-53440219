@@ -35,6 +35,7 @@ export interface Model {
   ambiti_ideali: LinkItem[];
   applicazioni_compatibili: LinkItem[];
   settori_utilizzo: LinkItem[];
+  datasheet_url: string | null;
   created_by: string | null;
   updated_by: string | null;
   created_at: string;
@@ -68,6 +69,7 @@ export interface ModelInsert {
   ambiti_ideali?: LinkItem[];
   applicazioni_compatibili?: LinkItem[];
   settori_utilizzo?: LinkItem[];
+  datasheet_url?: string | null;
 }
 
 export interface ModelUpdate extends Partial<ModelInsert> {
