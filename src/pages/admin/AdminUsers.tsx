@@ -4,6 +4,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -19,17 +20,43 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Search, Shield, User, Trash2 } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Search, Shield, User, Trash2, UserPlus } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { Profile, AppRole } from '@/types/admin';
 import { Badge } from '@/components/ui/badge';
+import { z } from 'zod';
+
+const newUserSchema = z.object({
+  email: z.string().email('Email non valida'),
+  password: z.string().min(6, 'La password deve avere almeno 6 caratteri'),
+  fullName: z.string().min(2, 'Il nome deve avere almeno 2 caratteri'),
+  role: z.enum(['admin', 'contributor']),
+});
 
 export default function AdminUsers() {
   const [users, setUsers] = useState<Profile[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const [newUser, setNewUser] = useState({
+    email: '',
+    password: '',
+    fullName: '',
+    role: 'contributor' as AppRole,
+  });
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const { isAdmin, profile } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -138,6 +165,84 @@ export default function AdminUsers() {
     }
   };
 
+  const handleCreateUser = async () => {
+    setFormErrors({});
+    
+    try {
+      const validated = newUserSchema.parse(newUser);
+      setIsCreating(true);
+
+      // Create user via Supabase Auth
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+        email: validated.email,
+        password: validated.password,
+        options: {
+          data: {
+            full_name: validated.fullName,
+          },
+        },
+      });
+
+      if (signUpError) {
+        if (signUpError.message.includes('User already registered')) {
+          toast({
+            title: 'Utente già registrato',
+            description: 'Esiste già un account con questa email.',
+            variant: 'destructive',
+          });
+        } else {
+          throw signUpError;
+        }
+        return;
+      }
+
+      // Update the role if needed (profile is created automatically by trigger)
+      if (authData.user && validated.role === 'admin') {
+        // Wait a moment for the trigger to create the profile
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .update({ role: 'admin' })
+          .eq('user_id', authData.user.id);
+
+        if (updateError) {
+          console.error('Error updating role:', updateError);
+        }
+      }
+
+      toast({
+        title: 'Utente creato!',
+        description: `${validated.fullName} è stato aggiunto come ${validated.role}.`,
+      });
+
+      setNewUser({ email: '', password: '', fullName: '', role: 'contributor' });
+      setIsDialogOpen(false);
+      
+      // Refresh users list after a short delay
+      setTimeout(fetchUsers, 1500);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        const errors: Record<string, string> = {};
+        err.errors.forEach((e) => {
+          if (e.path[0]) {
+            errors[e.path[0] as string] = e.message;
+          }
+        });
+        setFormErrors(errors);
+      } else {
+        console.error('Error creating user:', err);
+        toast({
+          title: 'Errore',
+          description: 'Impossibile creare l\'utente.',
+          variant: 'destructive',
+        });
+      }
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
   const filteredUsers = users.filter(
     (user) =>
       user.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -162,6 +267,91 @@ export default function AdminUsers() {
               className="pl-10"
             />
           </div>
+          
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button>
+                <UserPlus className="h-4 w-4 mr-2" />
+                Nuovo utente
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Aggiungi nuovo utente</DialogTitle>
+                <DialogDescription>
+                  Crea un nuovo account per un membro del team.
+                </DialogDescription>
+              </DialogHeader>
+              
+              <div className="space-y-4 py-4">
+                <div className="space-y-2">
+                  <Label htmlFor="fullName">Nome completo</Label>
+                  <Input
+                    id="fullName"
+                    placeholder="Mario Rossi"
+                    value={newUser.fullName}
+                    onChange={(e) => setNewUser({ ...newUser, fullName: e.target.value })}
+                  />
+                  {formErrors.fullName && (
+                    <p className="text-sm text-destructive">{formErrors.fullName}</p>
+                  )}
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="mario@example.com"
+                    value={newUser.email}
+                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                  />
+                  {formErrors.email && (
+                    <p className="text-sm text-destructive">{formErrors.email}</p>
+                  )}
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={newUser.password}
+                    onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                  />
+                  {formErrors.password && (
+                    <p className="text-sm text-destructive">{formErrors.password}</p>
+                  )}
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="role">Ruolo</Label>
+                  <Select
+                    value={newUser.role}
+                    onValueChange={(value: AppRole) => setNewUser({ ...newUser, role: value })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="contributor">Contributor</SelectItem>
+                      <SelectItem value="admin">Admin</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+                  Annulla
+                </Button>
+                <Button onClick={handleCreateUser} disabled={isCreating}>
+                  {isCreating ? 'Creazione...' : 'Crea utente'}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
 
         {/* Info card */}
