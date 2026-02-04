@@ -14,16 +14,186 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      interventions: {
+        Row: {
+          client_name: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          location: string | null
+          model_used: string | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          updated_by: string | null
+          video_url: string | null
+        }
+        Insert: {
+          client_name?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          location?: string | null
+          model_used?: string | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+          updated_by?: string | null
+          video_url?: string | null
+        }
+        Update: {
+          client_name?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          location?: string | null
+          model_used?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          updated_by?: string | null
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "interventions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "interventions_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      models: {
+        Row: {
+          ambiti_ideali: Json | null
+          applicazioni_compatibili: Json | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          diameter: string | null
+          id: string
+          model_id: string
+          name: string
+          photos: Json | null
+          settori_utilizzo: Json | null
+          specifications: Json | null
+          tagline: string | null
+          updated_at: string
+          updated_by: string | null
+          videos: Json | null
+        }
+        Insert: {
+          ambiti_ideali?: Json | null
+          applicazioni_compatibili?: Json | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          diameter?: string | null
+          id?: string
+          model_id: string
+          name: string
+          photos?: Json | null
+          settori_utilizzo?: Json | null
+          specifications?: Json | null
+          tagline?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          videos?: Json | null
+        }
+        Update: {
+          ambiti_ideali?: Json | null
+          applicazioni_compatibili?: Json | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          diameter?: string | null
+          id?: string
+          model_id?: string
+          name?: string
+          photos?: Json | null
+          settori_utilizzo?: Json | null
+          specifications?: Json | null
+          tagline?: string | null
+          updated_at?: string
+          updated_by?: string | null
+          videos?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "models_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "models_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: never; Returns: boolean }
+      is_content_editor: { Args: never; Returns: boolean }
+      is_contributor: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "contributor"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +320,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "contributor"],
+    },
   },
 } as const
