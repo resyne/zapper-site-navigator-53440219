@@ -26,6 +26,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { Model, ModelInsert, Specification, LinkItem } from '@/types/admin';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 export default function AdminModels() {
   const [models, setModels] = useState<Model[]>([]);
@@ -345,6 +346,15 @@ export default function AdminModels() {
                     rows={4}
                   />
                 </div>
+
+                {/* Image Upload */}
+                <ImageUpload
+                  label="Foto prodotto"
+                  value={formData.photos || []}
+                  onChange={(urls) => setFormData({ ...formData, photos: urls })}
+                  maxImages={5}
+                  folder={`models/${formData.model_id || 'new'}`}
+                />
 
                 <div className="flex gap-2 pt-4">
                   <Button
