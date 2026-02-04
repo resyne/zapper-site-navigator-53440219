@@ -114,8 +114,13 @@ export default function AdminAuth() {
       } else {
         toast({
           title: 'Registrazione completata!',
-          description: 'Controlla la tua email per confermare il tuo account.',
+          description: 'Benvenuto! Accesso in corso...',
         });
+        // Auto-login after successful signup (auto-confirm is enabled)
+        const { error: loginError } = await signIn(validated.email, validated.password);
+        if (!loginError) {
+          navigate('/admin');
+        }
       }
     } catch (err) {
       if (err instanceof z.ZodError) {
