@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Zap, Play, AlertTriangle, FileDown } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import DatasheetRequestModal from "@/components/modelli/DatasheetRequestModal";
+import { supabase } from "@/integrations/supabase/client";
 
 import { DatasheetUrls } from "@/types/admin";
 
@@ -39,8 +40,34 @@ interface ModelloTemplateProps {
 
 const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
   const [isDatasheetModalOpen, setIsDatasheetModalOpen] = useState(false);
+  const [dbPhotos, setDbPhotos] = useState<string[]>([]);
+  const [dbDatasheetUrl, setDbDatasheetUrl] = useState<DatasheetUrls | null>(null);
 
-  const hasDatasheet = data.datasheetUrl && Object.keys(data.datasheetUrl).length > 0;
+  useEffect(() => {
+    const fetchFromDb = async () => {
+      const { data: dbModel } = await supabase
+        .from('models')
+        .select('photos, datasheet_url')
+        .eq('model_id', data.id)
+        .maybeSingle();
+      
+      if (dbModel) {
+        const photos = Array.isArray(dbModel.photos) ? dbModel.photos as string[] : [];
+        if (photos.length > 0) {
+          setDbPhotos(photos);
+        }
+        if (dbModel.datasheet_url && typeof dbModel.datasheet_url === 'object' && Object.keys(dbModel.datasheet_url).length > 0) {
+          setDbDatasheetUrl(dbModel.datasheet_url as DatasheetUrls);
+        }
+      }
+    };
+    fetchFromDb();
+  }, [data.id]);
+
+  // Merge: DB data takes priority over static data
+  const photos = dbPhotos.length > 0 ? dbPhotos : (data.photos || []);
+  const datasheetUrl = dbDatasheetUrl || data.datasheetUrl;
+  const hasDatasheet = datasheetUrl && Object.keys(datasheetUrl).length > 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -97,10 +124,10 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
 
               {/* Product image */}
               <div className="flex justify-center lg:justify-end">
-                {data.photos && data.photos.length > 0 ? (
+                {photos.length > 0 ? (
                   <div className="relative">
                     <img 
-                      src={data.photos[0]} 
+                      src={photos[0]}
                       alt={`${data.name} - Abbattitore di fumi ZAPPER`}
                       className="max-w-full h-auto max-h-[400px] object-contain rounded-2xl shadow-2xl"
                     />
@@ -344,13 +371,13 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
         </section>
 
         {/* Datasheet Request Modal */}
-        {hasDatasheet && data.datasheetUrl && (
+        {hasDatasheet && datasheetUrl && (
           <DatasheetRequestModal
             isOpen={isDatasheetModalOpen}
             onClose={() => setIsDatasheetModalOpen(false)}
             modelId={data.id}
             modelName={data.name}
-            datasheetUrls={data.datasheetUrl}
+            datasheetUrls={datasheetUrl}
           />
         )}
       </main>
