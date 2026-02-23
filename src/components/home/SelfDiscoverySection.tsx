@@ -44,19 +44,57 @@ const SelfDiscoverySection = () => {
     ],
   };
 
-  const recommendations: Record<string, string[]> = {
-    "forno-legna": ["ZAPPER M", "ZAPPER L"],
-    "brace-carbone": ["ZAPPER S", "ZAPPER M"],
-    "cappa-cucina": ["ZAPPER M", "ZAPPER L"],
-    "forno-gas": ["ZAPPER S", "ZAPPER M"],
-    camino: ["ZAPPER S"],
-    "stufa-pellet": ["ZAPPER S"],
-    barbecue: ["ZAPPER S"],
-    "forno-giardino": ["ZAPPER S", "ZAPPER M"],
-    torrefazione: ["ZAPPER L"],
-    affumicatore: ["ZAPPER M", "ZAPPER L"],
-    "caldaia-biomassa": ["ZAPPER L"],
-    "forno-industriale": ["ZAPPER L"],
+  interface Recommendation {
+    name: string;
+    href: string;
+    description: string;
+  }
+
+  const recommendations: Record<string, Recommendation[]> = {
+    "forno-legna": [
+      { name: "ZPZ", href: "/modelli/zpz", description: "Per pizzerie con forno a legna standard" },
+      { name: "ZPZ MAX", href: "/modelli/zpz-max", description: "Per forni a legna ad alta portata" },
+    ],
+    "brace-carbone": [
+      { name: "ZBR S", href: "/modelli/zbr-s", description: "Per bracerie e grill standard" },
+      { name: "ZBR MAX", href: "/modelli/zbr-max", description: "Per bracerie ad alta portata" },
+    ],
+    "cappa-cucina": [
+      { name: "Destink", href: "/modelli/destink", description: "Per cappe di cucine professionali" },
+      { name: "Destink MAX", href: "/modelli/destink-max", description: "Per cappe ad alta portata" },
+    ],
+    "forno-gas": [
+      { name: "ZPZ Nuvola", href: "/modelli/zpz-nuvola", description: "Per forni a gas standard" },
+      { name: "ZPZ Nuvola L", href: "/modelli/zpz-nuvola-l", description: "Per forni a gas di grandi dimensioni" },
+    ],
+    camino: [
+      { name: "ZCM", href: "/modelli/zcm", description: "Per camini e stufe residenziali" },
+    ],
+    "stufa-pellet": [
+      { name: "ZCM", href: "/modelli/zcm", description: "Per stufe a pellet e legna" },
+    ],
+    barbecue: [
+      { name: "ZBR S", href: "/modelli/zbr-s", description: "Per barbecue e grill domestici" },
+    ],
+    "forno-giardino": [
+      { name: "ZPZ", href: "/modelli/zpz", description: "Per forni da giardino a legna" },
+    ],
+    torrefazione: [
+      { name: "ZTRF", href: "/modelli/ztrf", description: "Per torrefazioni standard" },
+      { name: "ZTRF MAX", href: "/modelli/ztrf-max", description: "Per torrefazioni industriali" },
+    ],
+    affumicatore: [
+      { name: "ZAF", href: "/modelli/zaf", description: "Per affumicatori standard" },
+      { name: "ZAF MAX", href: "/modelli/zaf-max", description: "Per affumicatori industriali" },
+    ],
+    "caldaia-biomassa": [
+      { name: "ZCL", href: "/modelli/zcl", description: "Per caldaie a biomassa residenziali" },
+      { name: "ZCL MAX", href: "/modelli/zcl-max", description: "Per caldaie a biomassa industriali" },
+    ],
+    "forno-industriale": [
+      { name: "ZTGL", href: "/modelli/ztgl", description: "Per forni e taglio laser industriali" },
+      { name: "ZTGL MAX", href: "/modelli/ztgl-max", description: "Per forni industriali ad alta portata" },
+    ],
   };
 
   const handleSectorSelect = (sectorId: string) => {
@@ -84,8 +122,8 @@ const SelfDiscoverySection = () => {
     setSelectedApplication("");
   };
 
-  const getRecommendedModels = () => {
-    return recommendations[selectedApplication] || ["ZAPPER M"];
+  const getRecommendedModels = (): Recommendation[] => {
+    return recommendations[selectedApplication] || [{ name: "ZPZ", href: "/modelli/zpz", description: "Modello versatile per diverse applicazioni" }];
   };
 
   return (
@@ -213,10 +251,11 @@ const SelfDiscoverySection = () => {
 
                 <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 mb-6 sm:mb-8">
                   {getRecommendedModels().map((model, index) => (
-                    <div
-                      key={model}
-                      className={`p-4 sm:p-6 rounded-lg sm:rounded-xl border-2 ${
-                        index === 0 ? "border-accent bg-accent/5" : "border-border"
+                    <Link
+                      key={model.name}
+                      to={model.href}
+                      className={`block p-4 sm:p-6 rounded-lg sm:rounded-xl border-2 hover:shadow-md transition-all ${
+                        index === 0 ? "border-accent bg-accent/5" : "border-border hover:border-primary/50"
                       }`}
                     >
                       {index === 0 && (
@@ -224,11 +263,11 @@ const SelfDiscoverySection = () => {
                           Consigliato
                         </span>
                       )}
-                      <h4 className="font-display text-xl sm:text-2xl font-bold mb-1 sm:mb-2">{model}</h4>
+                      <h4 className="font-display text-xl sm:text-2xl font-bold mb-1 sm:mb-2">{model.name}</h4>
                       <p className="text-xs sm:text-sm text-muted-foreground">
-                        Ideale per il tuo tipo di impianto e settore.
+                        {model.description}
                       </p>
-                    </div>
+                    </Link>
                   ))}
                 </div>
 
