@@ -74,9 +74,9 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
       <Header />
       <main>
         {/* Hero */}
-        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-zapper-black">
-          <div className="container">
-            <nav className="flex items-center gap-2 text-sm text-white/60 mb-6">
+        <section className="pt-24 pb-12 md:pt-32 md:pb-16 bg-zapper-black overflow-hidden">
+          <div className="container px-4 sm:px-6">
+            <nav className="flex items-center gap-2 text-sm text-white/60 mb-6 flex-wrap">
               <Link to="/modelli" className="hover:text-white">Modelli</Link>
               <span>/</span>
               <span className="text-white">{data.name}</span>
@@ -87,23 +87,23 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                 <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mb-6">
                   <Zap className="w-8 h-8 text-white" />
                 </div>
-                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 break-words">
                   {data.name}
                 </h1>
-                <p className="text-xl text-primary font-semibold mb-2">{data.tagline}</p>
-                <p className="text-lg text-white/70 mb-4">{data.diameter}</p>
-                <p className="text-lg text-white/80 mb-8">{data.description}</p>
+                <p className="text-lg md:text-xl text-primary font-semibold mb-2">{data.tagline}</p>
+                <p className="text-base md:text-lg text-white/70 mb-4">{data.diameter}</p>
+                <p className="text-base md:text-lg text-white/80 mb-8">{data.description}</p>
                 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex flex-col gap-3">
                   <Button
                     size="lg"
-                    className="bg-primary text-white hover:bg-primary/90"
+                    className="bg-primary text-white hover:bg-primary/90 w-full sm:w-auto whitespace-normal text-left h-auto py-3"
                     asChild
                   >
                     <Link to="/contatti">
-                      Verifica se {data.name} è adatto al tuo impianto
-                      <ArrowRight className="w-5 h-5 ml-2" />
+                      <span className="flex-1">Verifica se {data.name} è adatto al tuo impianto</span>
+                      <ArrowRight className="w-5 h-5 ml-2 flex-shrink-0" />
                     </Link>
                   </Button>
                   
@@ -111,7 +111,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-white/30 text-white hover:bg-white/10"
+                      className="border-white/30 text-white hover:bg-white/10 w-full sm:w-auto"
                       onClick={() => setIsDatasheetModalOpen(true)}
                     >
                       <FileDown className="w-5 h-5 mr-2" />
@@ -149,8 +149,8 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
 
         {/* Correlazioni */}
         <section className="py-12 md:py-16">
-          <div className="container">
-            <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
+          <div className="container px-4 sm:px-6">
+            <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
                 <h3 className="font-display text-lg font-bold text-foreground mb-4">Ambiti ideali</h3>
                 <div className="space-y-2">
@@ -199,7 +199,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
 
         {/* Specifiche tecniche */}
         <section className="py-12 md:py-16 bg-muted/30">
-          <div className="container">
+          <div className="container px-4 sm:px-6">
             <h2 className="font-display text-2xl font-bold text-foreground mb-8 text-center">
               Specifiche tecniche
             </h2>
@@ -236,11 +236,11 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
         {/* In Azione */}
         {data.inAzione && (
           <section className="py-12 md:py-16">
-            <div className="container">
+            <div className="container px-4 sm:px-6">
               <h2 className="font-display text-2xl font-bold text-foreground mb-8 text-center">
                 🔥 {data.name} in azione
               </h2>
-              <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+              <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Video placeholder */}
                 <div className="aspect-video bg-muted rounded-2xl flex items-center justify-center relative overflow-hidden group cursor-pointer">
                   <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors" />
@@ -279,10 +279,10 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
         {/* Quando NON è questo modello */}
         {data.quandoNon && (
           <section className="py-12 md:py-16 bg-muted/30">
-            <div className="container">
+            <div className="container px-4 sm:px-6">
               <div className="max-w-2xl mx-auto">
                 <div className="flex items-center gap-3 mb-6">
-                  <AlertTriangle className="w-6 h-6 text-amber-500" />
+                  <AlertTriangle className="w-6 h-6 text-amber-500 flex-shrink-0" />
                   <h2 className="font-display text-xl font-bold text-foreground">
                     Quando {data.name} non è la soluzione ideale
                   </h2>
@@ -316,7 +316,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
 
         {/* Come funziona la valutazione */}
         <section className="py-12 md:py-16">
-          <div className="container">
+          <div className="container px-4 sm:px-6">
             <div className="max-w-2xl mx-auto">
               <h2 className="font-display text-xl font-bold text-foreground mb-6 flex items-center gap-2">
                 🔧 Come funziona la valutazione tecnica
@@ -347,8 +347,8 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
         </section>
 
         {/* CTA Finale */}
-        <section className="py-16 md:py-24 bg-accent">
-          <div className="container text-center">
+        <section className="py-16 md:py-24 bg-accent overflow-hidden">
+          <div className="container px-4 sm:px-6 text-center">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-accent-foreground mb-4">
               Conferma la soluzione con una valutazione
             </h2>
