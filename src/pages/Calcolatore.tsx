@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 import { Calculator, ArrowRight, Info, Flame, Wind, Ruler } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -44,6 +45,27 @@ interface CalcResult {
   modelloConsigliato: string;
   modelloHref: string;
 }
+
+/* ───────── VELOCITY BENCHMARKS (m/s) ───────── */
+// Based on UNI EN 16282 and ASHRAE guidelines for flue gas ducts
+const VELOCITY_RANGES = {
+  optimal: { min: 6, max: 10, label: "Ottimale", color: "text-green-600", bg: "bg-green-500", bgLight: "bg-green-100" },
+  acceptable: { min: 10, max: 13, label: "Accettabile – leggermente alto", color: "text-yellow-600", bg: "bg-yellow-500", bgLight: "bg-yellow-100" },
+  borderline: { min: 13, max: 16, label: "Al limite – sottodimensionato", color: "text-orange-500", bg: "bg-orange-500", bgLight: "bg-orange-100" },
+  excessive: { min: 16, max: Infinity, label: "Troppo veloce – rumore e perdite elevate", color: "text-red-600", bg: "bg-red-500", bgLight: "bg-red-100" },
+  tooSlow: { min: 0, max: 6, label: "Troppo lento – rischio condensa", color: "text-blue-500", bg: "bg-blue-500", bgLight: "bg-blue-100" },
+};
+
+function getVelocityStatus(v: number) {
+  if (v < VELOCITY_RANGES.tooSlow.max) return VELOCITY_RANGES.tooSlow;
+  if (v <= VELOCITY_RANGES.optimal.max) return VELOCITY_RANGES.optimal;
+  if (v <= VELOCITY_RANGES.acceptable.max) return VELOCITY_RANGES.acceptable;
+  if (v <= VELOCITY_RANGES.borderline.max) return VELOCITY_RANGES.borderline;
+  return VELOCITY_RANGES.excessive;
+}
+
+/* Standard chimney diameters [mm] */
+const STD_SIZES = [100, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800];
 
 /* ───────── CONSTANTS ───────── */
 const APPLICATION_TYPES = [
@@ -212,7 +234,7 @@ function calcSimplified(inputs: SimplifiedInputs): CalcResult | null {
   const areaSezione = portataMs / vTarget;
   const diametro = Math.round(Math.sqrt(4 * areaSezione / Math.PI) * 1000);
   // Round to nearest standard size (100, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500)
-  const stdSizes = [100, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800];
+  const stdSizes = STD_SIZES;
   const diametroStd = stdSizes.find(s => s >= diametro) || diametro;
 
   const model = getRecommendedModel(portata, inputs.applicationType);
@@ -295,7 +317,7 @@ function calcAdvanced(inputs: AdvancedInputs): CalcResult | null {
   const vTarget = 8;
   const idealArea = portataMs / vTarget;
   const diametroCanna = Math.round(Math.sqrt(4 * idealArea / Math.PI) * 1000);
-  const stdSizes = [100, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800];
+  const stdSizes = STD_SIZES;
   const diametroStd = stdSizes.find(s => s >= diametroCanna) || diametroCanna;
 
   const model = getRecommendedModel(portata, inputs.applicationType);
@@ -310,67 +332,142 @@ function calcAdvanced(inputs: AdvancedInputs): CalcResult | null {
   };
 }
 
-/* ───────── RESULTS CARD ───────── */
-const ResultsCard = ({ result }: { result: CalcResult }) => (
-  <Card className="border-primary/30 bg-primary/5">
-    <CardHeader className="pb-4">
-      <CardTitle className="text-xl flex items-center gap-2">
-        <Wind className="w-5 h-5 text-primary" />
-        Risultati orientativi
-      </CardTitle>
-      <CardDescription>
-        Valori indicativi — per un dimensionamento preciso contattaci
-      </CardDescription>
-    </CardHeader>
-    <CardContent>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-background rounded-lg p-4 text-center border">
-          <p className="text-sm text-muted-foreground mb-1">Portata</p>
-          <p className="text-2xl font-bold text-foreground">{result.portata.toLocaleString()}</p>
-          <p className="text-xs text-muted-foreground">m³/h</p>
-        </div>
-        <div className="bg-background rounded-lg p-4 text-center border">
-          <p className="text-sm text-muted-foreground mb-1">Prevalenza</p>
-          <p className="text-2xl font-bold text-foreground">{result.prevalenza}</p>
-          <p className="text-xs text-muted-foreground">Pa</p>
-        </div>
-        <div className="bg-background rounded-lg p-4 text-center border">
-          <p className="text-sm text-muted-foreground mb-1">Ø Canna fumaria</p>
-          <p className="text-2xl font-bold text-foreground">{result.diametroCanna}</p>
-          <p className="text-xs text-muted-foreground">mm</p>
-        </div>
-        <div className="bg-background rounded-lg p-4 text-center border">
-          <p className="text-sm text-muted-foreground mb-1">Velocità fumi</p>
-          <p className="text-2xl font-bold text-foreground">{result.velocita}</p>
-          <p className="text-xs text-muted-foreground">m/s</p>
-        </div>
-      </div>
+/* ───────── RESULTS CARD WITH SLIDER ───────── */
+const ResultsCard = ({ result }: { result: CalcResult }) => {
+  const portataMs = result.portata / 3600;
+  
+  // Find the index of the recommended diameter in STD_SIZES
+  const recommendedIdx = STD_SIZES.findIndex(s => s === result.diametroCanna);
+  
+  // Allow slider range: 2 sizes below to 3 sizes above recommended (clamped)
+  const sliderMin = Math.max(0, recommendedIdx - 3);
+  const sliderMax = Math.min(STD_SIZES.length - 1, recommendedIdx + 4);
+  
+  const [diameterIdx, setDiameterIdx] = useState(recommendedIdx >= 0 ? recommendedIdx : 0);
+  
+  const currentDiameter = STD_SIZES[diameterIdx] || result.diametroCanna;
+  const currentArea = Math.PI * Math.pow(currentDiameter / 2000, 2);
+  const currentVelocity = Math.round((portataMs / currentArea) * 10) / 10;
+  const velocityStatus = getVelocityStatus(currentVelocity);
 
-      <div className="bg-primary/10 rounded-lg p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <p className="text-sm font-medium text-muted-foreground">Modello ZAPPER® consigliato</p>
-          <p className="text-xl font-bold text-foreground">{result.modelloConsigliato}</p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-          <Button variant="accent" asChild>
-            <Link to={result.modelloHref}>
-              Scopri {result.modelloConsigliato}
-              <ArrowRight className="w-4 h-4 ml-1" />
-            </Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link to="/contatti">Richiedi consulenza</Link>
-          </Button>
-        </div>
-      </div>
+  // Recalculate prevalenza for adjusted diameter
+  const pDyn = 0.5 * 1.2 * currentVelocity * currentVelocity;
+  const adjustedPrevalenza = Math.round(Math.max(
+    0.02 * (3 / (currentDiameter / 1000)) * pDyn + 1.1 * pDyn + 1.0 * pDyn,
+    20
+  ));
 
-      <p className="text-xs text-muted-foreground mt-4 flex items-start gap-1">
-        <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
-        I risultati sono puramente orientativi. Per un dimensionamento conforme alla UNI EN 16282, contatta il nostro ufficio tecnico.
-      </p>
-    </CardContent>
-  </Card>
-);
+  return (
+    <Card className="border-primary/30 bg-primary/5">
+      <CardHeader className="pb-4">
+        <CardTitle className="text-xl flex items-center gap-2">
+          <Wind className="w-5 h-5 text-primary" />
+          Risultati orientativi
+        </CardTitle>
+        <CardDescription>
+          Valori indicativi — usa lo slider per regolare il diametro della canna fumaria
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="bg-background rounded-lg p-4 text-center border">
+            <p className="text-sm text-muted-foreground mb-1">Portata</p>
+            <p className="text-2xl font-bold text-foreground">{result.portata.toLocaleString()}</p>
+            <p className="text-xs text-muted-foreground">m³/h</p>
+          </div>
+          <div className="bg-background rounded-lg p-4 text-center border">
+            <p className="text-sm text-muted-foreground mb-1">Prevalenza</p>
+            <p className="text-2xl font-bold text-foreground">{adjustedPrevalenza}</p>
+            <p className="text-xs text-muted-foreground">Pa</p>
+          </div>
+          <div className="bg-background rounded-lg p-4 text-center border">
+            <p className="text-sm text-muted-foreground mb-1">Ø Canna fumaria</p>
+            <p className="text-2xl font-bold text-foreground">{currentDiameter}</p>
+            <p className="text-xs text-muted-foreground">mm</p>
+          </div>
+          <div className={`rounded-lg p-4 text-center border-2 transition-colors ${velocityStatus.bgLight} border-current ${velocityStatus.color}`}>
+            <p className="text-sm mb-1 opacity-80">Velocità fumi</p>
+            <p className={`text-2xl font-bold ${velocityStatus.color}`}>{currentVelocity}</p>
+            <p className="text-xs opacity-80">m/s</p>
+          </div>
+        </div>
+
+        {/* Chimney diameter slider */}
+        <div className="bg-background rounded-lg p-5 border mb-6">
+          <div className="flex items-center justify-between mb-2">
+            <Label className="text-sm font-semibold">Regola Ø canna fumaria</Label>
+            <span className="text-sm font-mono font-bold text-foreground">{currentDiameter} mm</span>
+          </div>
+          <Slider
+            value={[diameterIdx]}
+            min={sliderMin}
+            max={sliderMax}
+            step={1}
+            onValueChange={([v]) => setDiameterIdx(v)}
+            className="my-4"
+          />
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>{STD_SIZES[sliderMin]} mm</span>
+            <span className="text-primary font-medium">Consigliato: {result.diametroCanna} mm</span>
+            <span>{STD_SIZES[sliderMax]} mm</span>
+          </div>
+
+          {/* Velocity status indicator */}
+          <div className={`mt-4 flex items-center gap-3 rounded-md px-4 py-3 ${velocityStatus.bgLight}`}>
+            <div className={`w-3 h-3 rounded-full ${velocityStatus.bg} flex-shrink-0`} />
+            <div>
+              <p className={`text-sm font-semibold ${velocityStatus.color}`}>
+                {currentVelocity} m/s — {velocityStatus.label}
+              </p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Range ottimale: 6–10 m/s · Accettabile: 10–13 m/s · Limite: 13–16 m/s
+              </p>
+            </div>
+          </div>
+
+          {/* Velocity benchmark legend */}
+          <div className="mt-3 grid grid-cols-2 sm:grid-cols-5 gap-2">
+            {[
+              { label: "Lento", range: "< 6", cls: "bg-blue-500" },
+              { label: "Ottimale", range: "6–10", cls: "bg-green-500" },
+              { label: "Accettabile", range: "10–13", cls: "bg-yellow-500" },
+              { label: "Al limite", range: "13–16", cls: "bg-orange-500" },
+              { label: "Eccessivo", range: "> 16", cls: "bg-red-500" },
+            ].map(b => (
+              <div key={b.label} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <div className={`w-2.5 h-2.5 rounded-full ${b.cls} flex-shrink-0`} />
+                <span>{b.label} ({b.range})</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-primary/10 rounded-lg p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">Modello ZAPPER® consigliato</p>
+            <p className="text-xl font-bold text-foreground">{result.modelloConsigliato}</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+            <Button variant="accent" asChild>
+              <Link to={result.modelloHref}>
+                Scopri {result.modelloConsigliato}
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/contatti">Richiedi consulenza</Link>
+            </Button>
+          </div>
+        </div>
+
+        <p className="text-xs text-muted-foreground mt-4 flex items-start gap-1">
+          <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
+          I risultati sono puramente orientativi. Per un dimensionamento conforme alla UNI EN 16282, contatta il nostro ufficio tecnico.
+        </p>
+      </CardContent>
+    </Card>
+  );
+};
 
 /* ───────── PAGE COMPONENT ───────── */
 const Calcolatore = () => {
