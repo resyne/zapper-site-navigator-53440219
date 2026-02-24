@@ -60,6 +60,7 @@ import ZAFMax from "./pages/modelli/ZAFMax";
 import ZTGL from "./pages/modelli/ZTGL";
 import ZTGLMax from "./pages/modelli/ZTGLMax";
 import ZTGLMaxUltra from "./pages/modelli/ZTGLMaxUltra";
+import Calcolatore from "./pages/Calcolatore";
 import NotFound from "./pages/NotFound";
 // Admin pages
 import AdminAuth from "./pages/admin/AdminAuth";
@@ -85,6 +86,7 @@ const App = () => (
             <Route path="/settori" element={<Settori />} />
             <Route path="/applicazioni" element={<Applicazioni />} />
             <Route path="/modelli" element={<Modelli />} />
+            <Route path="/calcolatore" element={<Calcolatore />} />
             <Route path="/agevolazioni" element={<Agevolazioni />} />
             <Route path="/agevolazioni/industria-40" element={<Industria40 />} />
             <Route path="/agevolazioni/bando-inail-isi" element={<BandoInailIsi />} />
