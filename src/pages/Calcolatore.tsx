@@ -63,7 +63,8 @@ interface AppVelocityProfile {
 }
 
 const APP_VELOCITY_PROFILES: Record<string, AppVelocityProfile> = {
-  "forno-legna":       { tooSlow: 5,   optMax: 10,  accMax: 13,  limMax: 16 },
+  "forno-pizza":       { tooSlow: 5,   optMax: 10,  accMax: 13,  limMax: 16 },
+  "forno-panificazione": { tooSlow: 4, optMax: 9,   accMax: 12,  limMax: 15 },
   "cappa-cucina":      { tooSlow: 4,   optMax: 8,   accMax: 11,  limMax: 14 },
   "caldaia-biomassa":  { tooSlow: 4,   optMax: 8,   accMax: 11,  limMax: 14 },
   "camino":            { tooSlow: 3,   optMax: 7,   accMax: 10,  limMax: 13 },
@@ -101,7 +102,8 @@ const STD_SIZES = [100, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500, 600, 7
 
 /* ───────── CONSTANTS ───────── */
 const APPLICATION_TYPES = [
-  { value: "forno-legna", label: "Forno a legna" },
+  { value: "forno-pizza", label: "Forno pizza" },
+  { value: "forno-panificazione", label: "Forno panificazione" },
   { value: "cappa-cucina", label: "Cappa cucina professionale" },
   { value: "caldaia-biomassa", label: "Caldaia a biomassa" },
   { value: "camino", label: "Camino / Stufa" },
@@ -147,7 +149,8 @@ const FILTER_TYPES = [
 
 /* Capture velocity by application [m/s] */
 const CAPTURE_VELOCITY: Record<string, number> = {
-  "forno-legna": 1.0,
+  "forno-pizza": 1.0,
+  "forno-panificazione": 0.9,
   "cappa-cucina": 0.30,    // UNI EN 16282 — cappa a parete
   "caldaia-biomassa": 0.6,
   "camino": 0.8,
@@ -206,9 +209,14 @@ function calcPrevalenzaSimplified(portata: number): number {
 
 /* Recommended model mapping by airflow range */
 function getRecommendedModel(portata: number, appType: string): { name: string; href: string } {
-  if (appType === "forno-legna") {
+  if (appType === "forno-pizza") {
     if (portata <= 2000) return { name: "ZPZ", href: "/modelli/zpz" };
     if (portata <= 4000) return { name: "ZPZ MAX", href: "/modelli/zpz-max" };
+    return { name: "ZPZ Nuvola L", href: "/modelli/zpz-nuvola-l" };
+  }
+  if (appType === "forno-panificazione") {
+    if (portata <= 2000) return { name: "ZPF", href: "/modelli/zpf" };
+    if (portata <= 4000) return { name: "ZPF MAX", href: "/modelli/zpf-max" };
     return { name: "ZPZ Nuvola L", href: "/modelli/zpz-nuvola-l" };
   }
   if (appType === "cappa-cucina") {
