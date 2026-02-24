@@ -46,22 +46,54 @@ interface CalcResult {
   modelloHref: string;
 }
 
-/* ───────── VELOCITY BENCHMARKS (m/s) ───────── */
-// Based on UNI EN 16282 and ASHRAE guidelines for flue gas ducts
-const VELOCITY_RANGES = {
-  optimal: { min: 6, max: 10, label: "Ottimale", color: "text-green-600", bg: "bg-green-500", bgLight: "bg-green-100" },
-  acceptable: { min: 10, max: 13, label: "Accettabile – leggermente alto", color: "text-yellow-600", bg: "bg-yellow-500", bgLight: "bg-yellow-100" },
-  borderline: { min: 13, max: 16, label: "Al limite – sottodimensionato", color: "text-orange-500", bg: "bg-orange-500", bgLight: "bg-orange-100" },
-  excessive: { min: 16, max: Infinity, label: "Troppo veloce – rumore e perdite elevate", color: "text-red-600", bg: "bg-red-500", bgLight: "bg-red-100" },
-  tooSlow: { min: 0, max: 6, label: "Troppo lento – rischio condensa", color: "text-blue-500", bg: "bg-blue-500", bgLight: "bg-blue-100" },
+/* ───────── VELOCITY BENCHMARKS PER APPLICAZIONE (m/s) ───────── */
+interface VelocityBand {
+  label: string;
+  color: string;
+  bg: string;
+  bgLight: string;
+}
+
+interface AppVelocityProfile {
+  tooSlow: number;   // below this → too slow
+  optMax: number;     // up to this → optimal (green)
+  accMax: number;     // up to this → acceptable (yellow)
+  limMax: number;     // up to this → borderline (orange)
+  // above limMax → excessive (red)
+}
+
+const APP_VELOCITY_PROFILES: Record<string, AppVelocityProfile> = {
+  "forno-legna":       { tooSlow: 5,   optMax: 10,  accMax: 13,  limMax: 16 },
+  "cappa-cucina":      { tooSlow: 4,   optMax: 8,   accMax: 11,  limMax: 14 },
+  "caldaia-biomassa":  { tooSlow: 4,   optMax: 8,   accMax: 11,  limMax: 14 },
+  "camino":            { tooSlow: 3,   optMax: 7,   accMax: 10,  limMax: 13 },
+  "braciere":          { tooSlow: 5,   optMax: 10,  accMax: 13,  limMax: 16 },
+  "forno-industriale": { tooSlow: 6,   optMax: 12,  accMax: 15,  limMax: 18 },
+  "affumicatore":      { tooSlow: 3,   optMax: 7,   accMax: 10,  limMax: 13 },
+  "torrefazione":      { tooSlow: 5,   optMax: 9,   accMax: 12,  limMax: 15 },
 };
 
-function getVelocityStatus(v: number) {
-  if (v < VELOCITY_RANGES.tooSlow.max) return VELOCITY_RANGES.tooSlow;
-  if (v <= VELOCITY_RANGES.optimal.max) return VELOCITY_RANGES.optimal;
-  if (v <= VELOCITY_RANGES.acceptable.max) return VELOCITY_RANGES.acceptable;
-  if (v <= VELOCITY_RANGES.borderline.max) return VELOCITY_RANGES.borderline;
-  return VELOCITY_RANGES.excessive;
+const DEFAULT_PROFILE: AppVelocityProfile = { tooSlow: 5, optMax: 10, accMax: 13, limMax: 16 };
+
+const VELOCITY_BANDS = {
+  tooSlow:    { label: "Troppo lento – rischio condensa",          color: "text-blue-500",   bg: "bg-blue-500",   bgLight: "bg-blue-100" } as VelocityBand,
+  optimal:    { label: "Ottimale",                                  color: "text-green-600",  bg: "bg-green-500",  bgLight: "bg-green-100" } as VelocityBand,
+  acceptable: { label: "Accettabile – leggermente alto",           color: "text-yellow-600", bg: "bg-yellow-500", bgLight: "bg-yellow-100" } as VelocityBand,
+  borderline: { label: "Al limite – sottodimensionato",            color: "text-orange-500", bg: "bg-orange-500", bgLight: "bg-orange-100" } as VelocityBand,
+  excessive:  { label: "Troppo veloce – rumore e perdite elevate", color: "text-red-600",    bg: "bg-red-500",    bgLight: "bg-red-100" } as VelocityBand,
+};
+
+function getVelocityStatus(v: number, appType: string): VelocityBand {
+  const p = APP_VELOCITY_PROFILES[appType] || DEFAULT_PROFILE;
+  if (v < p.tooSlow) return VELOCITY_BANDS.tooSlow;
+  if (v <= p.optMax)  return VELOCITY_BANDS.optimal;
+  if (v <= p.accMax)  return VELOCITY_BANDS.acceptable;
+  if (v <= p.limMax)  return VELOCITY_BANDS.borderline;
+  return VELOCITY_BANDS.excessive;
+}
+
+function getProfileForApp(appType: string): AppVelocityProfile {
+  return APP_VELOCITY_PROFILES[appType] || DEFAULT_PROFILE;
 }
 
 /* Standard chimney diameters [mm] */
@@ -333,7 +365,7 @@ function calcAdvanced(inputs: AdvancedInputs): CalcResult | null {
 }
 
 /* ───────── RESULTS CARD WITH SLIDER ───────── */
-const ResultsCard = ({ result }: { result: CalcResult }) => {
+const ResultsCard = ({ result, appType }: { result: CalcResult; appType: string }) => {
   const portataMs = result.portata / 3600;
   
   // Find the index of the recommended diameter in STD_SIZES
@@ -348,7 +380,8 @@ const ResultsCard = ({ result }: { result: CalcResult }) => {
   const currentDiameter = STD_SIZES[diameterIdx] || result.diametroCanna;
   const currentArea = Math.PI * Math.pow(currentDiameter / 2000, 2);
   const currentVelocity = Math.round((portataMs / currentArea) * 10) / 10;
-  const velocityStatus = getVelocityStatus(currentVelocity);
+  const velocityStatus = getVelocityStatus(currentVelocity, appType);
+  const profile = getProfileForApp(appType);
 
   // Recalculate prevalenza for adjusted diameter
   const pDyn = 0.5 * 1.2 * currentVelocity * currentVelocity;
@@ -420,7 +453,7 @@ const ResultsCard = ({ result }: { result: CalcResult }) => {
                 {currentVelocity} m/s — {velocityStatus.label}
               </p>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Range ottimale: 6–10 m/s · Accettabile: 10–13 m/s · Limite: 13–16 m/s
+                Range ottimale: {profile.tooSlow}–{profile.optMax} m/s · Accettabile: {profile.optMax}–{profile.accMax} m/s · Limite: {profile.accMax}–{profile.limMax} m/s
               </p>
             </div>
           </div>
@@ -428,11 +461,11 @@ const ResultsCard = ({ result }: { result: CalcResult }) => {
           {/* Velocity benchmark legend */}
           <div className="mt-3 grid grid-cols-2 sm:grid-cols-5 gap-2">
             {[
-              { label: "Lento", range: "< 6", cls: "bg-blue-500" },
-              { label: "Ottimale", range: "6–10", cls: "bg-green-500" },
-              { label: "Accettabile", range: "10–13", cls: "bg-yellow-500" },
-              { label: "Al limite", range: "13–16", cls: "bg-orange-500" },
-              { label: "Eccessivo", range: "> 16", cls: "bg-red-500" },
+              { label: "Lento", range: `< ${profile.tooSlow}`, cls: "bg-blue-500" },
+              { label: "Ottimale", range: `${profile.tooSlow}–${profile.optMax}`, cls: "bg-green-500" },
+              { label: "Accettabile", range: `${profile.optMax}–${profile.accMax}`, cls: "bg-yellow-500" },
+              { label: "Al limite", range: `${profile.accMax}–${profile.limMax}`, cls: "bg-orange-500" },
+              { label: "Eccessivo", range: `> ${profile.limMax}`, cls: "bg-red-500" },
             ].map(b => (
               <div key={b.label} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <div className={`w-2.5 h-2.5 rounded-full ${b.cls} flex-shrink-0`} />
@@ -608,7 +641,7 @@ const Calcolatore = () => {
                       Calcola
                     </Button>
 
-                    {simplifiedResult && <ResultsCard result={simplifiedResult} />}
+                    {simplifiedResult && <ResultsCard result={simplifiedResult} appType={simplified.applicationType} />}
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -741,7 +774,7 @@ const Calcolatore = () => {
                       Calcola (UNI EN 16282)
                     </Button>
 
-                    {advancedResult && <ResultsCard result={advancedResult} />}
+                    {advancedResult && <ResultsCard result={advancedResult} appType={advanced.applicationType} />}
                   </CardContent>
                 </Card>
               </TabsContent>
