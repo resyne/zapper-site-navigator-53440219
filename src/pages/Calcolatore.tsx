@@ -72,17 +72,82 @@ const FILTER_TYPES = [
   { value: "tessuto", label: "Filtro a tessuto" },
 ];
 
-/* Airflow coefficients per application type (m³/h per m² of opening) */
-const PORTATA_COEFFICIENTS: Record<string, number> = {
-  "forno-legna": 1800,
-  "cappa-cucina": 2500,
-  "caldaia-biomassa": 1200,
-  "camino": 1500,
-  "braciere": 2000,
-  "forno-industriale": 2200,
-  "affumicatore": 1000,
-  "torrefazione": 1400,
+/*
+ * ───────── PORTATA CALCULATION LOGIC ─────────
+ * 
+ * Cappe cucina (UNI EN 16282-1): perimeter method
+ *   Q = perimetro_esposto × Δh × v_cattura × 3600
+ *   v_cattura tipica = 0.25–0.4 m/s, usiamo 0.3 m/s a parete, 0.35 isola
+ *   Δh = distanza bordo cappa – piano cottura, default 0.9 m
+ * 
+ * Forni a legna / bracieri: opening velocity method
+ *   Q = A_bocca × v_aspirazione × 3600
+ *   v_aspirazione = 0.8–1.5 m/s (dipende da combustibile)
+ * 
+ * Caldaie / camini: potenza termica approssimata da volume camera
+ *   Q = Volume × ricambi/h (tipico 15-25)
+ * 
+ * Industriali: area × fattore specifico più contenuto
+ */
+
+/* Capture velocity by application [m/s] */
+const CAPTURE_VELOCITY: Record<string, number> = {
+  "forno-legna": 1.0,
+  "cappa-cucina": 0.30,    // UNI EN 16282 — cappa a parete
+  "caldaia-biomassa": 0.6,
+  "camino": 0.8,
+  "braciere": 1.2,
+  "forno-industriale": 0.9,
+  "affumicatore": 0.5,
+  "torrefazione": 0.7,
 };
+
+/* Whether app uses perimeter method (cappe) vs opening area method */
+const USES_PERIMETER_METHOD = new Set(["cappa-cucina"]);
+
+/* Default overhang height for cappe [m] */
+const CAPPA_DH = 0.9;
+
+/* Clamp a numeric value */
+function clamp(val: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, val));
+}
+
+/* Calculate portata based on application type */
+function calcPortata(appType: string, wM: number, dM: number, _hM: number): number {
+  const v = CAPTURE_VELOCITY[appType] || 0.8;
+
+  if (USES_PERIMETER_METHOD.has(appType)) {
+    // UNI EN 16282: Q = perimetro_esposto × Δh × v × 3600
+    // Assume cappa a parete → 3 lati esposti: fronte + 2 lati
+    const perimetro = wM + 2 * dM; // m (parete sul lato lungo)
+    return Math.round(perimetro * CAPPA_DH * v * 3600);
+  }
+
+  // Opening area method
+  const area = wM * dM; // m²
+  return Math.round(area * v * 3600);
+}
+
+/* Simplified pressure drop estimate based on typical installation */
+function calcPrevalenzaSimplified(portata: number): number {
+  // Typical duct: 3m length, Ø from portata, 1 curva 90°, no filter
+  const portataMs = portata / 3600;
+  const vTarget = 8; // m/s target
+  const ductArea = portataMs / vTarget;
+  const ductD = Math.sqrt(4 * ductArea / Math.PI); // m
+  const rho = 1.2;
+  const pDyn = 0.5 * rho * vTarget * vTarget; // ~38 Pa
+
+  // Friction: λ·L/D · pDyn, λ≈0.02, L≈3m
+  const friction = 0.02 * (3 / Math.max(ductD, 0.1)) * pDyn;
+  // 1 curva 90° ξ=1.1
+  const bends = 1.1 * pDyn;
+  // Uscita ξ=1.0
+  const exit = 1.0 * pDyn;
+
+  return Math.round(friction + bends + exit);
+}
 
 /* Recommended model mapping by airflow range */
 function getRecommendedModel(portata: number, appType: string): { name: string; href: string } {
@@ -92,16 +157,16 @@ function getRecommendedModel(portata: number, appType: string): { name: string; 
     return { name: "ZPZ Nuvola L", href: "/modelli/zpz-nuvola-l" };
   }
   if (appType === "cappa-cucina") {
-    if (portata <= 2500) return { name: "ZCM", href: "/modelli/zcm" };
-    if (portata <= 5000) return { name: "ZCL", href: "/modelli/zcl" };
+    if (portata <= 1500) return { name: "ZCM", href: "/modelli/zcm" };
+    if (portata <= 3000) return { name: "ZCL", href: "/modelli/zcl" };
     return { name: "ZCL MAX", href: "/modelli/zcl-max" };
   }
   if (appType === "caldaia-biomassa") {
-    if (portata <= 2000) return { name: "ZCL", href: "/modelli/zcl" };
+    if (portata <= 1500) return { name: "ZCL", href: "/modelli/zcl" };
     return { name: "ZCL MAX", href: "/modelli/zcl-max" };
   }
   if (appType === "camino") {
-    if (portata <= 1500) return { name: "ZCM", href: "/modelli/zcm" };
+    if (portata <= 1200) return { name: "ZCM", href: "/modelli/zcm" };
     return { name: "ZCL", href: "/modelli/zcl" };
   }
   if (appType === "braciere") {
@@ -129,31 +194,33 @@ function getRecommendedModel(portata: number, appType: string): { name: string; 
 
 /* ───────── SIMPLIFIED CALCULATION ───────── */
 function calcSimplified(inputs: SimplifiedInputs): CalcResult | null {
-  const w = parseFloat(inputs.width) / 100;  // cm → m
-  const d = parseFloat(inputs.depth) / 100;
-  const h = parseFloat(inputs.height) / 100;
-  if (!w || !d || !inputs.applicationType) return null;
+  const wCm = clamp(parseFloat(inputs.width) || 0, 0, 1000);   // max 10m
+  const dCm = clamp(parseFloat(inputs.depth) || 0, 0, 1000);
+  const hCm = clamp(parseFloat(inputs.height) || 0, 0, 500);
+  const wM = wCm / 100;
+  const dM = dCm / 100;
+  const hM = hCm / 100;
+  if (!wM || !dM || !inputs.applicationType) return null;
 
-  const area = w * d; // m²
-  const coeff = PORTATA_COEFFICIENTS[inputs.applicationType] || 1500;
-  const portata = Math.round(area * coeff);
-  
-  // Simplified pressure calculation
-  const prevalenza = Math.round(150 + portata * 0.03);
+  const portata = calcPortata(inputs.applicationType, wM, dM, hM);
+  const prevalenza = calcPrevalenzaSimplified(portata);
 
-  // Chimney diameter from velocity (target 8-12 m/s)
-  const velocitaTarget = 10; // m/s
-  const portataMs = portata / 3600; // m³/s
-  const areaSezione = portataMs / velocitaTarget;
+  // Chimney diameter from target velocity 7-8 m/s
+  const vTarget = 8;
+  const portataMs = portata / 3600;
+  const areaSezione = portataMs / vTarget;
   const diametro = Math.round(Math.sqrt(4 * areaSezione / Math.PI) * 1000);
+  // Round to nearest standard size (100, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500)
+  const stdSizes = [100, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800];
+  const diametroStd = stdSizes.find(s => s >= diametro) || diametro;
 
   const model = getRecommendedModel(portata, inputs.applicationType);
 
   return {
     portata,
     prevalenza,
-    diametroCanna: diametro,
-    velocita: velocitaTarget,
+    diametroCanna: diametroStd,
+    velocita: Math.round((portataMs / (Math.PI * Math.pow(diametroStd / 2000, 2))) * 10) / 10,
     modelloConsigliato: model.name,
     modelloHref: model.href,
   };
@@ -161,10 +228,13 @@ function calcSimplified(inputs: SimplifiedInputs): CalcResult | null {
 
 /* ───────── ADVANCED CALCULATION (UNI EN 16282) ───────── */
 function calcAdvanced(inputs: AdvancedInputs): CalcResult | null {
-  const w = parseFloat(inputs.width) / 100;
-  const d = parseFloat(inputs.depth) / 100;
-  const h = parseFloat(inputs.height) / 100;
-  if (!w || !d || !inputs.applicationType) return null;
+  const wCm = clamp(parseFloat(inputs.width) || 0, 0, 1000);
+  const dCm = clamp(parseFloat(inputs.depth) || 0, 0, 1000);
+  const hCm = clamp(parseFloat(inputs.height) || 0, 0, 500);
+  const wM = wCm / 100;
+  const dM = dCm / 100;
+  const hM = hCm / 100;
+  if (!wM || !dM || !inputs.applicationType) return null;
 
   const ambientTemp = parseFloat(inputs.ambientTemp) || 20;
   const exhaustTemp = parseFloat(inputs.exhaustTemp) || 200;
@@ -175,31 +245,38 @@ function calcAdvanced(inputs: AdvancedInputs): CalcResult | null {
   const bends45 = parseInt(inputs.numBends45) || 0;
   const chimneyH = parseFloat(inputs.chimneyHeight) || 5;
 
-  const area = w * d;
-  const coeff = PORTATA_COEFFICIENTS[inputs.applicationType] || 1500;
-  
+  // Base portata from application method
+  let portata = calcPortata(inputs.applicationType, wM, dM, hM);
+
   // Temperature correction factor (UNI EN 16282)
   const tempFactor = (exhaustTemp + 273) / (ambientTemp + 273);
   
   // Altitude correction (air density decreases ~12% per 1000m)
   const altFactor = 1 + altitude * 0.00012;
   
-  const portata = Math.round(area * coeff * Math.sqrt(tempFactor) * altFactor);
+  portata = Math.round(portata * Math.sqrt(tempFactor) * altFactor);
   const portataMs = portata / 3600;
 
   // Duct velocity
   const ductAreaM2 = Math.PI * Math.pow(ductDiameter / 2000, 2);
   const velocita = portataMs / ductAreaM2;
 
-  // Pressure loss calculation (Darcy-Weisbach simplified)
-  const rho = 1.2 / tempFactor; // corrected air density
-  const frictionFactor = 0.02; // typical for galvanized steel
-  const straightLoss = frictionFactor * (ductLength / (ductDiameter / 1000)) * 0.5 * rho * velocita * velocita;
+  // Corrected air density
+  const rhoAmb = 1.225 * (1 - altitude * 0.0001); // approx
+  const rho = rhoAmb / tempFactor;
+  const pDyn = 0.5 * rho * velocita * velocita;
+
+  // Pressure loss: Darcy-Weisbach
+  const lambda = 0.02; // galvanized steel
+  const straightLoss = lambda * (ductLength / (ductDiameter / 1000)) * pDyn;
   
   // Bend losses (ξ = 1.1 for 90°, 0.5 for 45°)
-  const bendLoss = (bends90 * 1.1 + bends45 * 0.5) * 0.5 * rho * velocita * velocita;
+  const bendLoss = (bends90 * 1.1 + bends45 * 0.5) * pDyn;
   
-  // Filter loss
+  // Exit loss ξ=1.0
+  const exitLoss = 1.0 * pDyn;
+  
+  // Filter loss (Pa)
   const filterLosses: Record<string, number> = {
     nessuno: 0,
     ciclone: 150,
@@ -208,22 +285,24 @@ function calcAdvanced(inputs: AdvancedInputs): CalcResult | null {
   };
   const filterLoss = filterLosses[inputs.filterType] || 0;
 
-  // Chimney draft (negative pressure = natural draft benefit)
-  const chimneyDraft = chimneyH * 9.81 * (1.2 - rho);
+  // Chimney natural draft (negative = helps)
+  const chimneyDraft = chimneyH * 9.81 * (rhoAmb - rho);
 
-  const prevalenza = Math.round(straightLoss + bendLoss + filterLoss - chimneyDraft);
+  const prevalenza = Math.round(Math.max(straightLoss + bendLoss + exitLoss + filterLoss - chimneyDraft, 30));
 
-  // Recommended chimney diameter
-  const velocitaTarget = 10;
-  const idealArea = portataMs / velocitaTarget;
+  // Recommended chimney diameter (target 8 m/s)
+  const vTarget = 8;
+  const idealArea = portataMs / vTarget;
   const diametroCanna = Math.round(Math.sqrt(4 * idealArea / Math.PI) * 1000);
+  const stdSizes = [100, 120, 150, 180, 200, 250, 300, 350, 400, 450, 500, 600, 700, 800];
+  const diametroStd = stdSizes.find(s => s >= diametroCanna) || diametroCanna;
 
   const model = getRecommendedModel(portata, inputs.applicationType);
 
   return {
     portata,
-    prevalenza: Math.max(prevalenza, 50),
-    diametroCanna,
+    prevalenza,
+    diametroCanna: diametroStd,
     velocita: Math.round(velocita * 10) / 10,
     modelloConsigliato: model.name,
     modelloHref: model.href,
