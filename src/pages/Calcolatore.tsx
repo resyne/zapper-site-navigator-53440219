@@ -63,6 +63,7 @@ const FUEL_TYPES = [
   { value: "carbone", label: "Carbone" },
   { value: "gas", label: "Gas" },
   { value: "gasolio", label: "Gasolio" },
+  { value: "elettrico", label: "Elettrico" },
 ];
 
 const FILTER_TYPES = [
@@ -472,7 +473,7 @@ const Calcolatore = () => {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <Label>Combustibile</Label>
+                        <Label>Alimentazione</Label>
                         <Select value={simplified.fuelType} onValueChange={v => updateSimplified("fuelType", v)}>
                           <SelectTrigger><SelectValue /></SelectTrigger>
                           <SelectContent>
@@ -541,7 +542,7 @@ const Calcolatore = () => {
                           </Select>
                         </div>
                         <div className="space-y-2">
-                          <Label>Combustibile</Label>
+                          <Label>Alimentazione</Label>
                           <Select value={advanced.fuelType} onValueChange={v => updateAdvanced("fuelType", v)}>
                             <SelectTrigger><SelectValue /></SelectTrigger>
                             <SelectContent>
