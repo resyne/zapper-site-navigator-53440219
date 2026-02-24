@@ -160,6 +160,17 @@ const CAPTURE_VELOCITY: Record<string, number> = {
   "torrefazione": 0.7,
 };
 
+/*
+ * Forni pizza / panificazione: la portata dipende dall'area della BOCCA,
+ * non dal piano interno. Il campo "larghezza" = diametro interno del forno,
+ * e la bocca è proporzionata empiricamente:
+ *   - bocca larghezza ≈ diametro × 0.45
+ *   - bocca altezza   ≈ campo "altezza bocca" (default 25 cm)
+ */
+const USES_MOUTH_METHOD = new Set(["forno-pizza", "forno-panificazione"]);
+const DEFAULT_MOUTH_HEIGHT = 0.25; // m — altezza bocca di default se non indicata
+const MOUTH_WIDTH_RATIO = 0.45;   // larghezza bocca ≈ 45% del diametro interno
+
 /* Whether app uses perimeter method (cappe) vs opening area method */
 const USES_PERIMETER_METHOD = new Set(["cappa-cucina"]);
 
@@ -172,18 +183,25 @@ function clamp(val: number, min: number, max: number) {
 }
 
 /* Calculate portata based on application type */
-function calcPortata(appType: string, wM: number, dM: number, _hM: number): number {
+function calcPortata(appType: string, wM: number, dM: number, hM: number): number {
   const v = CAPTURE_VELOCITY[appType] || 0.8;
 
+  if (USES_MOUTH_METHOD.has(appType)) {
+    // Per forni pizza/panificazione: portata basata sull'area della bocca
+    // wM = diametro interno forno in m, hM = altezza bocca in m
+    const mouthW = wM * MOUTH_WIDTH_RATIO;
+    const mouthH = hM > 0 ? hM : DEFAULT_MOUTH_HEIGHT;
+    const mouthArea = mouthW * mouthH; // m²
+    return Math.round(mouthArea * v * 3600);
+  }
+
   if (USES_PERIMETER_METHOD.has(appType)) {
-    // UNI EN 16282: Q = perimetro_esposto × Δh × v × 3600
-    // Assume cappa a parete → 3 lati esposti: fronte + 2 lati
-    const perimetro = wM + 2 * dM; // m (parete sul lato lungo)
+    const perimetro = wM + 2 * dM;
     return Math.round(perimetro * CAPPA_DH * v * 3600);
   }
 
-  // Opening area method
-  const area = wM * dM; // m²
+  // Opening area method (default)
+  const area = wM * dM;
   return Math.round(area * v * 3600);
 }
 
