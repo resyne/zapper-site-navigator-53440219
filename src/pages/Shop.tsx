@@ -7,18 +7,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/contexts/CartContext";
-import { ShoppingCart, Plus, Minus, Package, Droplets, Wrench } from "lucide-react";
+import { ShoppingCart, Plus, Minus, Package, Droplets, Wrench, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const categoryIcons: Record<string, React.ReactNode> = {
   ricambio: <Wrench className="w-4 h-4" />,
   consumabile: <Droplets className="w-4 h-4" />,
+  filtro: <Filter className="w-4 h-4" />,
 };
 
 const categoryLabels: Record<string, string> = {
   ricambio: "Ricambio",
   consumabile: "Consumabile",
+  filtro: "Filtro",
 };
 
 const formatPrice = (cents: number) => {
@@ -85,6 +87,7 @@ const Shop = () => {
               { key: "all", label: "Tutti" },
               { key: "ricambio", label: "Ricambi" },
               { key: "consumabile", label: "Consumabili" },
+              { key: "filtro", label: "Filtri" },
             ].map((f) => (
               <Button
                 key={f.key}
