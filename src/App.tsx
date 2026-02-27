@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { CartProvider } from "@/contexts/CartContext";
 import Index from "./pages/Index";
 import Contatti from "./pages/Contatti";
 import Interventi from "./pages/Interventi";
@@ -61,6 +62,8 @@ import ZTGL from "./pages/modelli/ZTGL";
 import ZTGLMax from "./pages/modelli/ZTGLMax";
 import ZTGLMaxUltra from "./pages/modelli/ZTGLMaxUltra";
 import Calcolatore from "./pages/Calcolatore";
+import Shop from "./pages/Shop";
+import ShopCheckout from "./pages/ShopCheckout";
 import NotFound from "./pages/NotFound";
 // Admin pages
 import AdminAuth from "./pages/admin/AdminAuth";
@@ -75,6 +78,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
+        <CartProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
@@ -140,6 +144,9 @@ const App = () => (
             <Route path="/modelli/ztgl" element={<ZTGL />} />
             <Route path="/modelli/ztgl-max" element={<ZTGLMax />} />
             <Route path="/modelli/ztgl-max-ultra" element={<ZTGLMaxUltra />} />
+            {/* Shop routes (hidden - not in nav) */}
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/checkout" element={<ShopCheckout />} />
             {/* Admin routes */}
             <Route path="/admin/auth" element={<AdminAuth />} />
             <Route path="/admin" element={<AdminDashboard />} />
@@ -149,6 +156,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        </CartProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
