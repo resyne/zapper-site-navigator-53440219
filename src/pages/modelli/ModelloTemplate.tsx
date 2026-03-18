@@ -282,7 +282,6 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                     </div>
                   </div>
                 )}
-                </div>
               </div>
               
               {/* Contesto */}
