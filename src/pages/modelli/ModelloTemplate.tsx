@@ -41,6 +41,7 @@ interface ModelloTemplateProps {
 const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
   const [isDatasheetModalOpen, setIsDatasheetModalOpen] = useState(false);
   const [dbPhotos, setDbPhotos] = useState<string[]>([]);
+  const [dbVideos, setDbVideos] = useState<string[]>([]);
   const [dbDatasheetUrl, setDbDatasheetUrl] = useState<DatasheetUrls | null>(null);
 
   useEffect(() => {
