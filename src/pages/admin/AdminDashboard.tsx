@@ -39,6 +39,7 @@ export default function AdminDashboard() {
           modelsCount: modelsRes.count || 0,
           interventionsCount: interventionsRes.count || 0,
           usersCount: usersRes.count || 0,
+          shopCount: shopRes.count || 0,
         });
       } catch (error) {
         console.error('Error fetching stats:', error);
