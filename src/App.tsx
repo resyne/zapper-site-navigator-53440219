@@ -71,6 +71,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminModels from "./pages/admin/AdminModels";
 import AdminInterventions from "./pages/admin/AdminInterventions";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminShop from "./pages/admin/AdminShop";
 
 const queryClient = new QueryClient();
 
