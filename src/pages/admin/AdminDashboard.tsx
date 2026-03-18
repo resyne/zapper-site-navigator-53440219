@@ -18,6 +18,7 @@ export default function AdminDashboard() {
     modelsCount: 0,
     interventionsCount: 0,
     usersCount: 0,
+    shopCount: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
   const { isAdmin, profile } = useAuth();
