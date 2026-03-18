@@ -48,7 +48,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
     const fetchFromDb = async () => {
       const { data: dbModel } = await supabase
         .from('models')
-        .select('photos, datasheet_url')
+        .select('photos, videos, datasheet_url')
         .eq('model_id', data.id)
         .maybeSingle();
       
