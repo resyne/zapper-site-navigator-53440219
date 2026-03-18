@@ -26,12 +26,13 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [modelsRes, interventionsRes, usersRes] = await Promise.all([
+        const [modelsRes, interventionsRes, usersRes, shopRes] = await Promise.all([
           supabase.from('models').select('*', { count: 'exact', head: true }),
           supabase.from('interventions').select('*', { count: 'exact', head: true }),
           isAdmin
             ? supabase.from('profiles').select('*', { count: 'exact', head: true })
             : Promise.resolve({ count: 0 }),
+          supabase.from('shop_products').select('*', { count: 'exact', head: true }),
         ]);
 
         setStats({
