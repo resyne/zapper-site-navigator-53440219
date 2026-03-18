@@ -69,6 +69,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
 
   // Merge: DB data takes priority over static data
   const photos = dbPhotos.length > 0 ? dbPhotos : (data.photos || []);
+  const videos = dbVideos.length > 0 ? dbVideos : [];
   const datasheetUrl = dbDatasheetUrl || data.datasheetUrl;
   const hasDatasheet = datasheetUrl && Object.keys(datasheetUrl).length > 0;
 
