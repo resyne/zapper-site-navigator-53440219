@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Package, Video, Users } from 'lucide-react';
+import { Package, Video, Users, ShoppingBag } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ interface Stats {
   modelsCount: number;
   interventionsCount: number;
   usersCount: number;
+  shopCount: number;
 }
 
 export default function AdminDashboard() {
@@ -17,6 +18,7 @@ export default function AdminDashboard() {
     modelsCount: 0,
     interventionsCount: 0,
     usersCount: 0,
+    shopCount: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
   const { isAdmin, profile } = useAuth();
@@ -24,18 +26,20 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [modelsRes, interventionsRes, usersRes] = await Promise.all([
+        const [modelsRes, interventionsRes, usersRes, shopRes] = await Promise.all([
           supabase.from('models').select('*', { count: 'exact', head: true }),
           supabase.from('interventions').select('*', { count: 'exact', head: true }),
           isAdmin
             ? supabase.from('profiles').select('*', { count: 'exact', head: true })
             : Promise.resolve({ count: 0 }),
+          supabase.from('shop_products').select('*', { count: 'exact', head: true }),
         ]);
 
         setStats({
           modelsCount: modelsRes.count || 0,
           interventionsCount: interventionsRes.count || 0,
           usersCount: usersRes.count || 0,
+          shopCount: shopRes.count || 0,
         });
       } catch (error) {
         console.error('Error fetching stats:', error);
@@ -63,6 +67,14 @@ export default function AdminDashboard() {
       icon: Video,
       href: '/admin/interventions',
       color: 'text-accent',
+    },
+    {
+      title: 'Shop',
+      value: stats.shopCount,
+      description: 'Prodotti in catalogo',
+      icon: ShoppingBag,
+      href: '/admin/shop',
+      color: 'text-primary',
     },
   ];
 
@@ -146,6 +158,18 @@ export default function AdminDashboard() {
                 <p className="font-medium">Gestisci Interventi</p>
                 <p className="text-sm text-muted-foreground">
                   Aggiungi video testimonianze dei clienti
+                </p>
+              </div>
+            </Link>
+            <Link
+              to="/admin/shop"
+              className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted transition-colors"
+            >
+              <ShoppingBag className="h-5 w-5 text-primary" />
+              <div>
+                <p className="font-medium">Gestisci Shop</p>
+                <p className="text-sm text-muted-foreground">
+                  Aggiungi ricambi, consumabili e filtri
                 </p>
               </div>
             </Link>

@@ -71,6 +71,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminModels from "./pages/admin/AdminModels";
 import AdminInterventions from "./pages/admin/AdminInterventions";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminShop from "./pages/admin/AdminShop";
 
 const queryClient = new QueryClient();
 
@@ -153,6 +154,7 @@ const App = () => (
             <Route path="/admin/models" element={<AdminModels />} />
             <Route path="/admin/interventions" element={<AdminInterventions />} />
             <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/shop" element={<AdminShop />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
