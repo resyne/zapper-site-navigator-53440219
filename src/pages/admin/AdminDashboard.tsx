@@ -10,6 +10,7 @@ interface Stats {
   modelsCount: number;
   interventionsCount: number;
   usersCount: number;
+  shopCount: number;
 }
 
 export default function AdminDashboard() {
