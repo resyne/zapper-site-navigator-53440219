@@ -312,8 +312,9 @@ export default function AdminShop() {
             <div>
               <Label>Immagine prodotto</Label>
               <ImageUpload
-                images={form.image_url ? [form.image_url] : []}
-                onImagesChange={(imgs) => setForm((f) => ({ ...f, image_url: imgs[0] || null }))}
+                label="Immagine"
+                value={form.image_url ? [form.image_url] : []}
+                onChange={(urls) => setForm((f) => ({ ...f, image_url: urls[0] || null }))}
                 maxImages={1}
                 bucket="media"
                 folder="shop"
