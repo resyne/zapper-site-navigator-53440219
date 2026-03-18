@@ -364,6 +364,15 @@ export default function AdminModels() {
                   folder={`models/${formData.model_id || 'new'}`}
                 />
 
+                {/* Video Upload */}
+                <VideoUpload
+                  label="Video installazione / montaggio"
+                  value={formData.videos || []}
+                  onChange={(urls) => setFormData({ ...formData, videos: urls })}
+                  maxVideos={3}
+                  folder={`models/${formData.model_id || 'new'}/videos`}
+                />
+
                 {/* Multilingual PDF Upload */}
                 <MultilingualFileUpload
                   label="Schede tecniche (PDF)"
