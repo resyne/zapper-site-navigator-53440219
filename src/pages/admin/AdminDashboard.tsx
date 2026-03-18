@@ -68,6 +68,14 @@ export default function AdminDashboard() {
       href: '/admin/interventions',
       color: 'text-accent',
     },
+    {
+      title: 'Shop',
+      value: stats.shopCount,
+      description: 'Prodotti in catalogo',
+      icon: ShoppingBag,
+      href: '/admin/shop',
+      color: 'text-primary',
+    },
   ];
 
   if (isAdmin) {
