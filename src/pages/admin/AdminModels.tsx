@@ -27,6 +27,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { Model, ModelInsert, Specification, LinkItem, DatasheetUrls } from '@/types/admin';
 import ImageUpload from '@/components/admin/ImageUpload';
+import VideoUpload from '@/components/admin/VideoUpload';
 import MultilingualFileUpload from '@/components/admin/MultilingualFileUpload';
 
 export default function AdminModels() {
@@ -361,6 +362,15 @@ export default function AdminModels() {
                   onChange={(urls) => setFormData({ ...formData, photos: urls })}
                   maxImages={5}
                   folder={`models/${formData.model_id || 'new'}`}
+                />
+
+                {/* Video Upload */}
+                <VideoUpload
+                  label="Video installazione / montaggio"
+                  value={formData.videos || []}
+                  onChange={(urls) => setFormData({ ...formData, videos: urls })}
+                  maxVideos={3}
+                  folder={`models/${formData.model_id || 'new'}/videos`}
                 />
 
                 {/* Multilingual PDF Upload */}

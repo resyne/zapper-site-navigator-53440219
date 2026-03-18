@@ -41,21 +41,24 @@ interface ModelloTemplateProps {
 const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
   const [isDatasheetModalOpen, setIsDatasheetModalOpen] = useState(false);
   const [dbPhotos, setDbPhotos] = useState<string[]>([]);
+  const [dbVideos, setDbVideos] = useState<string[]>([]);
   const [dbDatasheetUrl, setDbDatasheetUrl] = useState<DatasheetUrls | null>(null);
 
   useEffect(() => {
     const fetchFromDb = async () => {
       const { data: dbModel } = await supabase
         .from('models')
-        .select('photos, datasheet_url')
+        .select('photos, videos, datasheet_url')
         .eq('model_id', data.id)
         .maybeSingle();
       
       if (dbModel) {
         const photos = Array.isArray(dbModel.photos) ? dbModel.photos as string[] : [];
-        if (photos.length > 0) {
-          setDbPhotos(photos);
-        }
+        if (photos.length > 0) setDbPhotos(photos);
+        
+        const videos = Array.isArray(dbModel.videos) ? dbModel.videos as string[] : [];
+        if (videos.length > 0) setDbVideos(videos);
+
         if (dbModel.datasheet_url && typeof dbModel.datasheet_url === 'object' && Object.keys(dbModel.datasheet_url).length > 0) {
           setDbDatasheetUrl(dbModel.datasheet_url as DatasheetUrls);
         }
@@ -66,6 +69,7 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
 
   // Merge: DB data takes priority over static data
   const photos = dbPhotos.length > 0 ? dbPhotos : (data.photos || []);
+  const videos = dbVideos.length > 0 ? dbVideos : [];
   const datasheetUrl = dbDatasheetUrl || data.datasheetUrl;
   const hasDatasheet = datasheetUrl && Object.keys(datasheetUrl).length > 0;
 
@@ -241,22 +245,43 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
                 🔥 {data.name} in azione
               </h2>
               <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Video placeholder */}
-                <div className="aspect-video bg-muted rounded-2xl flex items-center justify-center relative overflow-hidden group cursor-pointer">
-                  <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors" />
-                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center z-10">
-                    <Play className="w-8 h-8 text-primary-foreground ml-1" />
+                {/* Video */}
+                {videos.length > 0 ? (
+                  <div className="aspect-video rounded-2xl overflow-hidden bg-muted">
+                    <video
+                      src={videos[0]}
+                      controls
+                      className="w-full h-full object-cover"
+                      poster={photos.length > 1 ? photos[1] : undefined}
+                    />
                   </div>
-                  <span className="absolute bottom-4 left-4 text-sm text-muted-foreground">Video intervento</span>
-                </div>
+                ) : (
+                  <div className="aspect-video bg-muted rounded-2xl flex items-center justify-center relative overflow-hidden group cursor-pointer">
+                    <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors" />
+                    <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center z-10">
+                      <Play className="w-8 h-8 text-primary-foreground ml-1" />
+                    </div>
+                    <span className="absolute bottom-4 left-4 text-sm text-muted-foreground">Video in arrivo</span>
+                  </div>
+                )}
                 
-                {/* Foto placeholder */}
-                <div className="aspect-video bg-muted rounded-2xl flex items-center justify-center">
-                  <div className="text-center p-6">
-                    <Zap className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
-                    <span className="text-sm text-muted-foreground">Foto installazione</span>
+                {/* Foto installazione */}
+                {photos.length > 1 ? (
+                  <div className="aspect-video rounded-2xl overflow-hidden bg-muted">
+                    <img
+                      src={photos[1]}
+                      alt={`${data.name} - Installazione`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                </div>
+                ) : (
+                  <div className="aspect-video bg-muted rounded-2xl flex items-center justify-center">
+                    <div className="text-center p-6">
+                      <Zap className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
+                      <span className="text-sm text-muted-foreground">Foto installazione</span>
+                    </div>
+                  </div>
+                )}
               </div>
               
               {/* Contesto */}
