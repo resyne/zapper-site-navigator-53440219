@@ -10,7 +10,8 @@ import {
   LogOut, 
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  ShoppingBag
 } from 'lucide-react';
 import logoVerde from '@/assets/logo-zapper-verde.svg';
 import { useState } from 'react';
