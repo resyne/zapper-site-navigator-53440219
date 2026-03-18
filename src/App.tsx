@@ -154,6 +154,7 @@ const App = () => (
             <Route path="/admin/models" element={<AdminModels />} />
             <Route path="/admin/interventions" element={<AdminInterventions />} />
             <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/shop" element={<AdminShop />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

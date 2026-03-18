@@ -26,6 +26,7 @@ const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/models', label: 'Modelli', icon: Package },
   { href: '/admin/interventions', label: 'Interventi', icon: Video },
+  { href: '/admin/shop', label: 'Shop', icon: ShoppingBag },
 ];
 
 const adminOnlyItems = [
