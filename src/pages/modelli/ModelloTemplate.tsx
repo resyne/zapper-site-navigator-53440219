@@ -54,8 +54,10 @@ const ModelloTemplate = ({ data }: ModelloTemplateProps) => {
       
       if (dbModel) {
         const photos = Array.isArray(dbModel.photos) ? dbModel.photos as string[] : [];
-        if (photos.length > 0) {
-          setDbPhotos(photos);
+        if (photos.length > 0) setDbPhotos(photos);
+        
+        const videos = Array.isArray(dbModel.videos) ? dbModel.videos as string[] : [];
+        if (videos.length > 0) setDbVideos(videos);
         }
         if (dbModel.datasheet_url && typeof dbModel.datasheet_url === 'object' && Object.keys(dbModel.datasheet_url).length > 0) {
           setDbDatasheetUrl(dbModel.datasheet_url as DatasheetUrls);
