@@ -161,6 +161,18 @@ export default function AdminDashboard() {
                 </p>
               </div>
             </Link>
+            <Link
+              to="/admin/shop"
+              className="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted transition-colors"
+            >
+              <ShoppingBag className="h-5 w-5 text-primary" />
+              <div>
+                <p className="font-medium">Gestisci Shop</p>
+                <p className="text-sm text-muted-foreground">
+                  Aggiungi ricambi, consumabili e filtri
+                </p>
+              </div>
+            </Link>
           </CardContent>
         </Card>
       </div>
