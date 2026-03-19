@@ -1,11 +1,13 @@
 import { Flame } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
+import heroImage from "@/assets/applicazione-forni.jpg";
 
 const data: ApplicazioneData = {
   id: "forni-a-legna",
   title: "Forni a Legna",
   icon: Flame,
   heroColor: "bg-gradient-to-br from-primary via-primary/95 to-primary/90",
+  heroImage,
   subtitle: "Problemi di fumi, fuliggine e polveri derivanti dalla combustione del legno.",
   problemiTipici: [
     "Fumi neri persistenti dalla canna fumaria",

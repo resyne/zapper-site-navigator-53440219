@@ -1,11 +1,13 @@
 import { Home } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
+import heroImage from "@/assets/applicazione-camini.jpg";
 
 const data: ApplicazioneData = {
   id: "camini",
   title: "Camini e Stufe a Legna",
   icon: Home,
   heroColor: "bg-gradient-to-br from-accent via-accent/95 to-accent/90",
+  heroImage,
   subtitle: "Riduzione fumi visibili e particolato da camini aperti, termocamini e stufe a legna domestiche.",
   problemiTipici: [
     "Tiraggio insufficiente con fumo che rientra in casa",

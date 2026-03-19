@@ -1,11 +1,13 @@
 import { Thermometer } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
+import heroImage from "@/assets/applicazione-braci.jpg";
 
 const data: ApplicazioneData = {
   id: "braci-carbone",
   title: "Braci e Carbone",
   icon: Thermometer,
   heroColor: "bg-gradient-to-br from-primary via-primary/95 to-primary/90",
+  heroImage,
   subtitle: "Trattamento fumi da combustione di carbone e braci in impianti professionali per grigliate.",
   problemiTipici: [
     "Fumi densi e grassi che si diffondono nel vicinato",

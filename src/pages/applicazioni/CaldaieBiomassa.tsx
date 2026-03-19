@@ -1,11 +1,13 @@
 import { Flame } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
+import heroImage from "@/assets/applicazione-caldaie.jpg";
 
 const data: ApplicazioneData = {
   id: "caldaie-biomassa",
   title: "Caldaie a Biomassa",
   icon: Flame,
   heroColor: "bg-gradient-to-br from-accent via-accent/95 to-accent/90",
+  heroImage,
   subtitle: "Abbattimento particolato e fumi da caldaie alimentate a pellet, legna, cippato o altri combustibili solidi.",
   problemiTipici: [
     "Fumo visibile durante accensione e spegnimento",

@@ -207,8 +207,12 @@ const ApplicazioneTemplate = ({ data }: ApplicazioneTemplateProps) => {
         </section>
 
         {/* 7. CTA Finale */}
-        <section className={`py-16 md:py-24 ${data.heroColor}`}>
-          <div className="container text-center">
+        <section 
+          className={`py-16 md:py-24 ${data.heroImage ? '' : data.heroColor} relative bg-cover bg-center`}
+          style={data.heroImage ? { backgroundImage: `url(${data.heroImage})` } : undefined}
+        >
+          {data.heroImage && <div className="absolute inset-0 bg-foreground/70" />}
+          <div className="container text-center relative z-10">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-4">
               Hai questo problema?
             </h2>
