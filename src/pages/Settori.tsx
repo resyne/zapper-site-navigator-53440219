@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChefHat, Home, Factory, ArrowRight, CheckCircle } from "lucide-react";
 import settoreProfessionaleHero from "@/assets/settore-professionale-hero.jpg";
 import settoreDomesticoHero from "@/assets/settore-domestico-hero.jpg";
+import settoreIndustrialeHero from "@/assets/settore-industriale-hero.jpg";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -81,10 +82,11 @@ const Settori = () => {
                       style={
                         sector.id === 'professionale' ? { backgroundImage: `url(${settoreProfessionaleHero})` } :
                         sector.id === 'domestico' ? { backgroundImage: `url(${settoreDomesticoHero})` } :
+                        sector.id === 'industriale' ? { backgroundImage: `url(${settoreIndustrialeHero})` } :
                         undefined
                       }
                     >
-                      {(sector.id === 'professionale' || sector.id === 'domestico') && <div className="absolute inset-0 bg-foreground/60" />}
+                      {(sector.id === 'professionale' || sector.id === 'domestico' || sector.id === 'industriale') && <div className="absolute inset-0 bg-foreground/60" />}
                       <div className="relative z-10 flex items-center justify-between mb-4">
                         <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center">
                           <sector.icon className="w-7 h-7 text-primary" />
