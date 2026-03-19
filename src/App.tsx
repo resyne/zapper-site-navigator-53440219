@@ -34,6 +34,10 @@ import BraciCarbone from "./pages/applicazioni/BraciCarbone";
 import CaldaieBiomassaApp from "./pages/applicazioni/CaldaieBiomassa";
 import CaminiApp from "./pages/applicazioni/Camini";
 import Cappe from "./pages/applicazioni/Cappe";
+import ForniIndustrialiApp from "./pages/applicazioni/ForniIndustriali";
+import TorrefazioniApp from "./pages/applicazioni/Torrefazioni";
+import AffumicatoriApp from "./pages/applicazioni/Affumicatori";
+import TaglioLaser from "./pages/applicazioni/TaglioLaser";
 // Modelli imports
 import ZPZ from "./pages/modelli/ZPZ";
 import ZPZMax from "./pages/modelli/ZPZMax";
@@ -114,6 +118,10 @@ const App = () => (
             <Route path="/applicazioni/caldaie-biomassa" element={<CaldaieBiomassaApp />} />
             <Route path="/applicazioni/camini" element={<CaminiApp />} />
             <Route path="/applicazioni/cappe" element={<Cappe />} />
+            <Route path="/applicazioni/forni-industriali" element={<ForniIndustrialiApp />} />
+            <Route path="/applicazioni/torrefazioni" element={<TorrefazioniApp />} />
+            <Route path="/applicazioni/affumicatori" element={<AffumicatoriApp />} />
+            <Route path="/applicazioni/taglio-laser" element={<TaglioLaser />} />
             {/* Modelli routes */}
             <Route path="/modelli/zpz" element={<ZPZ />} />
             <Route path="/modelli/zpz-max" element={<ZPZMax />} />
