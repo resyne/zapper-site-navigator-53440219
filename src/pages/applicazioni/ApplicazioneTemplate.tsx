@@ -9,6 +9,7 @@ export interface ApplicazioneData {
   title: string;
   icon: LucideIcon;
   heroColor: string;
+  heroImage?: string;
   subtitle: string;
   problemiTipici: string[];
   ambitiCoinvolti: { name: string; href: string }[];
