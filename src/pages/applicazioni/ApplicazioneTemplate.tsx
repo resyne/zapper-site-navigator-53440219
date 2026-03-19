@@ -27,8 +27,12 @@ const ApplicazioneTemplate = ({ data }: ApplicazioneTemplateProps) => {
       <Header />
       <main>
         {/* 1. Hero Applicazione */}
-        <section className={`pt-24 pb-12 md:pt-32 md:pb-16 ${data.heroColor}`}>
-          <div className="container">
+        <section 
+          className={`pt-24 pb-12 md:pt-32 md:pb-16 ${data.heroImage ? '' : data.heroColor} relative bg-cover bg-center`}
+          style={data.heroImage ? { backgroundImage: `url(${data.heroImage})` } : undefined}
+        >
+          {data.heroImage && <div className="absolute inset-0 bg-foreground/60" />}
+          <div className="container relative z-10">
             <nav className="flex items-center gap-2 text-sm text-primary-foreground/60 mb-6">
               <Link to="/applicazioni" className="hover:text-primary-foreground transition-colors">Applicazioni</Link>
               <span>/</span>
