@@ -118,6 +118,10 @@ const App = () => (
             <Route path="/applicazioni/caldaie-biomassa" element={<CaldaieBiomassaApp />} />
             <Route path="/applicazioni/camini" element={<CaminiApp />} />
             <Route path="/applicazioni/cappe" element={<Cappe />} />
+            <Route path="/applicazioni/forni-industriali" element={<ForniIndustrialiApp />} />
+            <Route path="/applicazioni/torrefazioni" element={<TorrefazioniApp />} />
+            <Route path="/applicazioni/affumicatori" element={<AffumicatoriApp />} />
+            <Route path="/applicazioni/taglio-laser" element={<TaglioLaser />} />
             {/* Modelli routes */}
             <Route path="/modelli/zpz" element={<ZPZ />} />
             <Route path="/modelli/zpz-max" element={<ZPZMax />} />
