@@ -34,6 +34,10 @@ import BraciCarbone from "./pages/applicazioni/BraciCarbone";
 import CaldaieBiomassaApp from "./pages/applicazioni/CaldaieBiomassa";
 import CaminiApp from "./pages/applicazioni/Camini";
 import Cappe from "./pages/applicazioni/Cappe";
+import ForniIndustrialiApp from "./pages/applicazioni/ForniIndustriali";
+import TorrefazioniApp from "./pages/applicazioni/Torrefazioni";
+import AffumicatoriApp from "./pages/applicazioni/Affumicatori";
+import TaglioLaser from "./pages/applicazioni/TaglioLaser";
 // Modelli imports
 import ZPZ from "./pages/modelli/ZPZ";
 import ZPZMax from "./pages/modelli/ZPZMax";
