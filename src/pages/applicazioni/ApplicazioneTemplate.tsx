@@ -9,6 +9,7 @@ export interface ApplicazioneData {
   title: string;
   icon: LucideIcon;
   heroColor: string;
+  heroImage?: string;
   subtitle: string;
   problemiTipici: string[];
   ambitiCoinvolti: { name: string; href: string }[];
@@ -26,8 +27,12 @@ const ApplicazioneTemplate = ({ data }: ApplicazioneTemplateProps) => {
       <Header />
       <main>
         {/* 1. Hero Applicazione */}
-        <section className={`pt-24 pb-12 md:pt-32 md:pb-16 ${data.heroColor}`}>
-          <div className="container">
+        <section 
+          className={`pt-24 pb-12 md:pt-32 md:pb-16 ${data.heroImage ? '' : data.heroColor} relative bg-cover bg-center`}
+          style={data.heroImage ? { backgroundImage: `url(${data.heroImage})` } : undefined}
+        >
+          {data.heroImage && <div className="absolute inset-0 bg-foreground/60" />}
+          <div className="container relative z-10">
             <nav className="flex items-center gap-2 text-sm text-primary-foreground/60 mb-6">
               <Link to="/applicazioni" className="hover:text-primary-foreground transition-colors">Applicazioni</Link>
               <span>/</span>
@@ -202,8 +207,12 @@ const ApplicazioneTemplate = ({ data }: ApplicazioneTemplateProps) => {
         </section>
 
         {/* 7. CTA Finale */}
-        <section className={`py-16 md:py-24 ${data.heroColor}`}>
-          <div className="container text-center">
+        <section 
+          className={`py-16 md:py-24 ${data.heroImage ? '' : data.heroColor} relative bg-cover bg-center`}
+          style={data.heroImage ? { backgroundImage: `url(${data.heroImage})` } : undefined}
+        >
+          {data.heroImage && <div className="absolute inset-0 bg-foreground/70" />}
+          <div className="container text-center relative z-10">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground mb-4">
               Hai questo problema?
             </h2>

@@ -1,11 +1,13 @@
 import { ChefHat } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
+import heroImage from "@/assets/applicazione-cappe.jpg";
 
 const data: ApplicazioneData = {
   id: "cappe",
   title: "Cappe da Cucina Professionale",
   icon: ChefHat,
   heroColor: "bg-gradient-to-br from-primary via-primary/95 to-primary/90",
+  heroImage,
   subtitle: "Trattamento fumi, odori e grassi da cucine professionali con sistemi di captazione e filtrazione avanzata.",
   problemiTipici: [
     "Odori di cucina percepibili all'esterno e nei piani superiori",
