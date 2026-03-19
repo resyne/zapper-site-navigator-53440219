@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChefHat, Home, Factory, ArrowRight, CheckCircle } from "lucide-react";
+import settoreProfessionaleHero from "@/assets/settore-professionale-hero.jpg";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -73,9 +74,13 @@ const Settori = () => {
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className={`relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${sector.priority ? 'ring-2 ring-primary/50' : ''}`}>
-                    {/* Card Header - Nero strutturale per massima leggibilità */}
-                    <div className="bg-zapper-black p-6 md:p-8">
-                      <div className="flex items-center justify-between mb-4">
+                    {/* Card Header */}
+                    <div
+                      className="relative bg-zapper-black p-6 md:p-8 bg-cover bg-center"
+                      style={sector.id === 'professionale' ? { backgroundImage: `url(${settoreProfessionaleHero})` } : undefined}
+                    >
+                      {sector.id === 'professionale' && <div className="absolute inset-0 bg-foreground/60" />}
+                      <div className="relative z-10 flex items-center justify-between mb-4">
                         <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center">
                           <sector.icon className="w-7 h-7 text-primary" />
                         </div>
@@ -85,7 +90,7 @@ const Settori = () => {
                           </span>
                         )}
                       </div>
-                      <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
+                      <h2 className="relative z-10 font-display text-2xl md:text-3xl font-bold text-white">
                         {sector.title}
                       </h2>
                     </div>
