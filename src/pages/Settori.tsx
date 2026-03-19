@@ -90,7 +90,7 @@ const Settori = () => {
                           </span>
                         )}
                       </div>
-                      <h2 className="font-display text-2xl md:text-3xl font-bold text-white">
+                      <h2 className="relative z-10 font-display text-2xl md:text-3xl font-bold text-white">
                         {sector.title}
                       </h2>
                     </div>
