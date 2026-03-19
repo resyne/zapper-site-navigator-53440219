@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChefHat, Home, Factory, ArrowRight, CheckCircle } from "lucide-react";
 import settoreProfessionaleHero from "@/assets/settore-professionale-hero.jpg";
 import settoreDomesticoHero from "@/assets/settore-domestico-hero.jpg";
+import settoreIndustrialeHero from "@/assets/settore-industriale-hero.jpg";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
