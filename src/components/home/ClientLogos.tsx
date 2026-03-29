@@ -5,6 +5,7 @@ import laBaita from "@/assets/clients/la-baita.png";
 import daMichele from "@/assets/clients/da-michele.png";
 import pummarolaNcoppa from "@/assets/clients/pummarola-ncoppa.png";
 import barilla from "@/assets/clients/barilla.png";
+import leonardo from "@/assets/clients/leonardo.png";
 
 const ClientLogos = () => {
   const clients = [
@@ -15,6 +16,7 @@ const ClientLogos = () => {
     { name: "Da Michele", logo: daMichele },
     { name: "Pummarola 'Ncoppa", logo: pummarolaNcoppa },
     { name: "Barilla", logo: barilla },
+    { name: "Leonardo", logo: leonardo },
   ];
 
   return (
