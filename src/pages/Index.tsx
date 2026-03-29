@@ -10,6 +10,7 @@ import IncentivesCarousel from "@/components/home/IncentivesCarousel";
 import CaseStudyTeaser from "@/components/home/CaseStudyTeaser";
 import TrustpilotSection from "@/components/home/TrustpilotSection";
 import CTASection from "@/components/home/CTASection";
+import IndustrialSection from "@/components/home/IndustrialSection";
 
 const Index = () => {
   return (
@@ -21,6 +22,7 @@ const Index = () => {
         <ClientLogos />
         <ProblemSection />
         <HowItWorksSection />
+        <IndustrialSection />
         <SelfDiscoverySection />
         <IncentivesCarousel />
         <CaseStudyTeaser />
