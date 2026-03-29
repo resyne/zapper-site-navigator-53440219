@@ -96,6 +96,27 @@ const ProfessionalSection = () => {
             </div>
           </div>
         </div>
+        {/* Social Proof */}
+        <div className="mt-14">
+          <p className="text-center text-muted-foreground text-xs uppercase tracking-wider mb-6">
+            Scelti da ristoranti e attività di riferimento
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            {proClients.map((client) => (
+              <div
+                key={client.name}
+                className="flex items-center justify-center w-24 h-16 sm:w-28 sm:h-20 opacity-60 hover:opacity-100 transition-opacity duration-300"
+              >
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="max-w-full max-h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
