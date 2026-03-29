@@ -32,7 +32,7 @@ const HeroSection = () => {
 
             <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 animate-fade-in-up leading-tight">
               Fumi e odori?{" "}
-              <span className="block sm:inline">Problema <span className="text-primary">risolto.</span></span>
+              <span className="text-primary block sm:inline">Problema risolto.</span>
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-100">
