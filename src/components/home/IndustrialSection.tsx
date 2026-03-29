@@ -97,18 +97,18 @@ const IndustrialSection = () => {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14">
             {[
-              { name: "Barilla", logo: barilla },
-              { name: "Leonardo", logo: leonardo },
-              { name: "Modelleria Reggiana", logo: modelleriaReggiana },
+              { name: "Barilla", logo: barillaDark },
+              { name: "Leonardo", logo: leonardoDark },
+              { name: "Modelleria Reggiana", logo: modelleriaReggianaDark },
             ].map((client) => (
               <div
                 key={client.name}
-                className="flex items-center justify-center w-24 h-16 sm:w-32 sm:h-20 opacity-50 hover:opacity-90 transition-opacity duration-300"
+                className="flex items-center justify-center w-24 h-16 sm:w-32 sm:h-20 opacity-70 hover:opacity-100 transition-opacity duration-300"
               >
                 <img
                   src={client.logo}
                   alt={client.name}
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-full object-contain mix-blend-lighten"
                   loading="lazy"
                 />
               </div>
