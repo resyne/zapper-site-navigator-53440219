@@ -106,14 +106,11 @@ const HeroSection = () => {
                 className="relative rounded-2xl shadow-2xl w-full object-contain"
               />
               {/* Floating Badge */}
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl animate-float">
+              <div className="absolute -bottom-6 -left-6 bg-white p-4 sm:p-6 rounded-xl shadow-xl animate-float">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <span className="text-2xl font-display font-bold text-primary">95%</span>
-                  </div>
                   <div>
-                    <p className="text-sm text-zapper-gray">Efficienza</p>
-                    <p className="font-display font-semibold text-zapper-black">Abbattimento</p>
+                    <p className="font-display font-semibold text-zapper-black">Pasquale Elefante</p>
+                    <p className="text-sm text-zapper-gray">Fondatore e Capo tecnico</p>
                   </div>
                 </div>
               </div>
