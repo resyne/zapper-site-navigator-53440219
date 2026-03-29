@@ -14,6 +14,7 @@ const ClientLogos = () => {
     { name: "La Baita Ibiza", logo: laBaita },
     { name: "Da Michele", logo: daMichele },
     { name: "Pummarola 'Ncoppa", logo: pummarolaNcoppa },
+    { name: "Barilla", logo: barilla },
   ];
 
   return (
