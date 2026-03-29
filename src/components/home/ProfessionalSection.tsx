@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChefHat, Flame, CookingPot, Croissant } from "lucide-react";
 import professionalMachine from "@/assets/professional-machine.jpg";
+import vincenzoCapuano from "@/assets/clients/vincenzo-capuano.png";
+import daMichele from "@/assets/clients/da-michele.png";
+import laBaita from "@/assets/clients/la-baita.png";
+import daAlfonso from "@/assets/clients/da-alfonso.png";
+import pummarolaNcoppa from "@/assets/clients/pummarola-ncoppa.png";
+import rossopomodoro from "@/assets/clients/rossopomodoro.png";
 
 const ProfessionalSection = () => {
   const applications = [
