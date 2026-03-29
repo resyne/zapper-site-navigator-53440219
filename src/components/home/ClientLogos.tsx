@@ -4,6 +4,7 @@ import hakunaMatata from "@/assets/clients/hakuna-matata.png";
 import laBaita from "@/assets/clients/la-baita.png";
 import daMichele from "@/assets/clients/da-michele.png";
 import pummarolaNcoppa from "@/assets/clients/pummarola-ncoppa.png";
+import barilla from "@/assets/clients/barilla.png";
 
 const ClientLogos = () => {
   const clients = [
