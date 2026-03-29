@@ -17,6 +17,15 @@ const ProfessionalSection = () => {
     { label: "Cucine professionali", icon: CookingPot },
   ];
 
+  const proClients = [
+    { name: "Vincenzo Capuano", logo: vincenzoCapuano },
+    { name: "Da Michele", logo: daMichele },
+    { name: "La Baita Ibiza", logo: laBaita },
+    { name: "Da Alfonso", logo: daAlfonso },
+    { name: "Pummarola 'Ncoppa", logo: pummarolaNcoppa },
+    { name: "Rossopomodoro", logo: rossopomodoro },
+  ];
+
   return (
     <section className="py-16 md:py-28 bg-muted/30 relative overflow-hidden">
       <div className="container px-4 sm:px-6">
