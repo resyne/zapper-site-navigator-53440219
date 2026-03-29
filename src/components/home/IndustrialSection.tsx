@@ -90,6 +90,31 @@ const IndustrialSection = () => {
             </div>
           </div>
         </div>
+        {/* Social Proof */}
+        <div className="mt-14">
+          <p className="text-center text-white/50 text-xs uppercase tracking-wider mb-6">
+            Scelti da aziende leader nel settore industriale
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-14">
+            {[
+              { name: "Barilla", logo: barilla },
+              { name: "Leonardo", logo: leonardo },
+              { name: "Modelleria Reggiana", logo: modelleriaReggiana },
+            ].map((client) => (
+              <div
+                key={client.name}
+                className="flex items-center justify-center w-24 h-16 sm:w-32 sm:h-20 opacity-50 hover:opacity-90 transition-opacity duration-300"
+              >
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="max-w-full max-h-full object-contain brightness-0 invert"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
