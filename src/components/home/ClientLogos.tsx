@@ -1,29 +1,38 @@
+import daAlfonso from "@/assets/clients/da-alfonso.png";
+import francuccio from "@/assets/clients/francuccio.png";
+import hakunaMatata from "@/assets/clients/hakuna-matata.png";
+import laBaita from "@/assets/clients/la-baita.png";
+import daMichele from "@/assets/clients/da-michele.png";
+import pummarolaNcoppa from "@/assets/clients/pummarola-ncoppa.png";
+
 const ClientLogos = () => {
-  // Placeholder client logos - these would be real company logos
   const clients = [
-    { name: "Ristorante Milano", initials: "RM" },
-    { name: "Pizzeria Napoli", initials: "PN" },
-    { name: "Grill House", initials: "GH" },
-    { name: "Food Factory", initials: "FF" },
-    { name: "Caffè Torino", initials: "CT" },
-    { name: "Bakery Plus", initials: "BP" },
+    { name: "Da Alfonso", logo: daAlfonso },
+    { name: "Francuccio", logo: francuccio },
+    { name: "Hakuna Matata", logo: hakunaMatata },
+    { name: "La Baita Ibiza", logo: laBaita },
+    { name: "Da Michele", logo: daMichele },
+    { name: "Pummarola 'Ncoppa", logo: pummarolaNcoppa },
   ];
 
   return (
     <section className="py-8 sm:py-12 md:py-16 bg-muted/50 border-y border-border">
       <div className="container px-4 sm:px-6">
         <p className="text-center text-muted-foreground text-xs sm:text-sm uppercase tracking-wider mb-6 sm:mb-8">
-          Scelto da oltre 500 aziende in Italia
+          Scelto da oltre 1500+ attività in Italia e nel mondo
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-12">
+        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 md:gap-14">
           {clients.map((client, index) => (
             <div
               key={client.name}
-              className={`flex items-center justify-center w-20 h-10 sm:w-24 sm:h-12 md:w-32 md:h-16 rounded-lg bg-background border border-border opacity-60 hover:opacity-100 transition-opacity duration-300 animate-fade-in animation-delay-${(index + 1) * 100}`}
+              className={`flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 opacity-70 hover:opacity-100 transition-opacity duration-300 animate-fade-in animation-delay-${(index + 1) * 100}`}
             >
-              <span className="font-display font-bold text-base sm:text-lg md:text-xl text-muted-foreground">
-                {client.initials}
-              </span>
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="max-w-full max-h-full object-contain"
+                loading="lazy"
+              />
             </div>
           ))}
         </div>
