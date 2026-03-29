@@ -103,7 +103,7 @@ const HeroSection = () => {
                 <img
                   src={heroImage}
                   alt="Sistema ZAPPER® per abbattimento fumi"
-                className="relative rounded-2xl shadow-2xl w-full object-cover aspect-[4/3]"
+                className="relative rounded-2xl shadow-2xl w-full object-contain"
               />
               {/* Floating Badge */}
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl animate-float">
