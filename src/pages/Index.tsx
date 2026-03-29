@@ -11,6 +11,7 @@ import CaseStudyTeaser from "@/components/home/CaseStudyTeaser";
 import TrustpilotSection from "@/components/home/TrustpilotSection";
 import CTASection from "@/components/home/CTASection";
 import IndustrialSection from "@/components/home/IndustrialSection";
+import ProfessionalSection from "@/components/home/ProfessionalSection";
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
         <ClientLogos />
         <ProblemSection />
         <HowItWorksSection />
+        <ProfessionalSection />
         <IndustrialSection />
         <SelfDiscoverySection />
         <IncentivesCarousel />
