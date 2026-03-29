@@ -36,7 +36,7 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-white/80 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-100">
-              ZAPPER® è il sistema di abbattimento fumi che elimina il problema alla fonte. 
+              Con ZAPPER® progettiamo e produciamo sistemi di abbattimento fumi che eliminano il problema alla fonte. 
               Niente più segnalazioni, niente più multe. Solo aria pulita.
             </p>
 
