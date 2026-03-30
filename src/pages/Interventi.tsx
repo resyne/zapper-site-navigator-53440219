@@ -125,11 +125,36 @@ const Interventi = () => {
                         {intervento.title}
                       </h3>
 
-                      {intervento.description && (
-                        <p className="text-sm text-muted-foreground mb-3 line-clamp-3">
-                          {intervento.description}
-                        </p>
-                      )}
+                      {/* Details */}
+                      <div className="space-y-2 text-sm mb-3">
+                        {intervento.application_type && (
+                          <div className="flex items-start gap-2">
+                            <Wrench className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
+                            <div>
+                              <span className="text-muted-foreground">Applicazione: </span>
+                              <span className="text-foreground font-medium">{intervento.application_type}</span>
+                            </div>
+                          </div>
+                        )}
+                        {intervento.problem && (
+                          <div className="flex items-start gap-2">
+                            <AlertTriangle className="w-4 h-4 text-destructive mt-0.5 shrink-0" />
+                            <div>
+                              <span className="text-muted-foreground">Problema: </span>
+                              <span className="text-foreground">{intervento.problem}</span>
+                            </div>
+                          </div>
+                        )}
+                        {intervento.description && (
+                          <div className="flex items-start gap-2">
+                            <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                            <div>
+                              <span className="text-muted-foreground">Risultato: </span>
+                              <span className="text-foreground font-medium">{intervento.description}</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
 
                       {intervento.model_used && (
                         <div className="mt-3 p-3 bg-accent/10 rounded-lg flex items-center gap-2">
