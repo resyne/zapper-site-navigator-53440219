@@ -90,29 +90,31 @@ const Interventi = () => {
                     className="group bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in-up"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    {/* Thumbnail */}
-                    <div className="relative aspect-video bg-muted">
-                      <img
-                        src={intervento.thumbnail_url || "/placeholder.svg"}
-                        alt={intervento.title}
-                        className="w-full h-full object-cover"
-                      />
-                      {intervento.video_url && (
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-center justify-center">
-                          <a
-                            href={intervento.video_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-16 h-16 bg-accent/90 hover:bg-accent rounded-full flex items-center justify-center transition-all group-hover:scale-110"
-                          >
-                            <Play className="w-8 h-8 text-accent-foreground ml-1" fill="currentColor" />
-                          </a>
-                        </div>
+                    {/* Video / Thumbnail */}
+                    <div className="relative aspect-video bg-muted overflow-hidden">
+                      {intervento.video_url && getYouTubeEmbedUrl(intervento.video_url) ? (
+                        <iframe
+                          src={getYouTubeEmbedUrl(intervento.video_url)!}
+                          title={intervento.title}
+                          className="w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      ) : (
+                        <>
+                          <img
+                            src={intervento.thumbnail_url || "/placeholder.svg"}
+                            alt={intervento.title}
+                            className="w-full h-full object-cover"
+                          />
+                          {intervento.location && (
+                            <div className="absolute top-3 left-3 flex items-center gap-1 bg-background/80 backdrop-blur-sm px-2 py-1 rounded-full">
+                              <MapPin className="w-3 h-3 text-accent" />
+                              <span className="text-xs font-medium text-foreground">{intervento.location}</span>
+                            </div>
+                          )}
+                        </>
                       )}
-                      {intervento.location && (
-                        <div className="absolute top-3 left-3 flex items-center gap-1 bg-background/80 backdrop-blur-sm px-2 py-1 rounded-full">
-                          <MapPin className="w-3 h-3 text-accent" />
-                          <span className="text-xs font-medium text-foreground">{intervento.location}</span>
                         </div>
                       )}
                     </div>
