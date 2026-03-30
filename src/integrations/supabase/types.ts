@@ -187,6 +187,120 @@ export type Database = {
           },
         ]
       }
+      partner_documents: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          file_url: string
+          id: string
+          sort_order: number
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          file_url: string
+          id?: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          file_url?: string
+          id?: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      partner_price_lists: {
+        Row: {
+          created_at: string
+          description: string | null
+          file_url: string
+          id: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          file_url: string
+          id?: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          file_url?: string
+          id?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      partner_pricing: {
+        Row: {
+          created_at: string
+          custom_price_cents: number | null
+          discount_percent: number
+          id: string
+          model_id: string | null
+          notes: string | null
+          partner_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          custom_price_cents?: number | null
+          discount_percent?: number
+          id?: string
+          model_id?: string | null
+          notes?: string | null
+          partner_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          custom_price_cents?: number | null
+          discount_percent?: number
+          id?: string
+          model_id?: string | null
+          notes?: string | null
+          partner_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_pricing_model_id_fkey"
+            columns: ["model_id"]
+            isOneToOne: false
+            referencedRelation: "models"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_pricing_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
