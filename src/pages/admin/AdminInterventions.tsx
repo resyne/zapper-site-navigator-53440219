@@ -358,6 +358,31 @@ export default function AdminInterventions() {
                   </Popover>
                 </div>
 
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="application_type">Applicazione</Label>
+                    <Input
+                      id="application_type"
+                      value={formData.application_type || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, application_type: e.target.value })
+                      }
+                      placeholder="es. Forno a legna, Caldaia..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="problem">Problema</Label>
+                    <Input
+                      id="problem"
+                      value={formData.problem || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, problem: e.target.value })
+                      }
+                      placeholder="es. Fumi neri, Odori persistenti..."
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="video_url">URL Video (YouTube/Vimeo)</Label>
                   <Input
