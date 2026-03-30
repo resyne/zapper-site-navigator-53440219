@@ -62,6 +62,8 @@ export default function AdminInterventions() {
     location: '',
     client_name: '',
     model_used: '',
+    application_type: '',
+    problem: '',
   });
 
   const fetchInterventions = async () => {
@@ -110,6 +112,8 @@ export default function AdminInterventions() {
         location: intervention.location || '',
         client_name: intervention.client_name || '',
         model_used: intervention.model_used || '',
+        application_type: intervention.application_type || '',
+        problem: intervention.problem || '',
       });
     } else {
       setEditingIntervention(null);
@@ -121,6 +125,8 @@ export default function AdminInterventions() {
         location: '',
         client_name: '',
         model_used: '',
+        application_type: '',
+        problem: '',
       });
     }
     setIsDialogOpen(true);
@@ -151,8 +157,10 @@ export default function AdminInterventions() {
             location: formData.location,
             client_name: formData.client_name,
             model_used: formData.model_used,
+            application_type: formData.application_type,
+            problem: formData.problem,
             updated_by: profile?.id,
-          })
+          } as any)
           .eq('id', editingIntervention.id);
 
         if (error) throw error;
@@ -167,7 +175,7 @@ export default function AdminInterventions() {
           ...formData,
           created_by: profile?.id,
           updated_by: profile?.id,
-        });
+        } as any);
 
         if (error) throw error;
 
@@ -350,6 +358,31 @@ export default function AdminInterventions() {
                       </Command>
                     </PopoverContent>
                   </Popover>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="application_type">Applicazione</Label>
+                    <Input
+                      id="application_type"
+                      value={formData.application_type || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, application_type: e.target.value })
+                      }
+                      placeholder="es. Forno a legna, Caldaia..."
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="problem">Problema</Label>
+                    <Input
+                      id="problem"
+                      value={formData.problem || ''}
+                      onChange={(e) =>
+                        setFormData({ ...formData, problem: e.target.value })
+                      }
+                      placeholder="es. Fumi neri, Odori persistenti..."
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-2">

@@ -54,6 +54,7 @@ export type Database = {
       }
       interventions: {
         Row: {
+          application_type: string | null
           client_name: string | null
           created_at: string
           created_by: string | null
@@ -61,6 +62,7 @@ export type Database = {
           id: string
           location: string | null
           model_used: string | null
+          problem: string | null
           thumbnail_url: string | null
           title: string
           updated_at: string
@@ -68,6 +70,7 @@ export type Database = {
           video_url: string | null
         }
         Insert: {
+          application_type?: string | null
           client_name?: string | null
           created_at?: string
           created_by?: string | null
@@ -75,6 +78,7 @@ export type Database = {
           id?: string
           location?: string | null
           model_used?: string | null
+          problem?: string | null
           thumbnail_url?: string | null
           title: string
           updated_at?: string
@@ -82,6 +86,7 @@ export type Database = {
           video_url?: string | null
         }
         Update: {
+          application_type?: string | null
           client_name?: string | null
           created_at?: string
           created_by?: string | null
@@ -89,6 +94,7 @@ export type Database = {
           id?: string
           location?: string | null
           model_used?: string | null
+          problem?: string | null
           thumbnail_url?: string | null
           title?: string
           updated_at?: string

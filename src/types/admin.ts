@@ -61,6 +61,8 @@ export interface Intervention {
   location: string | null;
   client_name: string | null;
   model_used: string | null;
+  application_type: string | null;
+  problem: string | null;
   created_by: string | null;
   updated_by: string | null;
   created_at: string;
@@ -94,6 +96,8 @@ export interface InterventionInsert {
   location?: string | null;
   client_name?: string | null;
   model_used?: string | null;
+  application_type?: string | null;
+  problem?: string | null;
 }
 
 export interface InterventionUpdate extends Partial<InterventionInsert> {
