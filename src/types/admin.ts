@@ -1,6 +1,6 @@
 // Admin types for the CMS system
 
-export type AppRole = 'admin' | 'contributor';
+export type AppRole = 'admin' | 'contributor' | 'partner';
 
 export interface Profile {
   id: string;
