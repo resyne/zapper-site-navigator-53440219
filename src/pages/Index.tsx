@@ -12,6 +12,7 @@ import TrustpilotSection from "@/components/home/TrustpilotSection";
 import CTASection from "@/components/home/CTASection";
 import IndustrialSection from "@/components/home/IndustrialSection";
 import ProfessionalSection from "@/components/home/ProfessionalSection";
+import UTASection from "@/components/home/UTASection";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
         <ProblemSection />
         <HowItWorksSection />
         <ProfessionalSection />
+        <UTASection />
         <IndustrialSection />
         <SelfDiscoverySection />
         <IncentivesCarousel />
