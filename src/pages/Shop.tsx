@@ -1,50 +1,33 @@
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useCart } from "@/contexts/CartContext";
-import { ShoppingCart, Plus, Minus, Package, Droplets, Wrench, Filter } from "lucide-react";
-import { Link } from "react-router-dom";
+import { CartDrawer } from "@/components/shop/CartDrawer";
+import { useCartStore } from "@/stores/cartStore";
+import { storefrontApiRequest, STOREFRONT_PRODUCTS_QUERY, type ShopifyProduct } from "@/lib/shopify";
+import { Package, Loader2, Plus } from "lucide-react";
 import { toast } from "sonner";
 
-const categoryIcons: Record<string, React.ReactNode> = {
-  ricambio: <Wrench className="w-4 h-4" />,
-  consumabile: <Droplets className="w-4 h-4" />,
-  filtro: <Filter className="w-4 h-4" />,
-};
-
-const categoryLabels: Record<string, string> = {
-  ricambio: "Ricambio",
-  consumabile: "Consumabile",
-  filtro: "Filtro",
-};
-
-const formatPrice = (cents: number) => {
-  return new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" }).format(cents / 100);
-};
-
 const Shop = () => {
-  const [filter, setFilter] = useState<string>("all");
-  const { addItem, totalItems } = useCart();
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: products, isLoading } = useQuery({
-    queryKey: ["shop-products"],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("shop_products")
-        .select("*")
-        .eq("in_stock", true)
-        .order("sort_order");
-      if (error) throw error;
-      return data;
-    },
-  });
-
-  const filtered = filter === "all" ? products : products?.filter((p) => p.category === filter);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await storefrontApiRequest(STOREFRONT_PRODUCTS_QUERY, { first: 50 });
+        setProducts(data?.data?.products?.edges || []);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -65,39 +48,8 @@ const Shop = () => {
                   Acquista ricambi originali e prodotti consumabili ZAPPER® per mantenere il tuo sistema sempre efficiente.
                 </p>
               </div>
-              {totalItems > 0 && (
-                <Link to="/shop/checkout">
-                  <Button variant="accent" size="lg" className="relative">
-                    <ShoppingCart className="w-5 h-5 mr-2" />
-                    Carrello
-                    <span className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
-                      {totalItems}
-                    </span>
-                  </Button>
-                </Link>
-              )}
+              <CartDrawer />
             </div>
-          </div>
-        </section>
-
-        {/* Filters */}
-        <section className="border-b border-border bg-background sticky top-16 md:top-20 z-40">
-          <div className="container px-4 sm:px-6 py-3 flex gap-2">
-            {[
-              { key: "all", label: "Tutti" },
-              { key: "ricambio", label: "Ricambi" },
-              { key: "consumabile", label: "Consumabili" },
-              { key: "filtro", label: "Filtri" },
-            ].map((f) => (
-              <Button
-                key={f.key}
-                variant={filter === f.key ? "default" : "outline"}
-                size="sm"
-                onClick={() => setFilter(f.key)}
-              >
-                {f.label}
-              </Button>
-            ))}
           </div>
         </section>
 
@@ -105,35 +57,19 @@ const Shop = () => {
         <section className="py-12 md:py-16">
           <div className="container px-4 sm:px-6">
             {isLoading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {Array.from({ length: 4 }).map((_, i) => (
-                  <Card key={i} className="animate-pulse">
-                    <div className="h-48 bg-muted rounded-t-lg" />
-                    <CardContent className="p-5 space-y-3">
-                      <div className="h-4 bg-muted rounded w-3/4" />
-                      <div className="h-3 bg-muted rounded w-full" />
-                      <div className="h-8 bg-muted rounded w-1/3" />
-                    </CardContent>
-                  </Card>
-                ))}
+              <div className="flex items-center justify-center py-20">
+                <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+              </div>
+            ) : products.length === 0 ? (
+              <div className="text-center py-20">
+                <Package className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
+                <h2 className="text-xl font-semibold text-foreground mb-2">Nessun prodotto disponibile</h2>
+                <p className="text-muted-foreground">I prodotti saranno disponibili a breve.</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filtered?.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    onAdd={() => {
-                      addItem({
-                        id: product.id,
-                        name: product.name,
-                        slug: product.slug,
-                        price_cents: product.price_cents,
-                        image_url: product.image_url,
-                      });
-                      toast.success(`${product.name} aggiunto al carrello`);
-                    }}
-                  />
+                {products.map((product) => (
+                  <ProductCard key={product.node.id} product={product} />
                 ))}
               </div>
             )}
@@ -145,45 +81,55 @@ const Shop = () => {
   );
 };
 
-interface ProductCardProps {
-  product: {
-    id: string;
-    name: string;
-    slug: string;
-    description: string | null;
-    category: string;
-    price_cents: number;
-    image_url: string | null;
-  };
-  onAdd: () => void;
-}
+const ProductCard = ({ product }: { product: ShopifyProduct }) => {
+  const addItem = useCartStore((state) => state.addItem);
+  const isLoading = useCartStore((state) => state.isLoading);
+  const selectedVariant = product.node.variants.edges[0]?.node;
+  const image = product.node.images.edges[0]?.node;
+  const price = product.node.priceRange.minVariantPrice;
 
-const ProductCard = ({ product, onAdd }: ProductCardProps) => (
-  <Card className="group overflow-hidden hover:shadow-lg transition-shadow duration-300">
-    <div className="h-48 bg-muted flex items-center justify-center">
-      {product.image_url ? (
-        <img src={product.image_url} alt={product.name} className="w-full h-full object-cover" />
-      ) : (
-        <Package className="w-16 h-16 text-muted-foreground/30" />
-      )}
-    </div>
-    <CardContent className="p-5">
-      <div className="flex items-center gap-2 mb-2">
-        <Badge variant="secondary" className="text-xs gap-1">
-          {categoryIcons[product.category]}
-          {categoryLabels[product.category]}
-        </Badge>
-      </div>
-      <h3 className="font-display font-semibold text-lg mb-1 text-foreground">{product.name}</h3>
-      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{product.description}</p>
-      <div className="flex items-center justify-between">
-        <span className="text-xl font-bold text-foreground">{formatPrice(product.price_cents)}</span>
-        <Button variant="accent" size="sm" onClick={onAdd}>
-          <Plus className="w-4 h-4 mr-1" /> Aggiungi
-        </Button>
-      </div>
-    </CardContent>
-  </Card>
-);
+  const handleAddToCart = async () => {
+    if (!selectedVariant) return;
+    await addItem({
+      product,
+      variantId: selectedVariant.id,
+      variantTitle: selectedVariant.title,
+      price: selectedVariant.price,
+      quantity: 1,
+      selectedOptions: selectedVariant.selectedOptions || [],
+    });
+    toast.success(`${product.node.title} aggiunto al carrello`);
+  };
+
+  return (
+    <Card className="group overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <Link to={`/shop/product/${product.node.handle}`}>
+        <div className="h-48 bg-muted flex items-center justify-center overflow-hidden">
+          {image ? (
+            <img src={image.url} alt={image.altText || product.node.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          ) : (
+            <Package className="w-16 h-16 text-muted-foreground/30" />
+          )}
+        </div>
+      </Link>
+      <CardContent className="p-5">
+        <Link to={`/shop/product/${product.node.handle}`}>
+          <h3 className="font-display font-semibold text-lg mb-1 text-foreground hover:text-accent transition-colors">
+            {product.node.title}
+          </h3>
+        </Link>
+        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{product.node.description}</p>
+        <div className="flex items-center justify-between">
+          <span className="text-xl font-bold text-foreground">
+            €{parseFloat(price.amount).toFixed(2)}
+          </span>
+          <Button variant="accent" size="sm" onClick={handleAddToCart} disabled={isLoading || !selectedVariant?.availableForSale}>
+            {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <><Plus className="w-4 h-4 mr-1" /> Aggiungi</>}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default Shop;
