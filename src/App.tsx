@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { CartProvider } from "@/contexts/CartContext";
+import { useCartSync } from "@/hooks/useCartSync";
 import Index from "./pages/Index";
 import Contatti from "./pages/Contatti";
 import Interventi from "./pages/Interventi";
@@ -67,6 +68,7 @@ import ZTGLMax from "./pages/modelli/ZTGLMax";
 import ZTGLMaxUltra from "./pages/modelli/ZTGLMaxUltra";
 import Calcolatore from "./pages/Calcolatore";
 import Shop from "./pages/Shop";
+import ShopProduct from "./pages/ShopProduct";
 import ShopCheckout from "./pages/ShopCheckout";
 import NotFound from "./pages/NotFound";
 // Admin pages
@@ -81,11 +83,17 @@ import PartnerLogin from "./pages/partner/PartnerLogin";
 import PartnerDashboard from "./pages/partner/PartnerDashboard";
 const queryClient = new QueryClient();
 
+const CartSyncWrapper = ({ children }: { children: React.ReactNode }) => {
+  useCartSync();
+  return <>{children}</>;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthProvider>
         <CartProvider>
+        <CartSyncWrapper>
         <Toaster />
         <Sonner />
         <BrowserRouter>
@@ -157,6 +165,7 @@ const App = () => (
             <Route path="/modelli/ztgl-max-ultra" element={<ZTGLMaxUltra />} />
             {/* Shop routes (hidden - not in nav) */}
             <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/product/:handle" element={<ShopProduct />} />
             <Route path="/shop/checkout" element={<ShopCheckout />} />
             {/* Admin routes */}
             <Route path="/admin/auth" element={<AdminAuth />} />
@@ -172,6 +181,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        </CartSyncWrapper>
         </CartProvider>
       </AuthProvider>
     </TooltipProvider>
