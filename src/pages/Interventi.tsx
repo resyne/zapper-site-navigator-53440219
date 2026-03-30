@@ -115,8 +115,6 @@ const Interventi = () => {
                           )}
                         </>
                       )}
-                        </div>
-                      )}
                     </div>
 
                     {/* Card Content */}
