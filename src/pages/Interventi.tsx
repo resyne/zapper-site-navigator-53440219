@@ -3,7 +3,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Play, ArrowRight, MapPin, CheckCircle } from "lucide-react";
+import { Play, ArrowRight, MapPin, CheckCircle, Wrench, AlertTriangle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface InterventionData {
@@ -15,6 +15,8 @@ interface InterventionData {
   location: string | null;
   client_name: string | null;
   model_used: string | null;
+  application_type: string | null;
+  problem: string | null;
 }
 
 const getYouTubeEmbedUrl = (url: string): string | null => {
