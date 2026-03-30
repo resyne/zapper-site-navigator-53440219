@@ -17,6 +17,23 @@ interface InterventionData {
   model_used: string | null;
 }
 
+const getYouTubeEmbedUrl = (url: string): string | null => {
+  try {
+    // Handle youtube.com/shorts/ID
+    const shortsMatch = url.match(/youtube\.com\/shorts\/([^?&]+)/);
+    if (shortsMatch) return `https://www.youtube.com/embed/${shortsMatch[1]}`;
+    // Handle youtube.com/watch?v=ID
+    const watchMatch = url.match(/[?&]v=([^?&]+)/);
+    if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`;
+    // Handle youtu.be/ID
+    const shortMatch = url.match(/youtu\.be\/([^?&]+)/);
+    if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`;
+    return null;
+  } catch {
+    return null;
+  }
+};
+
 const Interventi = () => {
   const [interventi, setInterventi] = useState<InterventionData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
