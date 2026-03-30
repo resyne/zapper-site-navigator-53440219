@@ -41,7 +41,7 @@ const newUserSchema = z.object({
   email: z.string().email('Email non valida'),
   password: z.string().min(6, 'La password deve avere almeno 6 caratteri'),
   fullName: z.string().min(2, 'Il nome deve avere almeno 2 caratteri'),
-  role: z.enum(['admin', 'contributor']),
+  role: z.enum(['admin', 'contributor', 'partner']),
 });
 
 export default function AdminUsers() {
@@ -337,6 +337,7 @@ export default function AdminUsers() {
                     <SelectContent>
                       <SelectItem value="contributor">Contributor</SelectItem>
                       <SelectItem value="admin">Admin</SelectItem>
+                      <SelectItem value="partner">Partner</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -424,6 +425,7 @@ export default function AdminUsers() {
                           <SelectContent>
                             <SelectItem value="admin">Admin</SelectItem>
                             <SelectItem value="contributor">Contributor</SelectItem>
+                            <SelectItem value="partner">Partner</SelectItem>
                           </SelectContent>
                         </Select>
                       </TableCell>
