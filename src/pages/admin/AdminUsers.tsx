@@ -362,6 +362,8 @@ export default function AdminUsers() {
               <strong>Admin:</strong> Accesso completo, può gestire utenti e eliminare contenuti.
               <br />
               <strong>Contributor:</strong> Può creare e modificare contenuti, ma non eliminarli né gestire utenti.
+              <br />
+              <strong>Partner:</strong> Accede all'area partner con listini, sconti e documentazione tecnica dedicata.
             </p>
           </CardContent>
         </Card>
