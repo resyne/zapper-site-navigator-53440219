@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,6 +14,19 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
+import {
   Table,
   TableBody,
   TableCell,
@@ -21,7 +34,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Plus, Pencil, Trash2, Search, ExternalLink } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, ExternalLink, ChevronsUpDown, Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -29,11 +43,13 @@ import { Intervention, InterventionInsert } from '@/types/admin';
 
 export default function AdminInterventions() {
   const [interventions, setInterventions] = useState<Intervention[]>([]);
+  const [models, setModels] = useState<{ id: string; name: string; model_id: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingIntervention, setEditingIntervention] = useState<Intervention | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [modelPopoverOpen, setModelPopoverOpen] = useState(false);
   const { isAdmin, profile } = useAuth();
   const { toast } = useToast();
 
@@ -70,8 +86,17 @@ export default function AdminInterventions() {
     }
   };
 
+  const fetchModels = async () => {
+    const { data } = await supabase
+      .from('models')
+      .select('id, name, model_id')
+      .order('name');
+    setModels(data || []);
+  };
+
   useEffect(() => {
     fetchInterventions();
+    fetchModels();
   }, []);
 
   const handleOpenDialog = (intervention?: Intervention) => {
@@ -284,14 +309,47 @@ export default function AdminInterventions() {
 
                 <div className="space-y-2">
                   <Label htmlFor="model_used">Modello utilizzato</Label>
-                  <Input
-                    id="model_used"
-                    value={formData.model_used || ''}
-                    onChange={(e) =>
-                      setFormData({ ...formData, model_used: e.target.value })
-                    }
-                    placeholder="ZPZ MAX"
-                  />
+                  <Popover open={modelPopoverOpen} onOpenChange={setModelPopoverOpen}>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={modelPopoverOpen}
+                        className="w-full justify-between font-normal"
+                      >
+                        {formData.model_used || 'Seleziona modello...'}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-full p-0" align="start">
+                      <Command>
+                        <CommandInput placeholder="Cerca modello..." />
+                        <CommandList>
+                          <CommandEmpty>Nessun modello trovato.</CommandEmpty>
+                          <CommandGroup>
+                            {models.map((model) => (
+                              <CommandItem
+                                key={model.id}
+                                value={model.name}
+                                onSelect={() => {
+                                  setFormData({ ...formData, model_used: model.name });
+                                  setModelPopoverOpen(false);
+                                }}
+                              >
+                                <Check
+                                  className={cn(
+                                    "mr-2 h-4 w-4",
+                                    formData.model_used === model.name ? "opacity-100" : "opacity-0"
+                                  )}
+                                />
+                                {model.name}
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                        </CommandList>
+                      </Command>
+                    </PopoverContent>
+                  </Popover>
                 </div>
 
                 <div className="space-y-2">
