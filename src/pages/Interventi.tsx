@@ -127,6 +127,15 @@ const Interventi = () => {
 
                       {/* Details */}
                       <div className="space-y-2 text-sm mb-3">
+                        {intervento.location && (
+                          <div className="flex items-start gap-2">
+                            <MapPin className="w-4 h-4 text-accent mt-0.5 shrink-0" />
+                            <div>
+                              <span className="text-muted-foreground">Città: </span>
+                              <span className="text-foreground font-medium">{intervento.location}</span>
+                            </div>
+                          </div>
+                        )}
                         {intervento.application_type && (
                           <div className="flex items-start gap-2">
                             <Wrench className="w-4 h-4 text-muted-foreground mt-0.5 shrink-0" />
