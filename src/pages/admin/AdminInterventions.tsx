@@ -62,6 +62,8 @@ export default function AdminInterventions() {
     location: '',
     client_name: '',
     model_used: '',
+    application_type: '',
+    problem: '',
   });
 
   const fetchInterventions = async () => {
@@ -110,6 +112,8 @@ export default function AdminInterventions() {
         location: intervention.location || '',
         client_name: intervention.client_name || '',
         model_used: intervention.model_used || '',
+        application_type: intervention.application_type || '',
+        problem: intervention.problem || '',
       });
     } else {
       setEditingIntervention(null);
@@ -121,6 +125,8 @@ export default function AdminInterventions() {
         location: '',
         client_name: '',
         model_used: '',
+        application_type: '',
+        problem: '',
       });
     }
     setIsDialogOpen(true);
