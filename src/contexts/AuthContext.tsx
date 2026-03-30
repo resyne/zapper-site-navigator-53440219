@@ -130,6 +130,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isLoading,
         isAdmin,
         isContentEditor,
+        isPartner,
         signIn,
         signUp,
         signOut,
