@@ -157,8 +157,10 @@ export default function AdminInterventions() {
             location: formData.location,
             client_name: formData.client_name,
             model_used: formData.model_used,
+            application_type: formData.application_type,
+            problem: formData.problem,
             updated_by: profile?.id,
-          })
+          } as any)
           .eq('id', editingIntervention.id);
 
         if (error) throw error;
@@ -173,7 +175,7 @@ export default function AdminInterventions() {
           ...formData,
           created_by: profile?.id,
           updated_by: profile?.id,
-        });
+        } as any);
 
         if (error) throw error;
 
