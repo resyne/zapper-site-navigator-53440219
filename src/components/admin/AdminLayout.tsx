@@ -31,6 +31,7 @@ const navItems = [
 
 const adminOnlyItems = [
   { href: '/admin/users', label: 'Utenti', icon: Users },
+  { href: '/admin/partners', label: 'Partner', icon: Users },
 ];
 
 export default function AdminLayout({ children, title }: AdminLayoutProps) {
