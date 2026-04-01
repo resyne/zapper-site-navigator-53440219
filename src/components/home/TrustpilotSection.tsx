@@ -1,28 +1,15 @@
 import { Star } from "lucide-react";
 import trustpilotRating from "@/assets/trustpilot-rating.png";
+import review1 from "@/assets/trustpilot-review-1.png";
+import review2 from "@/assets/trustpilot-review-2.png";
+import review3 from "@/assets/trustpilot-review-3.png";
+import review4 from "@/assets/trustpilot-review-4.png";
+import review5 from "@/assets/trustpilot-review-5.png";
+import review6 from "@/assets/trustpilot-review-6.png";
+
+const reviewScreenshots = [review1, review2, review3, review4, review5, review6];
 
 const TrustpilotSection = () => {
-  const reviews = [
-    {
-      author: "Giuseppe M.",
-      rating: 5,
-      text: "Finalmente posso lavorare senza pensare alle lamentele! ZAPPER ha risolto tutti i miei problemi di fumi.",
-      date: "2 settimane fa",
-    },
-    {
-      author: "Francesca L.",
-      rating: 5,
-      text: "Installazione veloce e supporto eccellente. Il sistema funziona perfettamente, nessun odore in tutto il palazzo.",
-      date: "1 mese fa",
-    },
-    {
-      author: "Marco R.",
-      rating: 5,
-      text: "Ho provato altre soluzioni senza successo. ZAPPER è l'unico che ha funzionato davvero. Consiglio vivamente!",
-      date: "3 settimane fa",
-    },
-  ];
-
   const stats = {
     rating: 4.8,
     totalReviews: 2500,
@@ -48,28 +35,20 @@ const TrustpilotSection = () => {
           </p>
         </div>
 
-        {/* Reviews Grid */}
-        <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
-          {reviews.map((review, index) => (
+        {/* Trustpilot Screenshots Grid */}
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {reviewScreenshots.map((src, index) => (
             <div
               key={index}
-              className={`bg-card rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-sm border border-border hover:shadow-md transition-shadow animate-fade-in-up animation-delay-${(index + 1) * 100}`}
+              className={`bg-card rounded-lg sm:rounded-xl overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow animate-fade-in-up`}
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Stars */}
-              <div className="flex gap-1 mb-3 sm:mb-4">
-                {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-accent text-accent" />
-                ))}
-              </div>
-              
-              {/* Review Text */}
-              <p className="text-foreground text-sm sm:text-base mb-3 sm:mb-4">"{review.text}"</p>
-              
-              {/* Author */}
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-foreground text-sm sm:text-base">{review.author}</span>
-                <span className="text-xs sm:text-sm text-muted-foreground">{review.date}</span>
-              </div>
+              <img
+                src={src}
+                alt={`Recensione Trustpilot ${index + 1}`}
+                className="w-full h-auto"
+                loading="lazy"
+              />
             </div>
           ))}
         </div>
