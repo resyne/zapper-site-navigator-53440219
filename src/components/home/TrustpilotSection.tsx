@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import trustpilotRating from "@/assets/trustpilot-rating.png";
 
 const TrustpilotSection = () => {
   const reviews = [
