@@ -23,8 +23,8 @@ const TrustpilotSection = () => {
   ];
 
   const stats = {
-    rating: 4.9,
-    totalReviews: 487,
+    rating: 4.8,
+    totalReviews: 2500,
     excellent: 95,
   };
 
