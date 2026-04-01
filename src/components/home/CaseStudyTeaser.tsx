@@ -4,18 +4,18 @@ import { ArrowRight, Quote } from "lucide-react";
 
 const CaseStudyTeaser = () => {
   const caseStudy = {
-    name: "Pizzeria da Mario",
-    location: "Milano, Centro",
+    name: "Ristorante Pizzeria La Pace",
+    location: "Biella",
     sector: "Professionale",
-    application: "Forno a legna",
-    model: "ZAPPER M",
-    quote: "Dopo l'installazione di ZAPPER®, le lamentele dei vicini sono scomparse completamente. Ora possiamo lavorare in tranquillità e concentrarci sulla qualità delle nostre pizze.",
-    author: "Mario Rossi",
+    application: "Lavafumi",
+    model: "ZAPPER",
+    quote: "Abbiamo un ristorante pizzeria a Biella, da oltre 45 anni, e un anno fa per necessità ho dovuto installare una Lavafumi per eliminare un problema di fuliggine che colpiva il condominio. Elefante Pasquale si è dimostrato esperto ed efficiente portando soluzioni direttamente sul posto. A distanza di tempo SONO PIENAMENTE SODDISFATTO dell'investimento fatto, sull'efficienza del macchinario, e sulla poca ma accurata manutenzione che devo fare.",
+    author: "Giuseppe Apicella",
     role: "Titolare",
     results: [
-      { label: "Riduzione fumi", value: "95%" },
-      { label: "Tempo installazione", value: "4 ore" },
-      { label: "Segnalazioni dopo", value: "0" },
+      { label: "Anni di attività", value: "45+" },
+      { label: "Problema fuliggine", value: "Risolto" },
+      { label: "Manutenzione", value: "Minima" },
     ],
   };
 
