@@ -82,11 +82,13 @@ const CaseStudyTeaser = () => {
 
             {/* Before/After placeholder */}
             <div className="mt-6 sm:mt-8 grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="aspect-video bg-white/10 rounded-lg flex items-center justify-center">
-                <span className="text-xs sm:text-sm text-white/50">Prima</span>
+              <div className="aspect-video rounded-lg overflow-hidden relative">
+                <img src={caseStudyPrima} alt="Prima - canna fumaria con fumo nero" className="w-full h-full object-cover" loading="lazy" width={640} height={512} />
+                <span className="absolute bottom-2 left-2 bg-background/80 backdrop-blur-sm text-xs font-medium text-foreground px-2 py-1 rounded">Prima</span>
               </div>
-              <div className="aspect-video bg-white/10 rounded-lg flex items-center justify-center">
-                <span className="text-xs sm:text-sm text-white/50">Dopo</span>
+              <div className="aspect-video rounded-lg overflow-hidden relative">
+                <img src={caseStudyDopo} alt="Dopo - canna fumaria con poco fumo bianco" className="w-full h-full object-cover" loading="lazy" width={640} height={512} />
+                <span className="absolute bottom-2 left-2 bg-background/80 backdrop-blur-sm text-xs font-medium text-foreground px-2 py-1 rounded">Dopo</span>
               </div>
             </div>
           </div>
