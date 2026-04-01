@@ -59,9 +59,11 @@ const HeroSection = () => {
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                 </Link>
               </Button>
-              <Button variant="hero-outline" size="lg" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
-                <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Guarda come funziona
+              <Button variant="hero-outline" size="lg" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10" asChild>
+                <Link to="/interventi">
+                  <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  Guarda come funziona
+                </Link>
               </Button>
             </div>
             <p className="text-xs sm:text-sm text-white/60 mt-3 animate-fade-in-up animation-delay-300">
