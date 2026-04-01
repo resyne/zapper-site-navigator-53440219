@@ -34,15 +34,10 @@ const TrustpilotSection = () => {
       <div className="container px-4 sm:px-6">
         {/* Header with Trustpilot badge */}
         <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 bg-card px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-sm border border-border mb-4 sm:mb-6">
-            <span className="text-xl sm:text-2xl font-bold text-foreground">{stats.rating}</span>
-            <div className="flex gap-0.5">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-accent text-accent" />
-              ))}
-            </div>
+          <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 bg-card px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-sm border border-border mb-4 sm:mb-6">
+            <img src={trustpilotRating} alt="Trustpilot 4.8" className="h-5 sm:h-6" />
             <span className="text-muted-foreground text-xs sm:text-sm">
-              {stats.totalReviews} recensioni
+              2500+ clienti soddisfatti
             </span>
           </div>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4 px-2">
