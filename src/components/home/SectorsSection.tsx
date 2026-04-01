@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChefHat, Home, Factory, ArrowRight } from "lucide-react";
-import sectorProfessionale from "@/assets/sector-professionale.jpg";
-import sectorDomestico from "@/assets/sector-domestico.jpg";
-import sectorIndustriale from "@/assets/sector-industriale.jpg";
+import sectorProfessionale from "@/assets/sector-professionale.webp";
+import sectorDomestico from "@/assets/sector-domestico.webp";
+import sectorIndustriale from "@/assets/sector-industriale.webp";
 
 const SectorsSection = () => {
   const sectors = [

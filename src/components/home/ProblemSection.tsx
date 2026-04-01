@@ -1,5 +1,5 @@
 import { AlertTriangle, CloudOff, Users, FileWarning, TrendingDown, Ban } from "lucide-react";
-import problemBg from "@/assets/problem-bg.jpg";
+import problemBg from "@/assets/problem-bg.webp";
 
 const ProblemSection = () => {
   const problems = [

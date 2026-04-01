@@ -1,6 +1,6 @@
 import { Factory } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-forni-industriali.jpg";
+import heroImage from "@/assets/applicazione-forni-industriali.webp";
 
 const data: ApplicazioneData = {
   id: "forni-industriali",

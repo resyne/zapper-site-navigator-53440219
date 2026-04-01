@@ -1,6 +1,6 @@
 import { Beef } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-affumicatori.jpg";
+import heroImage from "@/assets/applicazione-affumicatori.webp";
 
 const data: ApplicazioneData = {
   id: "affumicatori",

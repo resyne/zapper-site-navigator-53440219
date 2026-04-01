@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Shield, CheckCircle } from "lucide-react";
-import heroImage from "@/assets/hero-zapper-team.jpg";
-import trustpilotRating from "@/assets/trustpilot-rating.png";
+import heroImage from "@/assets/hero-zapper-team.webp";
+import trustpilotRating from "@/assets/trustpilot-rating.webp";
 
 const HeroSection = () => {
   const benefits = [

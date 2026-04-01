@@ -1,6 +1,6 @@
 import { Flame } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-caldaie.jpg";
+import heroImage from "@/assets/applicazione-caldaie.webp";
 
 const data: ApplicazioneData = {
   id: "caldaie-biomassa",

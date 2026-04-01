@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Factory, Shield, Wind, Zap } from "lucide-react";
-import industrialMachine from "@/assets/industrial-machine.jpg";
-import barilla from "@/assets/clients/barilla.png";
-import leonardo from "@/assets/clients/leonardo.png";
-import modelleriaReggiana from "@/assets/clients/modelleria-reggiana.png";
+import industrialMachine from "@/assets/industrial-machine.webp";
+import barilla from "@/assets/clients/barilla.webp";
+import leonardo from "@/assets/clients/leonardo.webp";
+import modelleriaReggiana from "@/assets/clients/modelleria-reggiana.webp";
 
 const IndustrialSection = () => {
   const pollutants = [

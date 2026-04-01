@@ -1,6 +1,6 @@
 import { Scissors } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-taglio-laser.jpg";
+import heroImage from "@/assets/applicazione-taglio-laser.webp";
 
 const data: ApplicazioneData = {
   id: "taglio-laser",

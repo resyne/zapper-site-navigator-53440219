@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Wind, Factory, ChefHat, Coffee, Zap } from "lucide-react";
-import utaMachine from "@/assets/uta-carbone-attivo.png";
+import utaMachine from "@/assets/uta-carbone-attivo.webp";
 
 const UTASection = () => {
   const applications = [

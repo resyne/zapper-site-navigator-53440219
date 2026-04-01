@@ -1,12 +1,12 @@
-import daAlfonso from "@/assets/clients/da-alfonso.png";
-import pummarolaNcoppa from "@/assets/clients/pummarola-ncoppa.png";
-import daMichele from "@/assets/clients/da-michele.png";
-import laBaita from "@/assets/clients/la-baita.png";
-import rossopomodoro from "@/assets/clients/rossopomodoro.png";
-import barilla from "@/assets/clients/barilla.png";
-import leonardo from "@/assets/clients/leonardo.png";
-import modelleriaReggiana from "@/assets/clients/modelleria-reggiana.png";
-import vincenzoCapuano from "@/assets/clients/vincenzo-capuano.png";
+import daAlfonso from "@/assets/clients/da-alfonso.webp";
+import pummarolaNcoppa from "@/assets/clients/pummarola-ncoppa.webp";
+import daMichele from "@/assets/clients/da-michele.webp";
+import laBaita from "@/assets/clients/la-baita.webp";
+import rossopomodoro from "@/assets/clients/rossopomodoro.webp";
+import barilla from "@/assets/clients/barilla.webp";
+import leonardo from "@/assets/clients/leonardo.webp";
+import modelleriaReggiana from "@/assets/clients/modelleria-reggiana.webp";
+import vincenzoCapuano from "@/assets/clients/vincenzo-capuano.webp";
 
 const ClientLogos = () => {
   const clients = [

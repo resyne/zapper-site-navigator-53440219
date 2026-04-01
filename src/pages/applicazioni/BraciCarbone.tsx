@@ -1,6 +1,6 @@
 import { Thermometer } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-braci.jpg";
+import heroImage from "@/assets/applicazione-braci.webp";
 
 const data: ApplicazioneData = {
   id: "braci-carbone",
