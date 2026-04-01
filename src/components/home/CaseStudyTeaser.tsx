@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Quote } from "lucide-react";
+import caseStudyPrima from "@/assets/case-study-prima.jpg";
+import caseStudyDopo from "@/assets/case-study-dopo.jpg";
 
 const CaseStudyTeaser = () => {
   const caseStudy = {
