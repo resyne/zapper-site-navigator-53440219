@@ -1,11 +1,11 @@
 import { Star } from "lucide-react";
-import trustpilotRating from "@/assets/trustpilot-rating.png";
-import review1 from "@/assets/trustpilot-review-1.png";
-import review2 from "@/assets/trustpilot-review-2.png";
-import review3 from "@/assets/trustpilot-review-3.png";
-import review4 from "@/assets/trustpilot-review-4.png";
-import review5 from "@/assets/trustpilot-review-5.png";
-import review6 from "@/assets/trustpilot-review-6.png";
+import trustpilotRating from "@/assets/trustpilot-rating.webp";
+import review1 from "@/assets/trustpilot-review-1.webp";
+import review2 from "@/assets/trustpilot-review-2.webp";
+import review3 from "@/assets/trustpilot-review-3.webp";
+import review4 from "@/assets/trustpilot-review-4.webp";
+import review5 from "@/assets/trustpilot-review-5.webp";
+import review6 from "@/assets/trustpilot-review-6.webp";
 
 const reviewScreenshots = [review1, review2, review3, review4, review5, review6];
 

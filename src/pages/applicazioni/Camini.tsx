@@ -1,6 +1,6 @@
 import { Home } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-camini.jpg";
+import heroImage from "@/assets/applicazione-camini.webp";
 
 const data: ApplicazioneData = {
   id: "camini",

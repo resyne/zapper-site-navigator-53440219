@@ -1,6 +1,6 @@
 import { Coffee } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-torrefazioni.jpg";
+import heroImage from "@/assets/applicazione-torrefazioni.webp";
 
 const data: ApplicazioneData = {
   id: "torrefazioni",

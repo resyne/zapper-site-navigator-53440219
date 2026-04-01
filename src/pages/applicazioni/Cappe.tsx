@@ -1,6 +1,6 @@
 import { ChefHat } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-cappe.jpg";
+import heroImage from "@/assets/applicazione-cappe.webp";
 
 const data: ApplicazioneData = {
   id: "cappe",

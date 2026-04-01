@@ -1,6 +1,6 @@
 import { Flame } from "lucide-react";
 import ApplicazioneTemplate, { ApplicazioneData } from "./ApplicazioneTemplate";
-import heroImage from "@/assets/applicazione-forni.jpg";
+import heroImage from "@/assets/applicazione-forni.webp";
 
 const data: ApplicazioneData = {
   id: "forni-a-legna",
